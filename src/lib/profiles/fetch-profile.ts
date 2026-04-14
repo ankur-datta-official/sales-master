@@ -4,6 +4,9 @@ import type { UserProfile } from "@/types/profile";
 
 let hasLoggedProfilesTableWarning = false;
 
+export const PROFILE_WITH_ROLE_SELECT =
+  "id, email, full_name, avatar_url, status, phone, employee_code, designation, organization_id, branch_id, role_id, reports_to_user_id, is_field_user, joined_at, created_at, updated_at, roles ( slug, name, level )";
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
@@ -16,7 +19,18 @@ function toNullableBoolean(value: unknown): boolean | null {
   return typeof value === "boolean" ? value : null;
 }
 
-function normalizeProfileRow(row: unknown): UserProfile | null {
+function roleSlugFromRow(row: Record<string, unknown>): string | null {
+  const nested = row["roles"];
+  if (isRecord(nested) && !Array.isArray(nested)) {
+    return toNullableString(nested.slug);
+  }
+  if (Array.isArray(nested) && nested[0] && isRecord(nested[0])) {
+    return toNullableString(nested[0].slug);
+  }
+  return toNullableString(row["role"]);
+}
+
+export function normalizeProfileRow(row: unknown): UserProfile | null {
   if (!isRecord(row)) return null;
 
   const id = toNullableString(row.id);
@@ -38,7 +52,7 @@ function normalizeProfileRow(row: unknown): UserProfile | null {
     is_field_user: toNullableBoolean(row.is_field_user),
     joined_at: toNullableString(row.joined_at),
     display_name: toNullableString(row.display_name),
-    role: toNullableString(row.role),
+    role: roleSlugFromRow(row),
     created_at: toNullableString(row.created_at),
     updated_at: toNullableString(row.updated_at),
   };
@@ -48,7 +62,7 @@ function isProfilesTableMissing(message: string) {
   const normalizedMessage = message.toLowerCase();
   return (
     normalizedMessage.includes("could not find the table 'public.profiles'") ||
-    normalizedMessage.includes("relation \"public.profiles\" does not exist")
+    normalizedMessage.includes('relation "public.profiles" does not exist')
   );
 }
 
@@ -58,7 +72,7 @@ export async function fetchProfileByUserId(
 ): Promise<UserProfile | null> {
   const { data, error } = await supabase
     .from("profiles")
-    .select("*")
+    .select(PROFILE_WITH_ROLE_SELECT)
     .eq("id", userId)
     .maybeSingle();
 

@@ -1,5 +1,13 @@
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, UserRound } from "lucide-react";
+import {
+  Building2,
+  CalendarCheck2,
+  ClipboardCheck,
+  LayoutDashboard,
+  Package,
+  Users,
+  UserRound,
+} from "lucide-react";
 
 import type { AppRole } from "@/constants/roles";
 import { ROUTES } from "@/config/routes";
@@ -25,6 +33,31 @@ export const mainNavigation: readonly NavItem[] = [
     title: "Profile",
     href: ROUTES.profile,
     icon: UserRound,
+  },
+  {
+    title: "Users",
+    href: ROUTES.users,
+    icon: Users,
+  },
+  {
+    title: "Parties",
+    href: ROUTES.parties,
+    icon: Building2,
+  },
+  {
+    title: "Products",
+    href: ROUTES.products,
+    icon: Package,
+  },
+  {
+    title: "Work Plans",
+    href: ROUTES.workPlans,
+    icon: CalendarCheck2,
+  },
+  {
+    title: "Work Reports",
+    href: ROUTES.workReports,
+    icon: ClipboardCheck,
   },
 ] as const;
 
