@@ -3,15 +3,17 @@ import { redirect } from "next/navigation";
 import { ROUTES } from "@/config/routes";
 import { createClient } from "@/lib/supabase/server";
 
-export default async function HomePage() {
+/** Use in Server Components / layouts to enforce authentication */
+export async function requireUser() {
   const supabase = await createClient();
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser();
 
-  if (user) {
-    redirect(ROUTES.dashboard);
+  if (error || !user) {
+    redirect(ROUTES.login);
   }
 
-  redirect(ROUTES.login);
+  return user;
 }
