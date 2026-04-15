@@ -4,9 +4,22 @@ import {
   CalendarCheck2,
   ClipboardCheck,
   LayoutDashboard,
+  ListChecks,
+  BadgeCheck,
+  MapPin,
+  MapPinned,
   Package,
+  PercentCircle,
+  Banknote,
+  ShoppingCart,
+  Target,
   Users,
   UserRound,
+  WalletMinimal,
+  Factory,
+  CalendarClock,
+  Activity,
+  LineChart,
 } from "lucide-react";
 
 import type { AppRole } from "@/constants/roles";
@@ -35,6 +48,22 @@ export const mainNavigation: readonly NavItem[] = [
     icon: UserRound,
   },
   {
+    title: "Attendance",
+    href: ROUTES.attendance,
+    icon: CalendarClock,
+  },
+  {
+    title: "Field activity",
+    href: ROUTES.fieldActivity,
+    icon: Activity,
+    roles: ["assistant_manager", "manager", "hos", "admin"],
+  },
+  {
+    title: "Analytics",
+    href: ROUTES.analytics,
+    icon: LineChart,
+  },
+  {
     title: "Users",
     href: ROUTES.users,
     icon: Users,
@@ -58,6 +87,58 @@ export const mainNavigation: readonly NavItem[] = [
     title: "Work Reports",
     href: ROUTES.workReports,
     icon: ClipboardCheck,
+  },
+  {
+    title: "Visit Plans",
+    href: ROUTES.visitPlans,
+    icon: MapPin,
+  },
+  {
+    title: "Visit Logs",
+    href: ROUTES.visitLogs,
+    icon: MapPinned,
+  },
+  {
+    title: "Sales Targets",
+    href: ROUTES.salesTargets,
+    icon: Target,
+  },
+  {
+    title: "Collection Targets",
+    href: ROUTES.collectionTargets,
+    icon: PercentCircle,
+  },
+  {
+    title: "Sales Entries",
+    href: ROUTES.salesEntries,
+    icon: WalletMinimal,
+  },
+  {
+    title: "Collection Entries",
+    href: ROUTES.collectionEntries,
+    icon: Banknote,
+  },
+  {
+    title: "Demand Orders",
+    href: ROUTES.demandOrders,
+    icon: ShoppingCart,
+  },
+  {
+    title: "Approvals",
+    href: ROUTES.approvals,
+    icon: ListChecks,
+  },
+  {
+    title: "Accounts review",
+    href: ROUTES.accountsReview,
+    icon: BadgeCheck,
+    roles: ["accounts", "admin"],
+  },
+  {
+    title: "Factory queue",
+    href: ROUTES.factoryQueue,
+    icon: Factory,
+    roles: ["factory_operator", "accounts", "hos", "manager", "assistant_manager", "admin"],
   },
 ] as const;
 

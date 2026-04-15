@@ -11,7 +11,7 @@ const ROLE_HOME = {
   assistant_manager: ROUTES.dashboard,
   marketer: ROUTES.dashboard,
   accounts: ROUTES.dashboard,
-  factory_operator: ROUTES.dashboard,
+  factory_operator: ROUTES.factoryQueue,
 } satisfies Record<AppRole, string>;
 
 /**
