@@ -63,7 +63,7 @@ export default async function SalesEntriesPage({ searchParams }: PageProps) {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Sales entries</h1>
-        <p className="text-destructive text-sm">Could not load sales entries: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load sales entries right now.</p>
       </div>
     );
   }

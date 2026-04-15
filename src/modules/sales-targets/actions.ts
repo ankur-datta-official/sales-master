@@ -6,6 +6,7 @@ import type { AppRole } from "@/constants/roles";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import { canManageSalesTargets, isOrgAdminRole } from "@/lib/users/actor-permissions";
 import {
@@ -58,7 +59,13 @@ async function assertCanAssignSalesTarget(
     p_has_org_wide_access: hasOrgWide,
     p_max_depth: 25,
   });
-  if (error) return error.message;
+  if (error) {
+    return toSafeActionError(
+      error,
+      "Could not validate assignment scope for sales target.",
+      "salesTargets.assertCanAssignSalesTarget"
+    );
+  }
   const row = Array.isArray(data) ? data[0] : data;
   if (!row || !(typeof row === "object" && "can_access" in row && row.can_access)) {
     return "You cannot assign a target to this user based on your role and hierarchy.";
@@ -137,7 +144,10 @@ export async function createSalesTargetAction(
     .single();
 
   if (error || !data) {
-    return { ok: false, error: error?.message ?? "Could not create sales target." };
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not create sales target.", "salesTargets.createSalesTargetAction"),
+    };
   }
 
   revalidatePath(ROUTES.salesTargets);
@@ -203,7 +213,12 @@ export async function updateSalesTargetAction(
     })
     .eq("id", parsed.data.salesTargetId);
 
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not update sales target.", "salesTargets.updateSalesTargetAction"),
+    };
+  }
 
   revalidatePath(ROUTES.salesTargets);
   revalidatePath(`${ROUTES.salesTargets}/${parsed.data.salesTargetId}`);

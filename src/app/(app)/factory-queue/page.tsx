@@ -33,7 +33,7 @@ export default async function FactoryQueuePage() {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Factory queue</h1>
-        <p className="text-destructive text-sm">Could not load factory queue: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load factory queue right now.</p>
       </div>
     );
   }

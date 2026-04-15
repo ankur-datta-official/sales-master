@@ -69,7 +69,7 @@ export default async function DemandOrdersPage({ searchParams }: PageProps) {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Demand orders</h1>
-        <p className="text-destructive text-sm">Could not load demand orders: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load demand orders right now.</p>
       </div>
     );
   }

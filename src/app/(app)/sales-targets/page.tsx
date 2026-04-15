@@ -81,7 +81,7 @@ export default async function SalesTargetsPage({ searchParams }: PageProps) {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Sales targets</h1>
-        <p className="text-destructive text-sm">Could not load sales targets: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load sales targets right now.</p>
       </div>
     );
   }

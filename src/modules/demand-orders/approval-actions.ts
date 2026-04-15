@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import { canReviewDemandOrders } from "@/lib/users/actor-permissions";
 import {
@@ -83,7 +84,10 @@ export async function approveDemandOrderAction(input: ApproveDemandOrderInput): 
     .single();
 
   if (logErr || !logRow) {
-    return { ok: false, error: logErr?.message ?? "Could not record approval." };
+    return {
+      ok: false,
+      error: toSafeActionError(logErr, "Could not record approval.", "demandOrders.approval.approve.insertLog"),
+    };
   }
 
   const { data: updated, error: updErr } = await supabase
@@ -99,7 +103,11 @@ export async function approveDemandOrderAction(input: ApproveDemandOrderInput): 
     await supabase.from("approval_logs").delete().eq("id", logRow.id);
     return {
       ok: false,
-      error: updErr?.message ?? "Order could not be approved (it may have changed).",
+      error: toSafeActionError(
+        updErr,
+        "Order could not be approved (it may have changed).",
+        "demandOrders.approval.approve.updateOrder"
+      ),
     };
   }
 
@@ -174,7 +182,10 @@ export async function rejectDemandOrderAction(input: RejectDemandOrderInput): Pr
     .single();
 
   if (logErr || !logRow) {
-    return { ok: false, error: logErr?.message ?? "Could not record rejection." };
+    return {
+      ok: false,
+      error: toSafeActionError(logErr, "Could not record rejection.", "demandOrders.approval.reject.insertLog"),
+    };
   }
 
   const { data: updated, error: updErr } = await supabase
@@ -190,7 +201,11 @@ export async function rejectDemandOrderAction(input: RejectDemandOrderInput): Pr
     await supabase.from("approval_logs").delete().eq("id", logRow.id);
     return {
       ok: false,
-      error: updErr?.message ?? "Order could not be rejected (it may have changed).",
+      error: toSafeActionError(
+        updErr,
+        "Order could not be rejected (it may have changed).",
+        "demandOrders.approval.reject.updateOrder"
+      ),
     };
   }
 
@@ -293,7 +308,10 @@ export async function forwardDemandOrderAction(input: ForwardDemandOrderInput): 
     .single();
 
   if (logErr || !logRow) {
-    return { ok: false, error: logErr?.message ?? "Could not record forward." };
+    return {
+      ok: false,
+      error: toSafeActionError(logErr, "Could not record forward.", "demandOrders.approval.forward.insertLog"),
+    };
   }
 
   const { data: updated, error: updErr } = await supabase
@@ -309,7 +327,11 @@ export async function forwardDemandOrderAction(input: ForwardDemandOrderInput): 
     await supabase.from("approval_logs").delete().eq("id", logRow.id);
     return {
       ok: false,
-      error: updErr?.message ?? "Order could not be forwarded (it may have changed).",
+      error: toSafeActionError(
+        updErr,
+        "Order could not be forwarded (it may have changed).",
+        "demandOrders.approval.forward.updateOrder"
+      ),
     };
   }
 

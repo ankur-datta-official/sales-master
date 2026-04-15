@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import {
   canCreateCollectionEntries,
@@ -97,7 +98,14 @@ export async function createCollectionEntryAction(
     .single();
 
   if (error || !data) {
-    return { ok: false, error: error?.message ?? "Could not create collection entry." };
+    return {
+      ok: false,
+      error: toSafeActionError(
+        error,
+        "Could not create collection entry.",
+        "collectionEntries.createCollectionEntryAction"
+      ),
+    };
   }
 
   revalidatePath(ROUTES.collectionEntries);
@@ -168,7 +176,16 @@ export async function updateCollectionEntryAction(
     })
     .eq("id", parsed.data.collectionEntryId);
 
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    return {
+      ok: false,
+      error: toSafeActionError(
+        error,
+        "Could not update collection entry.",
+        "collectionEntries.updateCollectionEntryAction"
+      ),
+    };
+  }
 
   revalidatePath(ROUTES.collectionEntries);
   revalidatePath(`${ROUTES.collectionEntries}/${parsed.data.collectionEntryId}`);
@@ -213,7 +230,16 @@ export async function verifyCollectionEntryAction(
     .eq("id", parsed.data.collectionEntryId)
     .eq("verification_status", "unverified");
 
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    return {
+      ok: false,
+      error: toSafeActionError(
+        error,
+        "Could not verify collection entry.",
+        "collectionEntries.verifyCollectionEntryAction"
+      ),
+    };
+  }
 
   revalidatePath(ROUTES.collectionEntries);
   revalidatePath(`${ROUTES.collectionEntries}/${parsed.data.collectionEntryId}`);

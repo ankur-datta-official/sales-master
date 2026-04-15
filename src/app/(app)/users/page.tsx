@@ -24,7 +24,7 @@ export default async function UsersListPage() {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Users</h1>
-        <p className="text-destructive text-sm">Could not load users: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load users right now.</p>
       </div>
     );
   }

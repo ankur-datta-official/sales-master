@@ -33,7 +33,7 @@ export default async function AccountsReviewQueuePage() {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Accounts review</h1>
-        <p className="text-destructive text-sm">Could not load queue: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load queue right now.</p>
       </div>
     );
   }

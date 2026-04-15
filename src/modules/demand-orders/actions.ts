@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import { canCreateDemandOrders, isOrgAdminRole } from "@/lib/users/actor-permissions";
 import {
@@ -101,7 +102,10 @@ export async function createDemandOrderAction(
     .single();
 
   if (orderErr || !orderRow) {
-    return { ok: false, error: orderErr?.message ?? "Could not create demand order." };
+    return {
+      ok: false,
+      error: toSafeActionError(orderErr, "Could not create demand order.", "demandOrders.createDemandOrderAction.insertOrder"),
+    };
   }
 
   const { error: rpcErr } = await supabase.rpc("replace_demand_order_items", {
@@ -111,7 +115,14 @@ export async function createDemandOrderAction(
 
   if (rpcErr) {
     await supabase.from("demand_orders").delete().eq("id", orderRow.id);
-    return { ok: false, error: rpcErr.message };
+    return {
+      ok: false,
+      error: toSafeActionError(
+        rpcErr,
+        "Could not save demand order items.",
+        "demandOrders.createDemandOrderAction.replaceItems"
+      ),
+    };
   }
 
   revalidatePath(ROUTES.demandOrders);
@@ -166,14 +177,32 @@ export async function updateDraftDemandOrderAction(
     })
     .eq("id", parsed.data.demandOrderId);
 
-  if (headerErr) return { ok: false, error: headerErr.message };
+  if (headerErr) {
+    return {
+      ok: false,
+      error: toSafeActionError(
+        headerErr,
+        "Could not update demand order header.",
+        "demandOrders.updateDraftDemandOrderAction.updateHeader"
+      ),
+    };
+  }
 
   const { error: rpcErr } = await supabase.rpc("replace_demand_order_items", {
     p_order_id: parsed.data.demandOrderId,
     p_items: linesToJsonForRpc(parsed.data.items),
   });
 
-  if (rpcErr) return { ok: false, error: rpcErr.message };
+  if (rpcErr) {
+    return {
+      ok: false,
+      error: toSafeActionError(
+        rpcErr,
+        "Could not update demand order items.",
+        "demandOrders.updateDraftDemandOrderAction.replaceItems"
+      ),
+    };
+  }
 
   revalidatePath(ROUTES.demandOrders);
   revalidatePath(`${ROUTES.demandOrders}/${parsed.data.demandOrderId}`);
@@ -218,7 +247,16 @@ export async function submitDemandOrderAction(
     .select("*", { count: "exact", head: true })
     .eq("demand_order_id", parsed.data.demandOrderId);
 
-  if (countErr) return { ok: false, error: countErr.message };
+  if (countErr) {
+    return {
+      ok: false,
+      error: toSafeActionError(
+        countErr,
+        "Could not validate demand order items.",
+        "demandOrders.submitDemandOrderAction.countItems"
+      ),
+    };
+  }
   if ((count ?? 0) < 1) {
     return { ok: false, error: "Add at least one line item before submitting." };
   }
@@ -232,7 +270,12 @@ export async function submitDemandOrderAction(
     })
     .eq("id", parsed.data.demandOrderId);
 
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not submit demand order.", "demandOrders.submitDemandOrderAction"),
+    };
+  }
 
   const { error: logErr } = await supabase.from("approval_logs").insert({
     organization_id: profile.organization_id,
@@ -250,7 +293,10 @@ export async function submitDemandOrderAction(
       .from("demand_orders")
       .update({ status: "draft", submitted_at: null, stage: "draft" })
       .eq("id", parsed.data.demandOrderId);
-    return { ok: false, error: logErr.message };
+    return {
+      ok: false,
+      error: toSafeActionError(logErr, "Could not write approval log.", "demandOrders.submitDemandOrderAction.insertApprovalLog"),
+    };
   }
 
   revalidatePath(ROUTES.approvals);

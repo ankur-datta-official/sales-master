@@ -109,6 +109,7 @@ async function sendLocationPing(
 
 export function TodayAttendancePanel({ activeSession, canCheckInOut, lastKnownLocation }: Props) {
   const router = useRouter();
+  const activeSessionId = activeSession?.id ?? null;
   const [error, setError] = useState<string | null>(null);
   const [hint, setHint] = useState<string | null>(null);
   const [trackingStatus, setTrackingStatus] = useState<string | null>(null);
@@ -121,7 +122,7 @@ export function TodayAttendancePanel({ activeSession, canCheckInOut, lastKnownLo
   }, [lastKnownLocation?.captured_at]);
 
   useEffect(() => {
-    if (!activeSession || !canCheckInOut) {
+    if (!activeSessionId || !canCheckInOut) {
       setTrackingStatus(null);
       return;
     }
@@ -135,7 +136,7 @@ export function TodayAttendancePanel({ activeSession, canCheckInOut, lastKnownLo
           if (mounted) setTrackingStatus("Tracking waiting for GPS");
           return;
         }
-        await sendLocationPing(activeSession.id, geo, "web");
+        await sendLocationPing(activeSessionId, geo, "web");
         if (mounted) {
           const nowIso = new Date().toISOString();
           setLastPingAt(nowIso);
@@ -160,7 +161,7 @@ export function TodayAttendancePanel({ activeSession, canCheckInOut, lastKnownLo
       window.clearTimeout(firstTimeout);
       window.clearInterval(interval);
     };
-  }, [activeSession?.id, canCheckInOut]);
+  }, [activeSessionId, canCheckInOut]);
 
   function onCheckIn() {
     setError(null);

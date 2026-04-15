@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import { canCheckInOutOwnAttendance } from "@/lib/users/actor-permissions";
 import {
@@ -63,7 +64,10 @@ export async function checkInAttendanceAction(
         error: "You already have an active check-in. Check out before checking in again.",
       };
     }
-    return { ok: false, error: error?.message ?? "Could not check in." };
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not check in.", "attendance.checkInAttendanceAction"),
+    };
   }
 
   revalidatePath(ROUTES.attendance);
@@ -99,7 +103,14 @@ export async function checkOutAttendanceAction(
     .maybeSingle();
 
   if (activeErr) {
-    return { ok: false, error: activeErr.message };
+    return {
+      ok: false,
+      error: toSafeActionError(
+        activeErr,
+        "Could not verify active attendance session.",
+        "attendance.checkOutAttendanceAction.fetchActive"
+      ),
+    };
   }
   if (!active) {
     return { ok: false, error: "No active check-in to close." };
@@ -121,7 +132,10 @@ export async function checkOutAttendanceAction(
     .eq("status", "checked_in");
 
   if (error) {
-    return { ok: false, error: error.message };
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not check out.", "attendance.checkOutAttendanceAction"),
+    };
   }
 
   revalidatePath(ROUTES.attendance);

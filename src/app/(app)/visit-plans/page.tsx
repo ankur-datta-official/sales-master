@@ -61,7 +61,7 @@ export default async function VisitPlansPage({ searchParams }: PageProps) {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Visit Plans</h1>
-        <p className="text-destructive text-sm">Could not load visit plans: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load visit plans right now.</p>
       </div>
     );
   }

@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import { canPerformAccountsDemandOrderReview } from "@/lib/users/actor-permissions";
 import {
@@ -69,7 +70,14 @@ export async function accountsApproveDemandOrderAction(
     .single();
 
   if (logErr || !logRow) {
-    return { ok: false, error: logErr?.message ?? "Could not record accounts approval." };
+    return {
+      ok: false,
+      error: toSafeActionError(
+        logErr,
+        "Could not record accounts approval.",
+        "demandOrders.accounts.approve.insertLog"
+      ),
+    };
   }
 
   const { data: updated, error: updErr } = await supabase
@@ -85,7 +93,11 @@ export async function accountsApproveDemandOrderAction(
     await supabase.from("approval_logs").delete().eq("id", logRow.id);
     return {
       ok: false,
-      error: updErr?.message ?? "Order could not be updated (it may have changed).",
+      error: toSafeActionError(
+        updErr,
+        "Order could not be updated (it may have changed).",
+        "demandOrders.accounts.approve.updateOrder"
+      ),
     };
   }
 
@@ -149,7 +161,14 @@ export async function accountsRejectDemandOrderAction(
     .single();
 
   if (logErr || !logRow) {
-    return { ok: false, error: logErr?.message ?? "Could not record accounts rejection." };
+    return {
+      ok: false,
+      error: toSafeActionError(
+        logErr,
+        "Could not record accounts rejection.",
+        "demandOrders.accounts.reject.insertLog"
+      ),
+    };
   }
 
   const { data: updated, error: updErr } = await supabase
@@ -165,7 +184,11 @@ export async function accountsRejectDemandOrderAction(
     await supabase.from("approval_logs").delete().eq("id", logRow.id);
     return {
       ok: false,
-      error: updErr?.message ?? "Order could not be rejected (it may have changed).",
+      error: toSafeActionError(
+        updErr,
+        "Order could not be rejected (it may have changed).",
+        "demandOrders.accounts.reject.updateOrder"
+      ),
     };
   }
 

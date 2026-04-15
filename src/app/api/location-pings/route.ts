@@ -33,6 +33,9 @@ export async function POST(req: Request) {
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  if (!session.profile?.id) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const role = resolveAppRole(session.user, session.profile);
   if (!canCheckInOutOwnAttendance(role)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
@@ -48,7 +51,8 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
   const supabase = await createClient();
   const session = await getCurrentUserProfile();
-  if (!session) {
+  const actorProfileId = session?.profile?.id;
+  if (!session || !actorProfileId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const role = resolveAppRole(session.user, session.profile);
@@ -70,12 +74,37 @@ export async function GET(req: Request) {
         { status: 400 }
       );
     }
+    const { data: attendanceSession, error: attendanceSessionError } = await supabase
+      .from("attendance_sessions")
+      .select("user_id")
+      .eq("id", parsed.data.attendance_session_id)
+      .maybeSingle();
+    if (attendanceSessionError || !attendanceSession) {
+      return NextResponse.json({ error: "Attendance session not found." }, { status: 404 });
+    }
+
+    const isOwnSession = attendanceSession.user_id === actorProfileId;
+    if (!isOwnSession) {
+      if (!canFilterAttendanceHistoryByUser(role)) {
+        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+      }
+      const { data: canAccessUser, error: accessError } = await supabase.rpc("can_access_profile", {
+        actor_id: actorProfileId,
+        target_profile_id: attendanceSession.user_id,
+      });
+      if (accessError || !canAccessUser) {
+        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+      }
+    }
+
     const result = await getRecentLocationPingsForSession(
       supabase,
       parsed.data.attendance_session_id,
       parsed.data.limit
     );
-    if (!result.ok) return NextResponse.json({ error: result.error }, { status: 400 });
+    if (!result.ok) {
+      return NextResponse.json({ error: "Could not load session location history." }, { status: 400 });
+    }
     return NextResponse.json({ data: result.data });
   }
 
@@ -87,11 +116,13 @@ export async function GET(req: Request) {
         { status: 400 }
       );
     }
-    if (parsed.data.user_id !== session.profile?.id && !canFilterAttendanceHistoryByUser(role)) {
+    if (parsed.data.user_id !== actorProfileId && !canFilterAttendanceHistoryByUser(role)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
     const result = await getLastKnownLocationForUser(supabase, parsed.data.user_id);
-    if (!result.ok) return NextResponse.json({ error: result.error }, { status: 400 });
+    if (!result.ok) {
+      return NextResponse.json({ error: "Could not load last known location." }, { status: 400 });
+    }
     return NextResponse.json({ data: result.data });
   }
 

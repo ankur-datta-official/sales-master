@@ -50,7 +50,7 @@ export default async function WorkReportsPage({ searchParams }: PageProps) {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Work Reports</h1>
-        <p className="text-destructive text-sm">Could not load work reports: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load work reports right now.</p>
       </div>
     );
   }

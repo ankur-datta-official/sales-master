@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import { canCreateVisitPlans, isOrgAdminRole } from "@/lib/users/actor-permissions";
 import {
@@ -81,7 +82,10 @@ export async function createVisitPlanAction(
     .single();
 
   if (error || !data) {
-    return { ok: false, error: error?.message ?? "Could not create visit plan." };
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not create visit plan.", "visitPlans.createVisitPlanAction"),
+    };
   }
 
   revalidatePath(ROUTES.visitPlans);
@@ -134,7 +138,12 @@ export async function updatePlannedVisitPlanAction(
     })
     .eq("id", parsed.data.visitPlanId);
 
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not update visit plan.", "visitPlans.updatePlannedVisitPlanAction"),
+    };
+  }
 
   revalidatePath(ROUTES.visitPlans);
   revalidatePath(`${ROUTES.visitPlans}/${parsed.data.visitPlanId}`);
@@ -173,7 +182,12 @@ export async function updateVisitPlanStatusAction(
     .update({ status: parsed.data.status })
     .eq("id", parsed.data.visitPlanId);
 
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not update visit plan status.", "visitPlans.updateVisitPlanStatusAction"),
+    };
+  }
 
   revalidatePath(ROUTES.visitPlans);
   revalidatePath(`${ROUTES.visitPlans}/${parsed.data.visitPlanId}`);

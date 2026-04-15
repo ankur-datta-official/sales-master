@@ -47,7 +47,7 @@ export function LoginForm() {
     });
 
     if (error) {
-      setFormError(error.message);
+      setFormError("Login failed. Check your credentials and try again.");
       return;
     }
 

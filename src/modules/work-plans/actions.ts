@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import {
   canCreateWorkPlans,
@@ -87,7 +88,10 @@ export async function createWorkPlanAction(
     .single();
 
   if (error || !data) {
-    return { ok: false, error: error?.message ?? "Could not create work plan." };
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not create work plan.", "workPlans.createWorkPlanAction"),
+    };
   }
 
   revalidatePath(ROUTES.workPlans);
@@ -134,7 +138,12 @@ export async function updateDraftWorkPlanAction(
     })
     .eq("id", parsed.data.workPlanId);
 
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not update work plan.", "workPlans.updateDraftWorkPlanAction"),
+    };
+  }
 
   revalidatePath(ROUTES.workPlans);
   revalidatePath(`${ROUTES.workPlans}/${parsed.data.workPlanId}`);
@@ -181,7 +190,12 @@ export async function submitWorkPlanAction(
     })
     .eq("id", parsed.data.workPlanId);
 
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not submit work plan.", "workPlans.submitWorkPlanAction"),
+    };
+  }
 
   revalidatePath(ROUTES.workPlans);
   revalidatePath(`${ROUTES.workPlans}/${parsed.data.workPlanId}`);
@@ -236,7 +250,12 @@ export async function reviewWorkPlanAction(
     })
     .eq("id", parsed.data.workPlanId);
 
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not review work plan.", "workPlans.reviewWorkPlanAction"),
+    };
+  }
 
   revalidatePath(ROUTES.workPlans);
   revalidatePath(`${ROUTES.workPlans}/${parsed.data.workPlanId}`);

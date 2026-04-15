@@ -52,7 +52,7 @@ export async function recordLocationPing(
     .single();
 
   if (error || !data) {
-    return { ok: false, error: error?.message ?? "Could not save location ping." };
+    return { ok: false, error: "Could not save location ping." };
   }
 
   return {
@@ -73,7 +73,7 @@ export async function getRecentLocationPingsForSession(
     .order("captured_at", { ascending: false })
     .limit(limit);
 
-  if (error) return { ok: false, error: error.message };
+  if (error) return { ok: false, error: "Could not load session location history." };
   return {
     ok: true,
     data: (data ?? []).map((row) => mapLocationPingRow(row as Parameters<typeof mapLocationPingRow>[0])),
@@ -92,7 +92,7 @@ export async function getLastKnownLocationForUser(
     .limit(1)
     .maybeSingle();
 
-  if (error) return { ok: false, error: error.message };
+  if (error) return { ok: false, error: "Could not load last known location." };
   if (!data) return { ok: true, data: null };
   return { ok: true, data: mapLocationPingRow(data as Parameters<typeof mapLocationPingRow>[0]) };
 }

@@ -51,7 +51,7 @@ export default async function AttendanceHistoryPage({ searchParams }: PageProps)
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Attendance history</h1>
-        <p className="text-destructive text-sm">Could not load history: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load history right now.</p>
       </div>
     );
   }

@@ -57,7 +57,7 @@ export default async function WorkPlansPage({ searchParams }: PageProps) {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Work Plans</h1>
-        <p className="text-destructive text-sm">Could not load work plans: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load work plans right now.</p>
       </div>
     );
   }

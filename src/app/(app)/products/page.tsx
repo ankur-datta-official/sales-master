@@ -51,7 +51,7 @@ export default async function ProductsPage({ searchParams }: PageProps) {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Products</h1>
-        <p className="text-destructive text-sm">Could not load products: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load products right now.</p>
       </div>
     );
   }

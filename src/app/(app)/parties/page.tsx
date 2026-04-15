@@ -49,7 +49,7 @@ export default async function PartiesPage({ searchParams }: PageProps) {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Parties</h1>
-        <p className="text-destructive text-sm">Could not load parties: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load parties right now.</p>
       </div>
     );
   }

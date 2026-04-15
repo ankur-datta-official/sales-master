@@ -69,7 +69,7 @@ export default async function VisitLogsPage({ searchParams }: PageProps) {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Visit logs</h1>
-        <p className="text-destructive text-sm">Could not load visit logs: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load visit logs right now.</p>
       </div>
     );
   }

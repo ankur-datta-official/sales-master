@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import { createServiceRoleClient } from "@/lib/supabase/service";
 import { canMutateOrgUsers } from "@/lib/users/actor-permissions";
@@ -81,7 +82,11 @@ export async function createOrgUserAction(
   if (createErr || !created.user) {
     return {
       ok: false,
-      error: createErr?.message ?? "Could not create authentication user.",
+      error: toSafeActionError(
+        createErr,
+        "Could not create authentication user.",
+        "users.createOrgUserAction.createAuthUser"
+      ),
     };
   }
 
@@ -104,7 +109,10 @@ export async function createOrgUserAction(
     .eq("id", newId);
 
   if (upErr) {
-    return { ok: false, error: upErr.message };
+    return {
+      ok: false,
+      error: toSafeActionError(upErr, "Could not finish user profile setup.", "users.createOrgUserAction.updateProfile"),
+    };
   }
 
   revalidatePath(ROUTES.users);
@@ -176,7 +184,10 @@ export async function updateOrgUserAction(
     .eq("id", parsed.data.userId);
 
   if (error) {
-    return { ok: false, error: error.message };
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not update user profile.", "users.updateOrgUserAction"),
+    };
   }
 
   revalidatePath(ROUTES.users);

@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import { canCreateSalesEntries, isOrgAdminRole } from "@/lib/users/actor-permissions";
 import {
@@ -93,7 +94,10 @@ export async function createSalesEntryAction(
     .single();
 
   if (error || !data) {
-    return { ok: false, error: error?.message ?? "Could not create sales entry." };
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not create sales entry.", "salesEntries.createSalesEntryAction"),
+    };
   }
 
   revalidatePath(ROUTES.salesEntries);
@@ -155,7 +159,12 @@ export async function updateSalesEntryAction(input: UpdateSalesEntryInput): Prom
     })
     .eq("id", parsed.data.salesEntryId);
 
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not update sales entry.", "salesEntries.updateSalesEntryAction"),
+    };
+  }
 
   revalidatePath(ROUTES.salesEntries);
   revalidatePath(`${ROUTES.salesEntries}/${parsed.data.salesEntryId}`);

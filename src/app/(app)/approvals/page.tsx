@@ -72,7 +72,7 @@ export default async function ApprovalsPage({ searchParams }: PageProps) {
     return (
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Approvals</h1>
-        <p className="text-destructive text-sm">Could not load approval log: {error.message}</p>
+        <p className="text-destructive text-sm">Could not load approval log right now.</p>
       </div>
     );
   }

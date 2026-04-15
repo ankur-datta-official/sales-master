@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import { canMutateParties } from "@/lib/users/actor-permissions";
 import {
@@ -68,7 +69,10 @@ export async function createPartyAction(
     .single();
 
   if (error || !data) {
-    return { ok: false, error: error?.message ?? "Could not create party." };
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not create party.", "parties.createPartyAction"),
+    };
   }
 
   revalidatePath(ROUTES.parties);
@@ -129,7 +133,10 @@ export async function updatePartyAction(input: UpdatePartyInput): Promise<Action
     .eq("id", parsed.data.partyId);
 
   if (error) {
-    return { ok: false, error: error.message };
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not update party.", "parties.updatePartyAction"),
+    };
   }
 
   revalidatePath(ROUTES.parties);

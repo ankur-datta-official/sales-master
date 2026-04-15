@@ -6,6 +6,7 @@ import type { AppRole } from "@/constants/roles";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import { canManageCollectionTargets, isOrgAdminRole } from "@/lib/users/actor-permissions";
 import {
@@ -39,7 +40,13 @@ async function assertCanAssignCollectionTarget(
     p_has_org_wide_access: hasOrgWide,
     p_max_depth: 25,
   });
-  if (error) return error.message;
+  if (error) {
+    return toSafeActionError(
+      error,
+      "Could not validate assignment scope for collection target.",
+      "collectionTargets.assertCanAssignCollectionTarget"
+    );
+  }
   const row = Array.isArray(data) ? data[0] : data;
   if (!row || !(typeof row === "object" && "can_access" in row && row.can_access)) {
     return "You cannot assign a collection target to this user based on your role and hierarchy.";
@@ -114,7 +121,14 @@ export async function createCollectionTargetAction(
     .single();
 
   if (error || !data) {
-    return { ok: false, error: error?.message ?? "Could not create collection target." };
+    return {
+      ok: false,
+      error: toSafeActionError(
+        error,
+        "Could not create collection target.",
+        "collectionTargets.createCollectionTargetAction"
+      ),
+    };
   }
 
   revalidatePath(ROUTES.collectionTargets);
@@ -176,7 +190,16 @@ export async function updateCollectionTargetAction(
     })
     .eq("id", parsed.data.collectionTargetId);
 
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    return {
+      ok: false,
+      error: toSafeActionError(
+        error,
+        "Could not update collection target.",
+        "collectionTargets.updateCollectionTargetAction"
+      ),
+    };
+  }
 
   revalidatePath(ROUTES.collectionTargets);
   revalidatePath(`${ROUTES.collectionTargets}/${parsed.data.collectionTargetId}`);

@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
+import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import { canCreateVisitLogs, isOrgAdminRole } from "@/lib/users/actor-permissions";
 import {
@@ -185,7 +186,10 @@ export async function createVisitLogAction(
     .single();
 
   if (error || !data) {
-    return { ok: false, error: error?.message ?? "Could not create visit log." };
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not create visit log.", "visitLogs.createVisitLogAction"),
+    };
   }
 
   revalidatePath(ROUTES.visitLogs);
@@ -288,7 +292,12 @@ export async function updateVisitLogAction(input: UpdateVisitLogInput): Promise<
     })
     .eq("id", parsed.data.visitLogId);
 
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    return {
+      ok: false,
+      error: toSafeActionError(error, "Could not update visit log.", "visitLogs.updateVisitLogAction"),
+    };
+  }
 
   revalidatePath(ROUTES.visitLogs);
   revalidatePath(`${ROUTES.visitLogs}/${parsed.data.visitLogId}`);
