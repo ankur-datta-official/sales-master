@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
+import { rpcCanAccessProfile } from "@/lib/auth/can-access-profile-rpc";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { normalizeProfileRow, PROFILE_WITH_ROLE_SELECT } from "@/lib/profiles/fetch-profile";
@@ -22,8 +23,19 @@ export default async function UserDetailPage({ params }: PageProps) {
   const { user, profile: actorProfile } = await requireUserProfile();
   const actorRole = resolveAppRole(user, actorProfile);
   const canEdit = canMutateOrgUsers(actorRole);
+  const actorProfileId = actorProfile?.id;
+  if (!actorProfileId) {
+    redirect(ROUTES.login);
+  }
 
   const supabase = await createClient();
+  if (!canEdit) {
+    const canSee = await rpcCanAccessProfile(supabase, actorProfileId, userId, actorRole);
+    if (!canSee) {
+      notFound();
+    }
+  }
+
   const { data: raw, error } = await supabase
     .from("profiles")
     .select(PROFILE_WITH_ROLE_SELECT)

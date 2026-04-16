@@ -5,10 +5,11 @@ import { revalidatePath } from "next/cache";
 import type { AppRole } from "@/constants/roles";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
+import { assertCanAssignTargetByHierarchy } from "@/lib/auth/target-assignment";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
-import { canManageSalesTargets, isOrgAdminRole } from "@/lib/users/actor-permissions";
+import { canManageSalesTargets } from "@/lib/users/actor-permissions";
 import {
   createSalesTargetSchema,
   updateSalesTargetSchema,
@@ -49,28 +50,16 @@ async function assertCanAssignSalesTarget(
   assigneeId: string,
   role: AppRole | null
 ): Promise<string | null> {
-  if (!canManageSalesTargets(role)) {
-    return "You do not have permission to assign sales targets.";
-  }
-  const hasOrgWide = isOrgAdminRole(role) || role === "hos";
-  const { data, error } = await supabase.rpc("can_access_profile", {
-    p_actor_profile_id: actorProfileId,
-    p_target_profile_id: assigneeId,
-    p_has_org_wide_access: hasOrgWide,
-    p_max_depth: 25,
+  return assertCanAssignTargetByHierarchy({
+    supabase,
+    actorProfileId,
+    assigneeId,
+    role,
+    canAssign: canManageSalesTargets(role),
+    deniedMessage: "You do not have permission to assign sales targets.",
+    fallbackMessage: "Could not validate assignment scope for sales target.",
+    context: "salesTargets.assertCanAssignSalesTarget",
   });
-  if (error) {
-    return toSafeActionError(
-      error,
-      "Could not validate assignment scope for sales target.",
-      "salesTargets.assertCanAssignSalesTarget"
-    );
-  }
-  const row = Array.isArray(data) ? data[0] : data;
-  if (!row || !(typeof row === "object" && "can_access" in row && row.can_access)) {
-    return "You cannot assign a target to this user based on your role and hierarchy.";
-  }
-  return null;
 }
 
 async function assertPartyInOrg(
@@ -199,7 +188,7 @@ export async function updateSalesTargetAction(
   const qtyNorm = normalizeOptionalTargetQty(parsed.data.target_qty);
   if (!qtyNorm.ok) return { ok: false, error: qtyNorm.error };
 
-  const { error } = await supabase
+  const { data: updatedRow, error } = await supabase
     .from("sales_targets")
     .update({
       assigned_to_user_id: parsed.data.assigned_to_user_id,
@@ -211,12 +200,20 @@ export async function updateSalesTargetAction(
       target_qty: qtyNorm.value,
       status: parsed.data.status,
     })
-    .eq("id", parsed.data.salesTargetId);
+    .eq("id", parsed.data.salesTargetId)
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
       ok: false,
       error: toSafeActionError(error, "Could not update sales target.", "salesTargets.updateSalesTargetAction"),
+    };
+  }
+  if (!updatedRow) {
+    return {
+      ok: false,
+      error: "Sales target could not be updated. Refresh and try again.",
     };
   }
 

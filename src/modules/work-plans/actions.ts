@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
+import { canReviewOwnerByHierarchy } from "@/lib/auth/can-review-owner";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
@@ -22,34 +23,8 @@ import {
   type SubmitWorkPlanInput,
   type UpdateDraftWorkPlanInput,
 } from "@/modules/work-plans/schemas";
-import type { AppRole } from "@/constants/roles";
 
 type ActionResult<T = void> = { ok: true; data?: T } | { ok: false; error: string };
-
-function canOrgScopeReview(role: AppRole | null): boolean {
-  return role === "hos" || isOrgAdminRole(role);
-}
-
-async function canReviewActorAccessOwner(
-  ownerUserId: string,
-  role: AppRole | null
-): Promise<boolean> {
-  const supabase = await createClient();
-  const { profile } = await requireUserProfile();
-  if (!profile?.id || !profile.organization_id) return false;
-  if (canOrgScopeReview(role)) return true;
-  if (role !== "manager" && role !== "assistant_manager") return false;
-
-  const { data, error } = await supabase.rpc("can_access_profile", {
-    p_actor_profile_id: profile.id,
-    p_target_profile_id: ownerUserId,
-    p_has_org_wide_access: false,
-    p_max_depth: 25,
-  });
-  if (error) return false;
-  const row = Array.isArray(data) ? data[0] : data;
-  return Boolean(row && typeof row === "object" && "can_access" in row && row.can_access);
-}
 
 export async function createWorkPlanAction(
   input: CreateWorkPlanInput
@@ -128,7 +103,7 @@ export async function updateDraftWorkPlanAction(
     return { ok: false, error: "Only draft plans can be edited." };
   }
 
-  const { error } = await supabase
+  const { data: updatedRow, error } = await supabase
     .from("work_plans")
     .update({
       plan_date: parsed.data.plan_date,
@@ -136,12 +111,21 @@ export async function updateDraftWorkPlanAction(
       details: parsed.data.details.trim(),
       priority: parsed.data.priority ?? null,
     })
-    .eq("id", parsed.data.workPlanId);
+    .eq("id", parsed.data.workPlanId)
+    .eq("status", "draft")
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
       ok: false,
       error: toSafeActionError(error, "Could not update work plan.", "workPlans.updateDraftWorkPlanAction"),
+    };
+  }
+  if (!updatedRow) {
+    return {
+      ok: false,
+      error: "This plan is no longer a draft or could not be updated. Refresh and try again.",
     };
   }
 
@@ -179,7 +163,7 @@ export async function submitWorkPlanAction(
     return { ok: false, error: "Only draft plans can be submitted." };
   }
 
-  const { error } = await supabase
+  const { data: submittedRow, error } = await supabase
     .from("work_plans")
     .update({
       status: "submitted",
@@ -188,12 +172,21 @@ export async function submitWorkPlanAction(
       reviewed_by: null,
       reviewed_at: null,
     })
-    .eq("id", parsed.data.workPlanId);
+    .eq("id", parsed.data.workPlanId)
+    .eq("status", "draft")
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
       ok: false,
       error: toSafeActionError(error, "Could not submit work plan.", "workPlans.submitWorkPlanAction"),
+    };
+  }
+  if (!submittedRow) {
+    return {
+      ok: false,
+      error: "Only draft plans can be submitted, or the plan was changed elsewhere. Refresh and try again.",
     };
   }
 
@@ -235,12 +228,17 @@ export async function reviewWorkPlanAction(
     return { ok: false, error: "You cannot review your own plan." };
   }
 
-  const allowed = await canReviewActorAccessOwner(target.owner_user_id, role);
+  const allowed = await canReviewOwnerByHierarchy(
+    supabase,
+    profile.id,
+    target.owner_user_id,
+    role
+  );
   if (!allowed) {
     return { ok: false, error: "You are outside the allowed review scope." };
   }
 
-  const { error } = await supabase
+  const { data: reviewedRow, error } = await supabase
     .from("work_plans")
     .update({
       status: parsed.data.status,
@@ -248,12 +246,21 @@ export async function reviewWorkPlanAction(
       reviewed_at: new Date().toISOString(),
       review_note: parsed.data.review_note?.trim() || null,
     })
-    .eq("id", parsed.data.workPlanId);
+    .eq("id", parsed.data.workPlanId)
+    .eq("status", "submitted")
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
       ok: false,
       error: toSafeActionError(error, "Could not review work plan.", "workPlans.reviewWorkPlanAction"),
+    };
+  }
+  if (!reviewedRow) {
+    return {
+      ok: false,
+      error: "Only submitted plans can be reviewed, or the plan changed. Refresh and try again.",
     };
   }
 

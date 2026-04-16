@@ -1,11 +1,10 @@
 import Link from "next/link";
 
-import { buttonVariants } from "@/components/ui/button";
+import { ApplyFiltersButton } from "@/components/ui/apply-filters-button";
 import { APPROVAL_LOG_ACTIONS } from "@/constants/statuses";
 import { ROUTES } from "@/config/routes";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { createClient } from "@/lib/supabase/server";
-import { cn } from "@/lib/utils";
 import { mapApprovalLogRow } from "@/modules/approval-logs/normalize";
 import { APPROVAL_LOG_ROW_SELECT } from "@/modules/approval-logs/select-fields";
 import type { ApprovalLogWithActors } from "@/modules/approval-logs/types";
@@ -131,12 +130,7 @@ export default async function ApprovalsPage({ searchParams }: PageProps) {
           className="h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
         />
         <div className="flex gap-2 lg:col-span-2">
-          <button
-            type="submit"
-            className={cn(buttonVariants({ variant: "outline" }), "h-9 flex-1 px-4")}
-          >
-            Apply
-          </button>
+          <ApplyFiltersButton className="h-9 flex-1 px-4" />
         </div>
       </form>
 

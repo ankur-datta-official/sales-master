@@ -20,9 +20,13 @@ export function AppShell({
   userRole,
 }: AppShellProps) {
   return (
-    <SidebarProvider>
-      <AppSidebar userRole={userRole} />
-      <SidebarInset className="flex min-h-svh flex-col overflow-x-hidden">
+    <SidebarProvider className="bg-gradient-to-br from-sidebar/25 via-background to-muted/15">
+      <AppSidebar
+        userRole={userRole}
+        userEmail={userEmail}
+        userDisplayName={userDisplayName}
+      />
+      <SidebarInset className="flex min-h-svh flex-col overflow-x-hidden bg-gradient-to-b from-background via-background to-muted/12">
         <AppTopbar userEmail={userEmail} userDisplayName={userDisplayName} />
         <ContentContainer>{children}</ContentContainer>
       </SidebarInset>

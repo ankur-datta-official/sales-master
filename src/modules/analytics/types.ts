@@ -56,6 +56,7 @@ export type OrderPipelineSummarySection = {
 
 export type AnalyticsData = {
   role: AppRole | null;
+  warnings: string[];
   summary_cards: AnalyticsSummaryCard[];
   quick_widgets: AnalyticsWidget[];
   sales_trend: SalesTrendSection | null;

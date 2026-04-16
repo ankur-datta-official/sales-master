@@ -43,6 +43,7 @@ export type DashboardRecentActivity = {
 
 export type DashboardData = {
   role: AppRole | null;
+  warnings: string[];
   summary_cards: DashboardSummaryCard[];
   quick_widgets: DashboardQuickWidget[];
   recent_work_reports: DashboardRecentWorkReport[];

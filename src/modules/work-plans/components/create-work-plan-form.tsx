@@ -18,6 +18,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { FormErrorAlert } from "@/components/ui/form-error-alert";
+import {
+  FormActions,
+  FormContent,
+  FormField,
+  FormShell,
+  FormSection,
+} from "@/components/ui/form-primitives";
+import { NativeSelect } from "@/components/ui/native-select";
 import { ROUTES } from "@/config/routes";
 import { WORK_PLAN_PRIORITIES } from "@/constants/statuses";
 import { cn } from "@/lib/utils";
@@ -26,12 +35,6 @@ import {
   createWorkPlanSchema,
   type CreateWorkPlanInput,
 } from "@/modules/work-plans/schemas";
-
-const selectClass = cn(
-  "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none",
-  "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
-  "disabled:cursor-not-allowed disabled:opacity-50 dark:bg-input/30"
-);
 
 type Props = { organizationId: string };
 
@@ -77,61 +80,87 @@ export function CreateWorkPlanForm({ organizationId }: Props) {
   }
 
   return (
-    <Card className="max-w-2xl">
-      <CardHeader>
-        <CardTitle>New work plan</CardTitle>
-        <CardDescription>Create your plan as draft and submit when ready.</CardDescription>
-      </CardHeader>
+    <FormShell
+      className="max-w-2xl"
+      title="New work plan"
+      description="Create your plan as draft and submit when ready."
+    >
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <CardContent className="space-y-4">
-          {error && (
-            <p className="text-sm text-destructive" role="alert">
-              {error}
-            </p>
-          )}
-          <div className="space-y-2">
-            <Label htmlFor="plan_date">Plan date</Label>
-            <Input id="plan_date" type="date" {...form.register("plan_date")} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="title">Title</Label>
-            <Input id="title" {...form.register("title")} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="details">Details</Label>
-            <Textarea id="details" rows={6} {...form.register("details")} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="priority">Priority (optional)</Label>
-            <select
-              id="priority"
-              className={selectClass}
-              {...form.register("priority", { setValueAs: (v) => (v === "" ? null : v) })}
+        <FormContent>
+          <FormErrorAlert message={error} />
+
+          <FormSection title="Plan details" description="Keep it clear and actionable.">
+            <div className="grid gap-5 sm:grid-cols-2">
+              <FormField
+                label="Plan date"
+                htmlFor="plan_date"
+                error={form.formState.errors.plan_date?.message}
+              >
+                <Input
+                  id="plan_date"
+                  type="date"
+                  {...form.register("plan_date")}
+                />
+              </FormField>
+
+              <FormField
+                label="Priority"
+                htmlFor="priority"
+                description="Optional."
+              >
+                <NativeSelect
+                  id="priority"
+                  {...form.register("priority", {
+                    setValueAs: (v) => (v === "" ? null : v),
+                  })}
+                >
+                  <option value="">— None —</option>
+                  {WORK_PLAN_PRIORITIES.map((p) => (
+                    <option key={p} value={p}>
+                      {p}
+                    </option>
+                  ))}
+                </NativeSelect>
+              </FormField>
+            </div>
+
+            <FormField
+              label="Title"
+              htmlFor="title"
+              description="A short summary for quick scanning."
+              error={form.formState.errors.title?.message}
             >
-              <option value="">— None —</option>
-              {WORK_PLAN_PRIORITIES.map((p) => (
-                <option key={p} value={p}>
-                  {p}
-                </option>
-              ))}
-            </select>
+              <Input id="title" {...form.register("title")} />
+            </FormField>
+
+            <FormField
+              label="Details"
+              htmlFor="details"
+              description="Add key actions, parties, and expected outcomes."
+              error={form.formState.errors.details?.message}
+            >
+              <Textarea id="details" rows={6} {...form.register("details")} />
+            </FormField>
+          </FormSection>
+        </FormContent>
+
+        <FormActions sticky>
+          <div className="flex flex-wrap items-center gap-2">
+            <Button type="submit" disabled={isPending}>
+              {isPending ? "Creating..." : "Create draft"}
+            </Button>
+            <Link
+              href={ROUTES.workPlans}
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "inline-flex h-9 items-center justify-center px-4"
+              )}
+            >
+              Cancel
+            </Link>
           </div>
-        </CardContent>
-        <CardFooter className="flex flex-wrap gap-2">
-          <Button type="submit" disabled={isPending}>
-            {isPending ? "Creating..." : "Create draft"}
-          </Button>
-          <Link
-            href={ROUTES.workPlans}
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "inline-flex h-9 items-center justify-center px-4"
-            )}
-          >
-            Cancel
-          </Link>
-        </CardFooter>
+        </FormActions>
       </form>
-    </Card>
+    </FormShell>
   );
 }

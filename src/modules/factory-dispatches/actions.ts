@@ -72,7 +72,7 @@ export async function updateFactoryDispatchAction(
   const memo = (parsed.data.memo_no ?? "").trim();
   const dispatchDateRaw = (parsed.data.dispatch_date ?? "").trim();
 
-  const { error } = await supabase
+  const { data: updatedRow, error } = await supabase
     .from("demand_order_dispatches")
     .update({
       factory_status: parsed.data.factory_status,
@@ -82,7 +82,9 @@ export async function updateFactoryDispatchAction(
       remarks,
       updated_by: profile.id,
     })
-    .eq("id", parsed.data.dispatchId);
+    .eq("id", parsed.data.dispatchId)
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
@@ -92,6 +94,12 @@ export async function updateFactoryDispatchAction(
         "Could not update factory dispatch record.",
         "factoryDispatches.updateFactoryDispatchAction"
       ),
+    };
+  }
+  if (!updatedRow) {
+    return {
+      ok: false,
+      error: "Dispatch could not be updated (it may no longer be visible to you). Refresh and try again.",
     };
   }
 

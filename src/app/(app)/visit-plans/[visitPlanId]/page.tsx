@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -10,6 +10,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ROUTES } from "@/config/routes";
+import { resolveAppRole } from "@/lib/auth/app-role";
+import { canActorViewOrgSubjectScopedRow } from "@/lib/auth/org-scoped-view-access";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
@@ -22,7 +24,13 @@ type PageProps = { params: Promise<{ visitPlanId: string }> };
 
 export default async function VisitPlanDetailPage({ params }: PageProps) {
   const { visitPlanId } = await params;
-  const { profile } = await requireUserProfile();
+  const { user, profile } = await requireUserProfile();
+  const actorProfileId = profile?.id;
+  const actorOrganizationId = profile?.organization_id;
+  if (!actorProfileId || !actorOrganizationId) {
+    redirect(ROUTES.login);
+  }
+  const role = resolveAppRole(user, profile);
 
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -37,6 +45,18 @@ export default async function VisitPlanDetailPage({ params }: PageProps) {
   const visit: VisitPlanWithRelations = mapVisitPlanRow(
     data as Parameters<typeof mapVisitPlanRow>[0]
   );
+
+  const canView = await canActorViewOrgSubjectScopedRow(
+    supabase,
+    actorProfileId,
+    actorOrganizationId,
+    visit.organization_id,
+    visit.user_id,
+    role
+  );
+  if (!canView) {
+    notFound();
+  }
 
   const { data: parties } = await supabase
     .from("parties")

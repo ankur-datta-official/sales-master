@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
+import { ApplyFiltersButton } from "@/components/ui/apply-filters-button";
 import { ROUTES } from "@/config/routes";
 import {
   WORK_PLAN_PRIORITIES,
@@ -132,12 +133,7 @@ export default async function WorkPlansPage({ searchParams }: PageProps) {
               </option>
             ))}
           </select>
-          <button
-            type="submit"
-            className={cn(buttonVariants({ variant: "outline" }), "h-9 px-4")}
-          >
-            Apply
-          </button>
+          <ApplyFiltersButton className="h-9 px-4" />
         </div>
       </form>
 

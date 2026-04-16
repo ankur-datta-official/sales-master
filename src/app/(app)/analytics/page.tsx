@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
+import { ApplyFiltersButton } from "@/components/ui/apply-filters-button";
 import {
   Card,
   CardContent,
@@ -76,6 +77,11 @@ export default async function AnalyticsPage({ searchParams }: PageProps) {
           Dashboard
         </Link>
       </div>
+      {analytics.warnings.length > 0 ? (
+        <p className="rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-200">
+          Some analytics widgets are temporarily unavailable: {analytics.warnings.join(" ")}
+        </p>
+      ) : null}
 
       <form className="grid gap-2 rounded-lg border p-3 sm:grid-cols-2 lg:grid-cols-6">
         <input
@@ -118,12 +124,7 @@ export default async function AnalyticsPage({ searchParams }: PageProps) {
             </option>
           ))}
         </select>
-        <button
-          type="submit"
-          className={cn(buttonVariants({ variant: "outline" }), "h-9 px-4")}
-        >
-          Apply
-        </button>
+        <ApplyFiltersButton className="h-9 px-4" />
       </form>
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">

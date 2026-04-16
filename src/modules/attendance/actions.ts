@@ -118,7 +118,7 @@ export async function checkOutAttendanceAction(
 
   const outAddr = (parsed.data.check_out_address ?? "").trim();
 
-  const { error } = await supabase
+  const { data: closedRow, error } = await supabase
     .from("attendance_sessions")
     .update({
       check_out_at: new Date().toISOString(),
@@ -129,12 +129,20 @@ export async function checkOutAttendanceAction(
     })
     .eq("id", active.id)
     .eq("user_id", profile.id)
-    .eq("status", "checked_in");
+    .eq("status", "checked_in")
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
       ok: false,
       error: toSafeActionError(error, "Could not check out.", "attendance.checkOutAttendanceAction"),
+    };
+  }
+  if (!closedRow) {
+    return {
+      ok: false,
+      error: "No active check-in was closed (it may have already been checked out). Refresh and try again.",
     };
   }
 

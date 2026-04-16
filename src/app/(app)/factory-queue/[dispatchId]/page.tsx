@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
+import { canActorViewFactoryDispatchDetail } from "@/lib/auth/org-scoped-view-access";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { createClient } from "@/lib/supabase/server";
 import { canUpdateFactoryDispatch, canViewFactoryQueue } from "@/lib/users/actor-permissions";
@@ -48,7 +49,24 @@ export default async function FactoryDispatchDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  if (detail.order_stage !== "factory_queue" || detail.order_status !== "sent_to_factory") {
+  const actorProfileId = profile?.id;
+  const actorOrganizationId = profile?.organization_id;
+  if (!actorProfileId || !actorOrganizationId) {
+    redirect(ROUTES.login);
+  }
+  const canViewDispatch = await canActorViewFactoryDispatchDetail(
+    supabase,
+    actorProfileId,
+    actorOrganizationId,
+    {
+      organization_id: detail.organization_id,
+      created_by_user_id: detail.created_by_user_id,
+      order_stage: detail.order_stage,
+      order_status: detail.order_status,
+    },
+    role
+  );
+  if (!canViewDispatch) {
     notFound();
   }
 

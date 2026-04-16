@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -10,6 +10,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ROUTES } from "@/config/routes";
+import { rpcCanAccessProfile } from "@/lib/auth/can-access-profile-rpc";
+import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
@@ -22,7 +24,12 @@ type PageProps = { params: Promise<{ sessionId: string }> };
 
 export default async function AttendanceSessionDetailPage({ params }: PageProps) {
   const { sessionId } = await params;
-  await requireUserProfile();
+  const { user, profile } = await requireUserProfile();
+  const actorProfileId = profile?.id;
+  if (!actorProfileId) {
+    redirect(ROUTES.login);
+  }
+  const role = resolveAppRole(user, profile);
 
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -38,6 +45,17 @@ export default async function AttendanceSessionDetailPage({ params }: PageProps)
   const session: AttendanceSessionWithUser = mapAttendanceSessionWithUserRow(
     data as Parameters<typeof mapAttendanceSessionWithUserRow>[0]
   );
+
+  const canViewSession = await rpcCanAccessProfile(
+    supabase,
+    actorProfileId,
+    session.user_id,
+    role
+  );
+  if (!canViewSession) {
+    notFound();
+  }
+
   let recentPings: LocationPing[] = [];
   const pingsResult = await getRecentLocationPingsForSession(supabase, session.id, 20);
   if (pingsResult.ok) recentPings = pingsResult.data;

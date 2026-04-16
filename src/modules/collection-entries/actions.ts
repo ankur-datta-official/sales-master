@@ -166,7 +166,7 @@ export async function updateCollectionEntryAction(
 
   const remarks = (parsed.data.remarks ?? "").trim();
 
-  const { error } = await supabase
+  const { data: updatedRow, error } = await supabase
     .from("collection_entries")
     .update({
       party_id: parsed.data.party_id,
@@ -174,7 +174,9 @@ export async function updateCollectionEntryAction(
       amount: parsed.data.amount,
       remarks,
     })
-    .eq("id", parsed.data.collectionEntryId);
+    .eq("id", parsed.data.collectionEntryId)
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
@@ -184,6 +186,12 @@ export async function updateCollectionEntryAction(
         "Could not update collection entry.",
         "collectionEntries.updateCollectionEntryAction"
       ),
+    };
+  }
+  if (!updatedRow) {
+    return {
+      ok: false,
+      error: "Collection entry could not be updated (it may no longer be editable). Refresh and try again.",
     };
   }
 
@@ -224,11 +232,13 @@ export async function verifyCollectionEntryAction(
     return { ok: false, error: "Only unverified entries can be verified or rejected." };
   }
 
-  const { error } = await supabase
+  const { data: verifiedRow, error } = await supabase
     .from("collection_entries")
     .update({ verification_status: parsed.data.verification_status })
     .eq("id", parsed.data.collectionEntryId)
-    .eq("verification_status", "unverified");
+    .eq("verification_status", "unverified")
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
@@ -238,6 +248,12 @@ export async function verifyCollectionEntryAction(
         "Could not verify collection entry.",
         "collectionEntries.verifyCollectionEntryAction"
       ),
+    };
+  }
+  if (!verifiedRow) {
+    return {
+      ok: false,
+      error: "This entry is not unverified or was already processed. Refresh and try again.",
     };
   }
 

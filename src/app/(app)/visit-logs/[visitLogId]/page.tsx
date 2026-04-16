@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ROUTES } from "@/config/routes";
+import { rpcCanAccessProfile } from "@/lib/auth/can-access-profile-rpc";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { createClient } from "@/lib/supabase/server";
@@ -25,6 +26,10 @@ type PageProps = { params: Promise<{ visitLogId: string }> };
 export default async function VisitLogDetailPage({ params }: PageProps) {
   const { visitLogId } = await params;
   const { user, profile } = await requireUserProfile();
+  const actorProfileId = profile?.id;
+  if (!actorProfileId) {
+    redirect(ROUTES.login);
+  }
   const role = resolveAppRole(user, profile);
   const isAdmin = isOrgAdminRole(role);
 
@@ -41,6 +46,11 @@ export default async function VisitLogDetailPage({ params }: PageProps) {
   const visit: VisitLogWithRelations = mapVisitLogRow(
     data as Parameters<typeof mapVisitLogRow>[0]
   );
+
+  const canViewVisit = await rpcCanAccessProfile(supabase, actorProfileId, visit.user_id, role);
+  if (!canViewVisit) {
+    notFound();
+  }
 
   const { data: parties } = await supabase
     .from("parties")

@@ -148,7 +148,7 @@ export async function updateSalesEntryAction(input: UpdateSalesEntryInput): Prom
 
   const remarks = (parsed.data.remarks ?? "").trim();
 
-  const { error } = await supabase
+  const { data: updatedRow, error } = await supabase
     .from("sales_entries")
     .update({
       party_id: parsed.data.party_id,
@@ -157,12 +157,20 @@ export async function updateSalesEntryAction(input: UpdateSalesEntryInput): Prom
       quantity: parsed.data.quantity,
       remarks,
     })
-    .eq("id", parsed.data.salesEntryId);
+    .eq("id", parsed.data.salesEntryId)
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
       ok: false,
       error: toSafeActionError(error, "Could not update sales entry.", "salesEntries.updateSalesEntryAction"),
+    };
+  }
+  if (!updatedRow) {
+    return {
+      ok: false,
+      error: "Sales entry could not be updated (it may no longer be editable). Refresh and try again.",
     };
   }
 

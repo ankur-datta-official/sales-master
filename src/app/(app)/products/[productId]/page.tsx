@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
+import { canActorViewOrgProduct } from "@/lib/auth/org-scoped-view-access";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { createClient } from "@/lib/supabase/server";
 import { canMutateProducts } from "@/lib/users/actor-permissions";
@@ -37,6 +38,14 @@ export default async function ProductDetailPage({ params }: PageProps) {
     ...(data as Product),
     base_price: Number((data as Product).base_price ?? 0),
   };
+
+  const actorOrganizationId = profile?.organization_id;
+  if (!actorOrganizationId) {
+    redirect(ROUTES.login);
+  }
+  if (!canActorViewOrgProduct(actorOrganizationId, product.organization_id)) {
+    notFound();
+  }
 
   return (
     <div className="space-y-4">

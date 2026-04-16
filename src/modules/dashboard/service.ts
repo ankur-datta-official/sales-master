@@ -236,17 +236,9 @@ export async function getDashboardData(params: {
   userId: string;
 }): Promise<DashboardData> {
   const { supabase, role, userId } = params;
+  const warnings: string[] = [];
 
-  const [
-    salesCollections,
-    queueCounts,
-    targetSummary,
-    attendance,
-    activeFieldUsersResult,
-    recentWorkReports,
-    recentOrders,
-    recentActivity,
-  ] = await Promise.all([
+  const settled = await Promise.allSettled([
     getTodaySalesAndCollections(supabase),
     getQueueCounts(supabase),
     getTargetSummary(supabase),
@@ -256,6 +248,37 @@ export async function getDashboardData(params: {
     getRecentOrders(supabase),
     getRecentActivity(supabase),
   ]);
+  const salesCollections =
+    settled[0].status === "fulfilled"
+      ? settled[0].value
+      : { todaySales: 0, todayCollections: 0, pendingCollectionVerification: 0 };
+  if (settled[0].status === "rejected") warnings.push("Sales/collection snapshot is temporarily unavailable.");
+  const queueCounts =
+    settled[1].status === "fulfilled"
+      ? settled[1].value
+      : { pendingApprovals: 0, pendingAccountsReview: 0, factoryQueuePending: 0 };
+  if (settled[1].status === "rejected") warnings.push("Queue counters are temporarily unavailable.");
+  const targetSummary =
+    settled[2].status === "fulfilled"
+      ? settled[2].value
+      : { activeSalesTargetAmount: 0, activeCollectionTargetAmount: 0, activeTargetCount: 0 };
+  if (settled[2].status === "rejected") warnings.push("Target summary is temporarily unavailable.");
+  const attendance =
+    settled[3].status === "fulfilled"
+      ? settled[3].value
+      : { isCheckedIn: false, checkInAt: null };
+  if (settled[3].status === "rejected") warnings.push("Attendance summary is temporarily unavailable.");
+  const activeFieldUsersResult =
+    settled[4].status === "fulfilled"
+      ? settled[4].value
+      : { ok: false as const, error: "Field activity unavailable." };
+  if (settled[4].status === "rejected") warnings.push("Field activity summary is temporarily unavailable.");
+  const recentWorkReports = settled[5].status === "fulfilled" ? settled[5].value : [];
+  if (settled[5].status === "rejected") warnings.push("Recent work reports are temporarily unavailable.");
+  const recentOrders = settled[6].status === "fulfilled" ? settled[6].value : [];
+  if (settled[6].status === "rejected") warnings.push("Recent orders are temporarily unavailable.");
+  const recentActivity = settled[7].status === "fulfilled" ? settled[7].value : [];
+  if (settled[7].status === "rejected") warnings.push("Recent activity is temporarily unavailable.");
 
   const activeFieldUsersCount = activeFieldUsersResult.ok ? activeFieldUsersResult.data.length : 0;
 
@@ -382,6 +405,7 @@ export async function getDashboardData(params: {
 
   return {
     role,
+    warnings,
     summary_cards: summaryCards,
     quick_widgets: quickWidgets,
     recent_work_reports: recentWorkReports,

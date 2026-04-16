@@ -339,6 +339,7 @@ export async function getAnalyticsBasicsData(args: {
   filters: AnalyticsFilters;
 }): Promise<AnalyticsData> {
   const { supabase, role, userId, filters } = args;
+  const warnings: string[] = [];
 
   const effectiveFilters: AnalyticsFilters = {
     ...filters,
@@ -349,21 +350,54 @@ export async function getAnalyticsBasicsData(args: {
         : "",
   };
 
-  const [salesTrend, collectionTrend, attendanceSummary, orderPipelineSummary] = await Promise.all([
+  const settled = await Promise.allSettled([
     loadSalesTrend(supabase, effectiveFilters, role, userId),
     loadCollectionTrend(supabase, effectiveFilters, role, userId),
     loadAttendanceSummary(supabase),
     loadOrderPipelineSummary(supabase),
   ]);
+  const salesTrend =
+    settled[0].status === "fulfilled" ? settled[0].value : { total_amount: 0, points: [] };
+  if (settled[0].status === "rejected") warnings.push("Sales trend data is temporarily unavailable.");
+  const collectionTrend =
+    settled[1].status === "fulfilled" ? settled[1].value : { total_amount: 0, points: [] };
+  if (settled[1].status === "rejected") warnings.push("Collection trend data is temporarily unavailable.");
+  const attendanceSummary =
+    settled[2].status === "fulfilled"
+      ? settled[2].value
+      : { active_now: 0, checked_in_today: 0, checked_out_today: 0, missed_checkout: 0 };
+  if (settled[2].status === "rejected") warnings.push("Attendance summary is temporarily unavailable.");
+  const orderPipelineSummary =
+    settled[3].status === "fulfilled"
+      ? settled[3].value
+      : {
+          draft: 0,
+          manager_review: 0,
+          accounts_review: 0,
+          factory_queue: 0,
+          rejected: 0,
+          sent_to_factory: 0,
+        };
+  if (settled[3].status === "rejected") warnings.push("Order pipeline summary is temporarily unavailable.");
 
-  const targetVsActual = await loadTargetVsActual(
-    supabase,
-    effectiveFilters,
-    role,
-    userId,
-    salesTrend,
-    collectionTrend
-  );
+  let targetVsActual: TargetVsActualSection = {
+    sales_target: 0,
+    sales_actual: salesTrend.total_amount,
+    collection_target: 0,
+    collection_actual: collectionTrend.total_amount,
+  };
+  try {
+    targetVsActual = await loadTargetVsActual(
+      supabase,
+      effectiveFilters,
+      role,
+      userId,
+      salesTrend,
+      collectionTrend
+    );
+  } catch {
+    warnings.push("Target vs actual data is temporarily unavailable.");
+  }
 
   const { cards, widgets } = buildCardsAndWidgets({
     role,
@@ -380,6 +414,7 @@ export async function getAnalyticsBasicsData(args: {
 
   return {
     role,
+    warnings,
     summary_cards: cards,
     quick_widgets: widgets,
     sales_trend: isFactoryOnly || isAccounts ? null : salesTrend,

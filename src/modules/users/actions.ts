@@ -65,8 +65,7 @@ export async function createOrgUserAction(
   } catch {
     return {
       ok: false,
-      error:
-        "User provisioning is not configured (missing SUPABASE_SERVICE_ROLE_KEY on the server).",
+      error: "User provisioning is not configured for this environment.",
     };
   }
 

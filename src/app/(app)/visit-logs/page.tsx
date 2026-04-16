@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
+import { ApplyFiltersButton } from "@/components/ui/apply-filters-button";
 import { ROUTES } from "@/config/routes";
 import { VISIT_LOG_STATUSES } from "@/constants/statuses";
 import { resolveAppRole } from "@/lib/auth/app-role";
@@ -147,12 +148,7 @@ export default async function VisitLogsPage({ searchParams }: PageProps) {
           className="h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
         />
         <div className="flex gap-2 lg:col-span-1">
-          <button
-            type="submit"
-            className={cn(buttonVariants({ variant: "outline" }), "h-9 flex-1 px-4")}
-          >
-            Apply
-          </button>
+          <ApplyFiltersButton className="h-9 flex-1 px-4" />
         </div>
       </form>
 

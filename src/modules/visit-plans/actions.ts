@@ -129,19 +129,28 @@ export async function updatePlannedVisitPlanAction(
     return { ok: false, error: "Party not found in your organization." };
   }
 
-  const { error } = await supabase
+  const { data: updatedRow, error } = await supabase
     .from("visit_plans")
     .update({
       party_id: parsed.data.party_id,
       visit_date: parsed.data.visit_date,
       purpose: parsed.data.purpose.trim(),
     })
-    .eq("id", parsed.data.visitPlanId);
+    .eq("id", parsed.data.visitPlanId)
+    .eq("status", "planned")
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
       ok: false,
       error: toSafeActionError(error, "Could not update visit plan.", "visitPlans.updatePlannedVisitPlanAction"),
+    };
+  }
+  if (!updatedRow) {
+    return {
+      ok: false,
+      error: "This visit is no longer planned or could not be updated. Refresh and try again.",
     };
   }
 
@@ -177,15 +186,24 @@ export async function updateVisitPlanStatusAction(
     return { ok: false, error: "Status can be updated only for planned visits." };
   }
 
-  const { error } = await supabase
+  const { data: updatedRow, error } = await supabase
     .from("visit_plans")
     .update({ status: parsed.data.status })
-    .eq("id", parsed.data.visitPlanId);
+    .eq("id", parsed.data.visitPlanId)
+    .eq("status", "planned")
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
       ok: false,
       error: toSafeActionError(error, "Could not update visit plan status.", "visitPlans.updateVisitPlanStatusAction"),
+    };
+  }
+  if (!updatedRow) {
+    return {
+      ok: false,
+      error: "Status can only be updated for planned visits, or the visit changed. Refresh and try again.",
     };
   }
 

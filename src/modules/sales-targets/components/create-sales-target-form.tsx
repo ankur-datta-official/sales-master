@@ -17,6 +17,15 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  FormActions,
+  FormContent,
+  FormField,
+  FormShell,
+  FormSection,
+} from "@/components/ui/form-primitives";
+import { FormErrorAlert } from "@/components/ui/form-error-alert";
+import { NativeSelect } from "@/components/ui/native-select";
 import { ROUTES } from "@/config/routes";
 import {
   SALES_TARGET_PERIOD_TYPES,
@@ -28,12 +37,6 @@ import {
   createSalesTargetSchema,
   type CreateSalesTargetInput,
 } from "@/modules/sales-targets/schemas";
-
-const selectClass = cn(
-  "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none",
-  "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
-  "disabled:cursor-not-allowed disabled:opacity-50 dark:bg-input/30"
-);
 
 type PartyOption = { id: string; name: string };
 type ProfileOption = { id: string; full_name: string | null; email: string | null };
@@ -91,124 +94,138 @@ export function CreateSalesTargetForm({
   }
 
   return (
-    <Card className="max-w-2xl">
-      <CardHeader>
-        <CardTitle>New sales target</CardTitle>
-        <CardDescription>
-          Assign volume or value targets within your hierarchy scope.
-        </CardDescription>
-      </CardHeader>
+    <FormShell
+      className="max-w-2xl"
+      title="New sales target"
+      description="Assign volume or value targets within your hierarchy scope."
+    >
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <CardContent className="space-y-4">
-          {error && (
-            <p className="text-sm text-destructive" role="alert">
-              {error}
-            </p>
-          )}
-          <div className="space-y-2">
-            <Label htmlFor="assigned_to_user_id">Assign to</Label>
-            <select
-              id="assigned_to_user_id"
-              className={selectClass}
-              {...form.register("assigned_to_user_id")}
-              disabled={assignableProfiles.length === 0}
+        <FormContent>
+          <FormErrorAlert message={error} />
+
+          <FormSection title="Assignment" description="Targets follow hierarchy visibility and review.">
+            <FormField label="Assign to" htmlFor="assigned_to_user_id">
+              <NativeSelect
+                id="assigned_to_user_id"
+                {...form.register("assigned_to_user_id")}
+                disabled={assignableProfiles.length === 0}
+              >
+                {assignableProfiles.length === 0 ? (
+                  <option value="">No assignable users</option>
+                ) : (
+                  assignableProfiles.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.full_name ?? p.email ?? p.id}
+                    </option>
+                  ))
+                )}
+              </NativeSelect>
+            </FormField>
+
+            <FormField
+              label="Party"
+              htmlFor="party_id"
+              description="Optional. Leave blank for organization scope."
             >
-              {assignableProfiles.length === 0 ? (
-                <option value="">No assignable users</option>
-              ) : (
-                assignableProfiles.map((p) => (
+              <NativeSelect
+                id="party_id"
+                {...form.register("party_id", {
+                  setValueAs: (v) => (v === "" ? "" : v),
+                })}
+              >
+                <option value="">All / organization scope</option>
+                {parties.map((p) => (
                   <option key={p.id} value={p.id}>
-                    {p.full_name ?? p.email ?? p.id}
+                    {p.name}
                   </option>
-                ))
+                ))}
+              </NativeSelect>
+            </FormField>
+          </FormSection>
+
+          <FormSection title="Period" description="Pick the target window.">
+            <div className="grid gap-5 sm:grid-cols-3">
+              <FormField label="Period type" htmlFor="period_type">
+                <NativeSelect id="period_type" {...form.register("period_type")}>
+                  {SALES_TARGET_PERIOD_TYPES.map((p) => (
+                    <option key={p} value={p}>
+                      {p}
+                    </option>
+                  ))}
+                </NativeSelect>
+              </FormField>
+
+              <FormField label="Start date" htmlFor="start_date">
+                <Input id="start_date" type="date" {...form.register("start_date")} />
+              </FormField>
+
+              <FormField label="End date" htmlFor="end_date">
+                <Input id="end_date" type="date" {...form.register("end_date")} />
+              </FormField>
+            </div>
+          </FormSection>
+
+          <FormSection title="Targets" description="Value and (optional) quantity.">
+            <div className="grid gap-5 sm:grid-cols-2">
+              <FormField label="Target amount" htmlFor="target_amount">
+                <Input
+                  id="target_amount"
+                  type="number"
+                  step="0.01"
+                  min="0.01"
+                  {...form.register("target_amount", { valueAsNumber: true })}
+                />
+              </FormField>
+
+              <FormField
+                label="Target quantity"
+                htmlFor="target_qty"
+                description="Optional."
+              >
+                <Input
+                  id="target_qty"
+                  type="number"
+                  step="any"
+                  min="0"
+                  {...form.register("target_qty")}
+                />
+              </FormField>
+            </div>
+          </FormSection>
+
+          <FormSection title="Status">
+            <FormField label="Status" htmlFor="status">
+              <NativeSelect id="status" {...form.register("status")}>
+                {SALES_TARGET_STATUSES.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </NativeSelect>
+            </FormField>
+          </FormSection>
+        </FormContent>
+
+        <FormActions sticky>
+          <div className="flex flex-wrap items-center gap-2">
+            <Button type="submit" disabled={isPending || assignableProfiles.length === 0}>
+              {isPending ? "Saving..." : "Create target"}
+            </Button>
+            <Link
+              href={ROUTES.salesTargets}
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "inline-flex h-9 items-center justify-center px-4"
               )}
-            </select>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="party_id">Party (optional)</Label>
-            <select
-              id="party_id"
-              className={selectClass}
-              {...form.register("party_id", {
-                setValueAs: (v) => (v === "" ? "" : v),
-              })}
             >
-              <option value="">All / organization scope</option>
-              {parties.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.name}
-                </option>
-              ))}
-            </select>
+              Cancel
+            </Link>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="period_type">Period type</Label>
-            <select id="period_type" className={selectClass} {...form.register("period_type")}>
-              {SALES_TARGET_PERIOD_TYPES.map((p) => (
-                <option key={p} value={p}>
-                  {p}
-                </option>
-              ))}
-            </select>
+          <div className="hidden text-xs text-muted-foreground md:block">
+            Draft targets can be reviewed before activation.
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor="start_date">Start date</Label>
-              <Input id="start_date" type="date" {...form.register("start_date")} />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="end_date">End date</Label>
-              <Input id="end_date" type="date" {...form.register("end_date")} />
-            </div>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor="target_amount">Target amount</Label>
-              <Input
-                id="target_amount"
-                type="number"
-                step="0.01"
-                min="0.01"
-                {...form.register("target_amount", { valueAsNumber: true })}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="target_qty">Target quantity (optional)</Label>
-              <Input
-                id="target_qty"
-                type="number"
-                step="any"
-                min="0"
-                {...form.register("target_qty")}
-              />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="status">Status</Label>
-            <select id="status" className={selectClass} {...form.register("status")}>
-              {SALES_TARGET_STATUSES.map((s) => (
-                <option key={s} value={s}>
-                  {s}
-                </option>
-              ))}
-            </select>
-          </div>
-        </CardContent>
-        <CardFooter className="flex flex-wrap gap-2">
-          <Button type="submit" disabled={isPending || assignableProfiles.length === 0}>
-            {isPending ? "Saving..." : "Create target"}
-          </Button>
-          <Link
-            href={ROUTES.salesTargets}
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "inline-flex h-9 items-center justify-center px-4"
-            )}
-          >
-            Cancel
-          </Link>
-        </CardFooter>
+        </FormActions>
       </form>
-    </Card>
+    </FormShell>
   );
 }

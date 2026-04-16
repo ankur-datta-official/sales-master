@@ -354,9 +354,12 @@ NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
 # Optional fallback key naming in project codebase:
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+# Optional: protect public health endpoint in production
+HEALTHCHECK_TOKEN=your_private_healthcheck_token
 ```
 
-> Note: At least `NEXT_PUBLIC_SUPABASE_URL` and one publishable/anon key must be set for auth/session flows.
+> Note: At least `NEXT_PUBLIC_SUPABASE_URL` and one publishable/anon key must be set for auth/session flows. Server-side admin/provisioning flows require `SUPABASE_SERVICE_ROLE_KEY`.
 
 ---
 
@@ -374,6 +377,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 - Ensure all required Supabase migrations are applied before production run.
 - Validate RLS policies with real role test accounts.
 - Configure environment variables in your deployment platform.
+- If you set `HEALTHCHECK_TOKEN`, configure your monitor to send `Authorization: Bearer <token>` (or `?token=`) to `/api/health`.
 - Run `npm run build` to verify production compatibility.
 
 ---

@@ -1,9 +1,12 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
+import { DetailHeader, DetailPageShell, StatusPill } from "@/components/ui/detail-page";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
+import { canActorViewOrgSubjectScopedRow } from "@/lib/auth/org-scoped-view-access";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { createClient } from "@/lib/supabase/server";
 import { canMutateParties } from "@/lib/users/actor-permissions";
@@ -39,26 +42,55 @@ export default async function PartyDetailPage({ params }: PageProps) {
     data as Parameters<typeof mapPartyRow>[0]
   );
 
+  const actorProfileId = profile?.id;
+  const actorOrganizationId = profile?.organization_id;
+  if (!actorProfileId || !actorOrganizationId) {
+    redirect(ROUTES.login);
+  }
+  const canView = await canActorViewOrgSubjectScopedRow(
+    supabase,
+    actorProfileId,
+    actorOrganizationId,
+    party.organization_id,
+    party.assigned_to_user_id,
+    role
+  );
+  if (!canView) {
+    notFound();
+  }
+
   const orgId = profile?.organization_id;
   const formOptions = canEdit && orgId ? await loadPartyFormOptions(supabase, orgId) : null;
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-3">
-        <Link
-          href={ROUTES.parties}
-          className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "text-muted-foreground")}
-        >
-          ← Parties
-        </Link>
-        <h1 className="text-2xl font-semibold tracking-tight">{party.name}</h1>
-      </div>
+    <DetailPageShell>
+      <DetailHeader
+        backHref={ROUTES.parties}
+        backLabel="Parties"
+        title={party.name}
+        description={party.code ? `Code ${party.code}` : "Party details and assignment."}
+        badges={
+          <StatusPill tone="neutral">
+            <span className="capitalize">{party.status ?? "—"}</span>
+          </StatusPill>
+        }
+        actions={
+          canEdit ? (
+            <Link
+              href={ROUTES.parties}
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }), "h-9")}
+            >
+              All parties
+            </Link>
+          ) : null
+        }
+      />
 
       {canEdit && formOptions ? (
         <UpdatePartyForm party={party} assignees={formOptions.assignees} />
       ) : (
         <PartyReadonlySummary party={party} />
       )}
-    </div>
+    </DetailPageShell>
   );
 }

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { resolveAppRole } from "@/lib/auth/app-role";
+import { rpcCanAccessProfile } from "@/lib/auth/can-access-profile-rpc";
 import { getCurrentUserProfile } from "@/lib/auth/get-current-profile";
 import { createClient } from "@/lib/supabase/server";
 import {
@@ -88,11 +89,13 @@ export async function GET(req: Request) {
       if (!canFilterAttendanceHistoryByUser(role)) {
         return NextResponse.json({ error: "Forbidden" }, { status: 403 });
       }
-      const { data: canAccessUser, error: accessError } = await supabase.rpc("can_access_profile", {
-        actor_id: actorProfileId,
-        target_profile_id: attendanceSession.user_id,
-      });
-      if (accessError || !canAccessUser) {
+      const canAccessUser = await rpcCanAccessProfile(
+        supabase,
+        actorProfileId,
+        attendanceSession.user_id,
+        role
+      );
+      if (!canAccessUser) {
         return NextResponse.json({ error: "Forbidden" }, { status: 403 });
       }
     }
@@ -116,8 +119,19 @@ export async function GET(req: Request) {
         { status: 400 }
       );
     }
-    if (parsed.data.user_id !== actorProfileId && !canFilterAttendanceHistoryByUser(role)) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    if (parsed.data.user_id !== actorProfileId) {
+      if (!canFilterAttendanceHistoryByUser(role)) {
+        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+      }
+      const canAccessTarget = await rpcCanAccessProfile(
+        supabase,
+        actorProfileId,
+        parsed.data.user_id,
+        role
+      );
+      if (!canAccessTarget) {
+        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+      }
     }
     const result = await getLastKnownLocationForUser(supabase, parsed.data.user_id);
     if (!result.ok) {

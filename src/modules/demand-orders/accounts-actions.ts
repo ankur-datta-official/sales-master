@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
+import { APPROVAL_LOG_ACTION, DEMAND_ORDER_STAGE, DEMAND_ORDER_STATUS } from "@/constants/statuses";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
@@ -45,7 +46,10 @@ export async function accountsApproveDemandOrderAction(
   if (!order || order.organization_id !== profile.organization_id) {
     return { ok: false, error: "Demand order not found in your organization." };
   }
-  if (order.stage !== "accounts_review" || order.status !== "approved") {
+  if (
+    order.stage !== DEMAND_ORDER_STAGE.accountsReview ||
+    order.status !== DEMAND_ORDER_STATUS.approved
+  ) {
     return {
       ok: false,
       error: "Only manager-approved orders in accounts review can be released to factory.",
@@ -60,7 +64,7 @@ export async function accountsApproveDemandOrderAction(
       organization_id: profile.organization_id,
       entity_type: "demand_order",
       entity_id: order.id,
-      action: "accounts_approve",
+      action: APPROVAL_LOG_ACTION.accountsApprove,
       from_user_id: null,
       to_user_id: null,
       acted_by_user_id: profile.id,
@@ -82,10 +86,13 @@ export async function accountsApproveDemandOrderAction(
 
   const { data: updated, error: updErr } = await supabase
     .from("demand_orders")
-    .update({ status: "sent_to_factory", stage: "factory_queue" })
+    .update({
+      status: DEMAND_ORDER_STATUS.sentToFactory,
+      stage: DEMAND_ORDER_STAGE.factoryQueue,
+    })
     .eq("id", order.id)
-    .eq("stage", "accounts_review")
-    .eq("status", "approved")
+    .eq("stage", DEMAND_ORDER_STAGE.accountsReview)
+    .eq("status", DEMAND_ORDER_STATUS.approved)
     .select("id")
     .maybeSingle();
 
@@ -136,7 +143,10 @@ export async function accountsRejectDemandOrderAction(
   if (!order || order.organization_id !== profile.organization_id) {
     return { ok: false, error: "Demand order not found in your organization." };
   }
-  if (order.stage !== "accounts_review" || order.status !== "approved") {
+  if (
+    order.stage !== DEMAND_ORDER_STAGE.accountsReview ||
+    order.status !== DEMAND_ORDER_STATUS.approved
+  ) {
     return {
       ok: false,
       error: "Only orders in accounts review can be rejected by accounts.",
@@ -151,7 +161,7 @@ export async function accountsRejectDemandOrderAction(
       organization_id: profile.organization_id,
       entity_type: "demand_order",
       entity_id: order.id,
-      action: "accounts_reject",
+      action: APPROVAL_LOG_ACTION.accountsReject,
       from_user_id: null,
       to_user_id: null,
       acted_by_user_id: profile.id,
@@ -173,10 +183,13 @@ export async function accountsRejectDemandOrderAction(
 
   const { data: updated, error: updErr } = await supabase
     .from("demand_orders")
-    .update({ status: "rejected", stage: "manager_review" })
+    .update({
+      status: DEMAND_ORDER_STATUS.rejected,
+      stage: DEMAND_ORDER_STAGE.managerReview,
+    })
     .eq("id", order.id)
-    .eq("stage", "accounts_review")
-    .eq("status", "approved")
+    .eq("stage", DEMAND_ORDER_STAGE.accountsReview)
+    .eq("status", DEMAND_ORDER_STATUS.approved)
     .select("id")
     .maybeSingle();
 

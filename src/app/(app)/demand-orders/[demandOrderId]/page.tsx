@@ -9,6 +9,26 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  ActionCard,
+  DetailHeader,
+  DetailPageShell,
+  KV,
+  KeyValueGrid,
+  MetadataCard,
+  Section,
+  StatusPill,
+} from "@/components/ui/detail-page";
+import {
+  DataTable,
+  DataTableBody,
+  DataTableCell,
+  DataTableEmptyRow,
+  DataTableHead,
+  DataTableHeaderCell,
+  DataTableRow,
+  DataTableTable,
+} from "@/components/ui/data-table";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
@@ -28,6 +48,7 @@ import { SubmitDemandOrderButton } from "@/modules/demand-orders/components/subm
 import { loadDemandOrderForwardTargets } from "@/modules/demand-orders/load-forward-targets";
 import { mapDemandOrderItemRow, mapDemandOrderRow } from "@/modules/demand-orders/normalize";
 import { canActorReviewDemandOrder } from "@/modules/demand-orders/review-access";
+import { canActorViewDemandOrder } from "@/modules/demand-orders/view-access";
 import type { DemandOrderDetail } from "@/modules/demand-orders/types";
 
 type PageProps = { params: Promise<{ demandOrderId: string }> };
@@ -57,6 +78,28 @@ export default async function DemandOrderDetailPage({ params }: PageProps) {
   if (headerError || !headerRow) notFound();
 
   const header = mapDemandOrderRow(headerRow as Parameters<typeof mapDemandOrderRow>[0]);
+
+  const role = resolveAppRole(user, profile);
+  const actorProfileId = profile?.id;
+  const actorOrganizationId = profile?.organization_id;
+  if (!actorProfileId || !actorOrganizationId) {
+    notFound();
+  }
+  const canViewOrder = await canActorViewDemandOrder(
+    supabase,
+    actorProfileId,
+    actorOrganizationId,
+    {
+      organization_id: header.organization_id,
+      created_by_user_id: header.created_by_user_id,
+      stage: header.stage,
+      status: header.status,
+    },
+    role
+  );
+  if (!canViewOrder) {
+    notFound();
+  }
 
   const { data: itemRows, error: itemsError } = await supabase
     .from("demand_order_items")
@@ -121,7 +164,6 @@ export default async function DemandOrderDetailPage({ params }: PageProps) {
     }))
     .sort((a, b) => a.product_name.localeCompare(b.product_name));
 
-  const role = resolveAppRole(user, profile);
   const isAdmin = isOrgAdminRole(role);
 
   const forwardTargets =
@@ -151,127 +193,140 @@ export default async function DemandOrderDetailPage({ params }: PageProps) {
   const canSubmit = canEditDraft && items.length > 0;
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-3">
-        <Link
-          href={ROUTES.demandOrders}
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "sm" }),
-            "text-muted-foreground"
-          )}
+    <DetailPageShell>
+      <DetailHeader
+        backHref={ROUTES.demandOrders}
+        backLabel="Demand orders"
+        title="Demand order"
+        description={
+          <span className="text-sm text-muted-foreground">
+            Total <span className="font-mono text-xs">{order.total_amount}</span>
+          </span>
+        }
+        badges={
+          <>
+            <StatusPill tone="neutral">{order.status}</StatusPill>
+            <StatusPill tone="neutral">{order.stage}</StatusPill>
+          </>
+        }
+      />
+
+      <div className="grid gap-4 xl:grid-cols-[1fr_360px]">
+        <MetadataCard
+          className="max-w-4xl"
+          title="Summary"
+          description={
+            <span className="text-muted-foreground">
+              Status <span className="font-mono text-xs capitalize">{order.status}</span> · Stage{" "}
+              <span className="font-mono text-xs">{order.stage}</span>
+            </span>
+          }
         >
-          ← Demand orders
-        </Link>
-        <h1 className="text-2xl font-semibold tracking-tight">Demand order</h1>
-      </div>
+          <KeyValueGrid>
+            <KV
+              label="Owner"
+              value={order.creator_name ?? order.creator_email ?? order.created_by_user_id}
+            />
+            <KV
+              label="Party"
+              value={
+                <>
+                  {order.party_name ?? order.party_id}
+                  {order.party_code ? (
+                    <span className="ml-1 font-mono text-xs text-muted-foreground">
+                      ({order.party_code})
+                    </span>
+                  ) : null}
+                </>
+              }
+            />
+            <KV label="Order date" value={order.order_date} mono />
+            <KV label="Submitted at" value={order.submitted_at ?? "—"} mono />
+            <KV label="Remarks" value={<span className="whitespace-pre-wrap">{order.remarks || "—"}</span>} />
+            <KV label="Created at" value={order.created_at} subtle />
+            <KV label="Updated at" value={order.updated_at} subtle />
+          </KeyValueGrid>
 
-      <Card className="max-w-4xl">
-        <CardHeader>
-          <CardTitle>Summary</CardTitle>
-          <CardDescription>
-            Status <span className="font-mono capitalize">{order.status}</span> · Stage{" "}
-            <span className="font-mono">{order.stage}</span> · Total{" "}
-            <span className="font-mono">{order.total_amount}</span>
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <dl className="grid gap-3 text-sm sm:grid-cols-[minmax(0,160px)_1fr] sm:gap-x-4">
-            <dt className="text-muted-foreground">Owner</dt>
-            <dd>{order.creator_name ?? order.creator_email ?? order.created_by_user_id}</dd>
-            <dt className="text-muted-foreground">Party</dt>
-            <dd>
-              {order.party_name ?? order.party_id}
-              {order.party_code ? (
-                <span className="text-muted-foreground ml-1 font-mono text-xs">
-                  ({order.party_code})
-                </span>
-              ) : null}
-            </dd>
-            <dt className="text-muted-foreground">Order date</dt>
-            <dd className="font-mono text-xs">{order.order_date}</dd>
-            <dt className="text-muted-foreground">Stage</dt>
-            <dd className="font-mono text-xs">{order.stage}</dd>
-            <dt className="text-muted-foreground">Remarks</dt>
-            <dd className="whitespace-pre-wrap">{order.remarks || "—"}</dd>
-            <dt className="text-muted-foreground">Submitted at</dt>
-            <dd className="font-mono text-xs">{order.submitted_at ?? "—"}</dd>
-            <dt className="text-muted-foreground">Created at</dt>
-            <dd>{order.created_at}</dd>
-            <dt className="text-muted-foreground">Updated at</dt>
-            <dd>{order.updated_at}</dd>
-          </dl>
-
-          <div>
-            <h3 className="mb-2 text-sm font-medium">Line items</h3>
-            <div className="overflow-x-auto rounded-md border">
-              <table className="w-full min-w-[720px] text-left text-sm">
-                <thead className="border-b bg-muted/40">
+          <Section title="Line items" description="Products and quantities in this order.">
+            <DataTable label="Demand order line items">
+              <DataTableTable className="min-w-[720px]">
+                <DataTableHead>
                   <tr>
-                    <th className="px-3 py-2 font-medium">Product</th>
-                    <th className="px-3 py-2 font-medium">Qty</th>
-                    <th className="px-3 py-2 font-medium">Unit price</th>
-                    <th className="px-3 py-2 font-medium">Line total</th>
-                    <th className="px-3 py-2 font-medium">Remark</th>
+                    <DataTableHeaderCell>Product</DataTableHeaderCell>
+                    <DataTableHeaderCell align="right">Qty</DataTableHeaderCell>
+                    <DataTableHeaderCell align="right">Unit price</DataTableHeaderCell>
+                    <DataTableHeaderCell align="right">Line total</DataTableHeaderCell>
+                    <DataTableHeaderCell>Remark</DataTableHeaderCell>
                   </tr>
-                </thead>
-                <tbody>
+                </DataTableHead>
+                <DataTableBody>
                   {items.length === 0 ? (
-                    <tr>
-                      <td colSpan={5} className="text-muted-foreground px-3 py-6 text-center">
-                        No line items.
-                      </td>
-                    </tr>
+                    <DataTableEmptyRow colSpan={5}>No line items.</DataTableEmptyRow>
                   ) : (
                     items.map((line) => (
-                      <tr key={line.id} className="border-b last:border-0">
-                        <td className="px-3 py-2">
-                          {line.product_name ?? line.product_id}
-                          {line.product_item_code ? (
-                            <span className="text-muted-foreground ml-1 font-mono text-xs">
-                              ({line.product_item_code})
-                            </span>
-                          ) : null}
-                        </td>
-                        <td className="px-3 py-2 font-mono text-xs">{line.quantity}</td>
-                        <td className="px-3 py-2 font-mono text-xs">{line.unit_price}</td>
-                        <td className="px-3 py-2 font-mono text-xs">{line.line_total}</td>
-                        <td className="px-3 py-2 text-muted-foreground">{line.remark || "—"}</td>
-                      </tr>
+                      <DataTableRow key={line.id}>
+                        <DataTableCell>
+                          <div className="font-medium">
+                            {line.product_name ?? line.product_id}
+                            {line.product_item_code ? (
+                              <span className="ml-1 font-mono text-xs text-muted-foreground">
+                                ({line.product_item_code})
+                              </span>
+                            ) : null}
+                          </div>
+                        </DataTableCell>
+                        <DataTableCell align="right" className="font-mono text-xs">
+                          {line.quantity}
+                        </DataTableCell>
+                        <DataTableCell align="right" className="font-mono text-xs">
+                          {line.unit_price}
+                        </DataTableCell>
+                        <DataTableCell align="right" className="font-mono text-xs">
+                          {line.line_total}
+                        </DataTableCell>
+                        <DataTableCell className="text-muted-foreground">
+                          {line.remark || "—"}
+                        </DataTableCell>
+                      </DataTableRow>
                     ))
                   )}
-                </tbody>
-              </table>
+                </DataTableBody>
+              </DataTableTable>
+            </DataTable>
+          </Section>
+
+          <Section title="Approval timeline" description="Audit trail of approval events.">
+            <ApprovalLogTimeline logs={approvalLogs} title=" " />
+          </Section>
+        </MetadataCard>
+
+        <div className="space-y-4">
+          {canSubmit && (
+            <ActionCard
+              title="Submit"
+              description="Submitted orders cannot be edited. They enter the approval queue for reviewers in your hierarchy."
+            >
+              <SubmitDemandOrderButton demandOrderId={order.id} />
+            </ActionCard>
+          )}
+
+          {showReview && (
+            <div className="rounded-xl border bg-card/60 shadow-[var(--shadow-xs)]">
+              <ReviewDemandOrderPanel
+                demandOrderId={order.id}
+                status={order.status}
+                forwardTargets={forwardTargets}
+              />
             </div>
-          </div>
+          )}
 
-          <ApprovalLogTimeline logs={approvalLogs} />
-        </CardContent>
-      </Card>
-
-      {canSubmit && (
-        <Card className="max-w-4xl">
-          <CardHeader>
-            <CardTitle className="text-base">Submit</CardTitle>
-            <CardDescription>
-              Submitted orders cannot be edited. They enter the approval queue for reviewers in your
-              hierarchy.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <SubmitDemandOrderButton demandOrderId={order.id} />
-          </CardContent>
-        </Card>
-      )}
-
-      {showReview && (
-        <ReviewDemandOrderPanel
-          demandOrderId={order.id}
-          status={order.status}
-          forwardTargets={forwardTargets}
-        />
-      )}
-
-      {showAccountsReview && <AccountsReviewDemandOrderPanel demandOrderId={order.id} />}
+          {showAccountsReview && (
+            <div className="rounded-xl border bg-card/60 shadow-[var(--shadow-xs)]">
+              <AccountsReviewDemandOrderPanel demandOrderId={order.id} />
+            </div>
+          )}
+        </div>
+      </div>
 
       {canEditDraft && (
         <EditDraftDemandOrderForm order={order} parties={parties ?? []} products={products} />
@@ -284,6 +339,6 @@ export default async function DemandOrderDetailPage({ params }: PageProps) {
             : "You have read-only access to this order."}
         </p>
       )}
-    </div>
+    </DetailPageShell>
   );
 }

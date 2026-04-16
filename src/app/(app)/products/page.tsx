@@ -1,6 +1,22 @@
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
+import { FilterBar } from "@/components/ui/filter-bar";
+import {
+  DataTable,
+  DataTableBody,
+  DataTableCell,
+  DataTableEmptyRow,
+  DataTableHead,
+  DataTableHeaderCell,
+  DataTableRow,
+  DataTableTable,
+} from "@/components/ui/data-table";
+import { Input } from "@/components/ui/input";
+import { ListPageHeader, ListPageShell, ListSummaryRow } from "@/components/ui/list-page";
+import { NativeSelect } from "@/components/ui/native-select";
+import { RowActionLink } from "@/components/ui/row-action-link";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { ROUTES } from "@/config/routes";
 import { PRODUCT_STATUSES } from "@/constants/statuses";
 import { resolveAppRole } from "@/lib/auth/app-role";
@@ -62,100 +78,107 @@ export default async function ProductsPage({ searchParams }: PageProps) {
   }));
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Products</h1>
-          <p className="text-muted-foreground text-sm">
-            {canEdit
-              ? "Manage product catalog for your organization."
-              : "Read-only product catalog view."}
-          </p>
-        </div>
-        {canEdit && (
-          <Link
-            href={ROUTES.productsNew}
-            className={cn(buttonVariants(), "inline-flex h-9 items-center justify-center px-4")}
-          >
-            New product
-          </Link>
-        )}
-      </div>
+    <ListPageShell>
+      <ListPageHeader
+        title="Products"
+        description={
+          canEdit
+            ? "Manage product catalog for your organization."
+            : "Read-only product catalog view."
+        }
+        actions={
+          canEdit ? (
+            <Link
+              href={ROUTES.productsNew}
+              className={cn(buttonVariants(), "inline-flex h-9 items-center justify-center px-4")}
+            >
+              New product
+            </Link>
+          ) : null
+        }
+      />
 
-      <form className="grid gap-2 rounded-lg border p-3 sm:grid-cols-[1fr_180px_180px_auto]">
-        <input
-          name="q"
-          defaultValue={q}
-          placeholder="Search by product name or item code"
-          className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
-        />
-        <input
-          name="category"
-          defaultValue={category}
-          placeholder="Category"
-          className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
-        />
-        <select
-          name="status"
-          defaultValue={status}
-          className="h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
+      <ListSummaryRow
+        left={products.length === 1 ? "1 product" : `${products.length} products`}
+      />
+
+      <form>
+        <FilterBar
+          actions={
+            <button
+              type="submit"
+              className={cn(buttonVariants({ variant: "outline" }), "h-9 px-4")}
+            >
+              Apply filters
+            </button>
+          }
         >
-          <option value="">All statuses</option>
-          {PRODUCT_STATUSES.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-        <button
-          type="submit"
-          className={cn(buttonVariants({ variant: "outline" }), "h-9 px-4")}
-        >
-          Apply
-        </button>
+          <div className="grid gap-2 sm:grid-cols-[1fr_200px_200px] lg:grid-cols-[1fr_240px_200px_200px]">
+            <Input
+              name="q"
+              defaultValue={q}
+              placeholder="Search by product name or item code"
+            />
+            <Input name="category" defaultValue={category} placeholder="Category" />
+            <NativeSelect name="status" defaultValue={status}>
+              <option value="">All statuses</option>
+              {PRODUCT_STATUSES.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </NativeSelect>
+          </div>
+        </FilterBar>
       </form>
 
-      <div className="overflow-x-auto rounded-lg border">
-        <table className="w-full min-w-[840px] text-left text-sm">
-          <thead className="border-b bg-muted/40">
+      <DataTable label="Products table">
+        <DataTableTable className="min-w-[840px]">
+          <DataTableHead>
             <tr>
-              <th className="px-3 py-2 font-medium">Product</th>
-              <th className="px-3 py-2 font-medium">Item code</th>
-              <th className="px-3 py-2 font-medium">Unit</th>
-              <th className="px-3 py-2 font-medium">Base price</th>
-              <th className="px-3 py-2 font-medium">Status</th>
-              <th className="px-3 py-2 font-medium w-24" />
+              <DataTableHeaderCell>Product</DataTableHeaderCell>
+              <DataTableHeaderCell>Item code</DataTableHeaderCell>
+              <DataTableHeaderCell>Unit</DataTableHeaderCell>
+              <DataTableHeaderCell align="right">Base price</DataTableHeaderCell>
+              <DataTableHeaderCell>Status</DataTableHeaderCell>
+              <DataTableHeaderCell className="w-24" />
             </tr>
-          </thead>
-          <tbody>
+          </DataTableHead>
+          <DataTableBody>
             {products.length === 0 ? (
-              <tr>
-                <td colSpan={6} className="text-muted-foreground px-3 py-8 text-center">
-                  No products found.
-                </td>
-              </tr>
+              <DataTableEmptyRow colSpan={6}>No products found.</DataTableEmptyRow>
             ) : (
               products.map((p) => (
-                <tr key={p.id} className="border-b last:border-0">
-                  <td className="px-3 py-2 font-medium">{p.product_name}</td>
-                  <td className="px-3 py-2 font-mono text-xs">{p.item_code}</td>
-                  <td className="px-3 py-2">{p.unit}</td>
-                  <td className="px-3 py-2">{Number(p.base_price).toFixed(2)}</td>
-                  <td className="px-3 py-2 font-mono text-xs">{p.status}</td>
-                  <td className="px-3 py-2">
-                    <Link
-                      href={`${ROUTES.products}/${p.id}`}
-                      className="text-primary text-xs font-medium underline-offset-4 hover:underline"
-                    >
-                      View
-                    </Link>
-                  </td>
-                </tr>
+                <DataTableRow key={p.id}>
+                  <DataTableCell className="font-medium">
+                    {p.product_name}
+                    {p.description ? (
+                      <div className="mt-1 line-clamp-1 text-xs text-muted-foreground">
+                        {p.description}
+                      </div>
+                    ) : null}
+                  </DataTableCell>
+                  <DataTableCell className="font-mono text-xs text-muted-foreground">
+                    {p.item_code}
+                  </DataTableCell>
+                  <DataTableCell>{p.unit}</DataTableCell>
+                  <DataTableCell align="right" className="font-mono text-xs">
+                    {Number(p.base_price).toFixed(2)}
+                  </DataTableCell>
+                  <DataTableCell>
+                    <StatusBadge tone="neutral" size="sm" className="font-mono">
+                      {p.status}
+                    </StatusBadge>
+                  </DataTableCell>
+                  <DataTableCell align="right">
+                    <RowActionLink href={`${ROUTES.products}/${p.id}`} />
+                  </DataTableCell>
+                </DataTableRow>
               ))
             )}
-          </tbody>
-        </table>
-      </div>
-    </div>
+          </DataTableBody>
+        </DataTableTable>
+      </DataTable>
+    </ListPageShell>
   );
 }

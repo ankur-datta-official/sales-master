@@ -9,6 +9,16 @@ import { normalizeProfileRow, PROFILE_WITH_ROLE_SELECT } from "@/lib/profiles/fe
 import { createClient } from "@/lib/supabase/server";
 import { canMutateOrgUsers } from "@/lib/users/actor-permissions";
 
+const ROLE_PRIORITY: Record<string, number> = {
+  admin: 1,
+  hos: 2,
+  manager: 3,
+  assistant_manager: 4,
+  accounts: 5,
+  factory_operator: 6,
+  marketer: 7,
+};
+
 export default async function UsersListPage() {
   const supabase = await createClient();
   const { user, profile: actorProfile } = await requireUserProfile();
@@ -31,7 +41,20 @@ export default async function UsersListPage() {
 
   const profiles = (rows ?? [])
     .map((r) => normalizeProfileRow(r))
-    .filter((p): p is NonNullable<typeof p> => p !== null);
+    .filter((p): p is NonNullable<typeof p> => p !== null)
+    .toSorted((a, b) => {
+      const aRank = ROLE_PRIORITY[a.role ?? ""] ?? 999;
+      const bRank = ROLE_PRIORITY[b.role ?? ""] ?? 999;
+      if (aRank !== bRank) return aRank - bRank;
+
+      const aName = (a.full_name ?? "").toLocaleLowerCase();
+      const bName = (b.full_name ?? "").toLocaleLowerCase();
+      if (aName !== bName) return aName.localeCompare(bName);
+
+      const aEmail = (a.email ?? "").toLocaleLowerCase();
+      const bEmail = (b.email ?? "").toLocaleLowerCase();
+      return aEmail.localeCompare(bEmail);
+    });
 
   return (
     <div className="space-y-4">

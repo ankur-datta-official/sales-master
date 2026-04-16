@@ -126,6 +126,15 @@ export const DEMAND_ORDER_STATUSES = [
 
 export type DemandOrderStatus = (typeof DEMAND_ORDER_STATUSES)[number];
 
+export const DEMAND_ORDER_STATUS = {
+  draft: "draft",
+  submitted: "submitted",
+  underReview: "under_review",
+  approved: "approved",
+  rejected: "rejected",
+  sentToFactory: "sent_to_factory",
+} as const satisfies Record<string, DemandOrderStatus>;
+
 /** Matches `public.demand_orders.stage` check constraint */
 export const DEMAND_ORDER_STAGES = [
   "draft",
@@ -135,6 +144,13 @@ export const DEMAND_ORDER_STAGES = [
 ] as const;
 
 export type DemandOrderStage = (typeof DEMAND_ORDER_STAGES)[number];
+
+export const DEMAND_ORDER_STAGE = {
+  draft: "draft",
+  managerReview: "manager_review",
+  accountsReview: "accounts_review",
+  factoryQueue: "factory_queue",
+} as const satisfies Record<string, DemandOrderStage>;
 
 /** Matches `public.approval_logs.action` check constraint (v1) */
 export const APPROVAL_LOG_ACTIONS = [
@@ -147,6 +163,15 @@ export const APPROVAL_LOG_ACTIONS = [
 ] as const;
 
 export type ApprovalLogAction = (typeof APPROVAL_LOG_ACTIONS)[number];
+
+export const APPROVAL_LOG_ACTION = {
+  submit: "submit",
+  approve: "approve",
+  reject: "reject",
+  forward: "forward",
+  accountsApprove: "accounts_approve",
+  accountsReject: "accounts_reject",
+} as const satisfies Record<string, ApprovalLogAction>;
 
 /** Matches `public.approval_logs.entity_type` check constraint (v1) */
 export const APPROVAL_LOG_ENTITY_TYPES = ["demand_order"] as const;

@@ -9,13 +9,22 @@ function isErrorWithDetails(value: unknown): value is ErrorWithDetails {
   return Boolean(value) && typeof value === "object";
 }
 
+function logActionError(context: string, diagnostic: unknown) {
+  if (process.env.NODE_ENV !== "production") {
+    console.error(`[action-error] ${context}`, diagnostic);
+    return;
+  }
+  // Keep production logs low-detail to reduce accidental sensitive diagnostics leakage.
+  console.error(`[action-error] ${context}`);
+}
+
 export function toSafeActionError(
   error: unknown,
   fallbackMessage: string,
   context: string
 ): string {
   if (!isErrorWithDetails(error)) {
-    console.error(`[action-error] ${context}`, { error });
+    logActionError(context, { error });
     return fallbackMessage;
   }
 
@@ -25,7 +34,7 @@ export function toSafeActionError(
     details: error.details ?? null,
     hint: error.hint ?? null,
   };
-  console.error(`[action-error] ${context}`, diagnostic);
+  logActionError(context, diagnostic);
 
   if (error.code === "23505") {
     return "Duplicate value detected. Please use a unique value and try again.";

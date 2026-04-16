@@ -5,10 +5,11 @@ import { revalidatePath } from "next/cache";
 import type { AppRole } from "@/constants/roles";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
+import { assertCanAssignTargetByHierarchy } from "@/lib/auth/target-assignment";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
-import { canManageCollectionTargets, isOrgAdminRole } from "@/lib/users/actor-permissions";
+import { canManageCollectionTargets } from "@/lib/users/actor-permissions";
 import {
   createCollectionTargetSchema,
   updateCollectionTargetSchema,
@@ -30,28 +31,16 @@ async function assertCanAssignCollectionTarget(
   assigneeId: string,
   role: AppRole | null
 ): Promise<string | null> {
-  if (!canManageCollectionTargets(role)) {
-    return "You do not have permission to assign collection targets.";
-  }
-  const hasOrgWide = isOrgAdminRole(role) || role === "hos";
-  const { data, error } = await supabase.rpc("can_access_profile", {
-    p_actor_profile_id: actorProfileId,
-    p_target_profile_id: assigneeId,
-    p_has_org_wide_access: hasOrgWide,
-    p_max_depth: 25,
+  return assertCanAssignTargetByHierarchy({
+    supabase,
+    actorProfileId,
+    assigneeId,
+    role,
+    canAssign: canManageCollectionTargets(role),
+    deniedMessage: "You do not have permission to assign collection targets.",
+    fallbackMessage: "Could not validate assignment scope for collection target.",
+    context: "collectionTargets.assertCanAssignCollectionTarget",
   });
-  if (error) {
-    return toSafeActionError(
-      error,
-      "Could not validate assignment scope for collection target.",
-      "collectionTargets.assertCanAssignCollectionTarget"
-    );
-  }
-  const row = Array.isArray(data) ? data[0] : data;
-  if (!row || !(typeof row === "object" && "can_access" in row && row.can_access)) {
-    return "You cannot assign a collection target to this user based on your role and hierarchy.";
-  }
-  return null;
 }
 
 async function assertPartyInOrg(
@@ -177,7 +166,7 @@ export async function updateCollectionTargetAction(
   const partyErr = await assertPartyInOrg(supabase, partyId, profile.organization_id);
   if (partyErr) return { ok: false, error: partyErr };
 
-  const { error } = await supabase
+  const { data: updatedRow, error } = await supabase
     .from("collection_targets")
     .update({
       assigned_to_user_id: parsed.data.assigned_to_user_id,
@@ -188,7 +177,9 @@ export async function updateCollectionTargetAction(
       target_amount: parsed.data.target_amount,
       status: parsed.data.status,
     })
-    .eq("id", parsed.data.collectionTargetId);
+    .eq("id", parsed.data.collectionTargetId)
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
@@ -198,6 +189,12 @@ export async function updateCollectionTargetAction(
         "Could not update collection target.",
         "collectionTargets.updateCollectionTargetAction"
       ),
+    };
+  }
+  if (!updatedRow) {
+    return {
+      ok: false,
+      error: "Collection target could not be updated. Refresh and try again.",
     };
   }
 

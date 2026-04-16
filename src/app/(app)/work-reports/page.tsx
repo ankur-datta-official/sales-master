@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
+import { ApplyFiltersButton } from "@/components/ui/apply-filters-button";
 import { ROUTES } from "@/config/routes";
 import { WORK_REPORT_STATUSES } from "@/constants/statuses";
 import { resolveAppRole } from "@/lib/auth/app-role";
@@ -113,12 +114,7 @@ export default async function WorkReportsPage({ searchParams }: PageProps) {
             defaultValue={user}
             className="h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
           />
-          <button
-            type="submit"
-            className={cn(buttonVariants({ variant: "outline" }), "h-9 px-4")}
-          >
-            Apply
-          </button>
+          <ApplyFiltersButton className="h-9 px-4" />
         </div>
       </form>
 

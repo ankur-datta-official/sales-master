@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { FormErrorAlert } from "@/components/ui/form-error-alert";
 import { ROUTES } from "@/config/routes";
 import { cn } from "@/lib/utils";
 import { createWorkReportAction } from "@/modules/work-reports/actions";
@@ -79,14 +80,20 @@ export function CreateWorkReportForm({ organizationId }: Props) {
       </CardHeader>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent className="space-y-4">
-          {error && <p className="text-sm text-destructive">{error}</p>}
+          <FormErrorAlert message={error} />
           <div className="space-y-2">
             <Label htmlFor="report_date">Report date</Label>
             <Input id="report_date" type="date" {...form.register("report_date")} />
+            {form.formState.errors.report_date ? (
+              <p className="text-xs text-destructive">{form.formState.errors.report_date.message}</p>
+            ) : null}
           </div>
           <div className="space-y-2">
             <Label htmlFor="summary">Summary</Label>
             <Textarea id="summary" rows={4} {...form.register("summary")} />
+            {form.formState.errors.summary ? (
+              <p className="text-xs text-destructive">{form.formState.errors.summary.message}</p>
+            ) : null}
           </div>
           <div className="space-y-2">
             <Label htmlFor="achievements">Achievements</Label>

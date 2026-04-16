@@ -1,6 +1,22 @@
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
+import { FilterBar } from "@/components/ui/filter-bar";
+import {
+  DataTable,
+  DataTableBody,
+  DataTableCell,
+  DataTableEmptyRow,
+  DataTableHead,
+  DataTableHeaderCell,
+  DataTableRow,
+  DataTableTable,
+} from "@/components/ui/data-table";
+import { Input } from "@/components/ui/input";
+import { ListPageHeader, ListPageShell, ListSummaryRow } from "@/components/ui/list-page";
+import { NativeSelect } from "@/components/ui/native-select";
+import { RowActionLink } from "@/components/ui/row-action-link";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { DEMAND_ORDER_STATUSES } from "@/constants/statuses";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
@@ -81,142 +97,134 @@ export default async function DemandOrdersPage({ searchParams }: PageProps) {
   const partiesForFilter = partyOptions ?? [];
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Demand orders</h1>
-          <p className="text-muted-foreground text-sm">
-            Multi-line demand orders. Submit when ready; hierarchy controls visibility.
-          </p>
-        </div>
-        {canCreateDemandOrders(role) && (
-          <Link
-            href={ROUTES.demandOrdersNew}
-            className={cn(buttonVariants(), "inline-flex h-9 items-center justify-center px-4")}
-          >
-            New order
-          </Link>
-        )}
-      </div>
+    <ListPageShell>
+      <ListPageHeader
+        title="Demand orders"
+        description="Multi-line demand orders. Submit when ready; hierarchy controls visibility."
+        actions={
+          canCreateDemandOrders(role) ? (
+            <Link
+              href={ROUTES.demandOrdersNew}
+              className={cn(buttonVariants(), "inline-flex h-9 items-center justify-center px-4")}
+            >
+              New order
+            </Link>
+          ) : null
+        }
+      />
 
-      <form className="grid gap-2 rounded-lg border p-3 sm:grid-cols-2 lg:grid-cols-7">
-        <input
-          name="dateFrom"
-          type="date"
-          defaultValue={dateFrom}
-          className="h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
-        />
-        <input
-          name="dateTo"
-          type="date"
-          defaultValue={dateTo}
-          className="h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
-        />
-        <select
-          name="party"
-          defaultValue={party}
-          className="h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
+      <ListSummaryRow
+        left={
+          rows.length === 1 ? "1 order" : `${rows.length} orders`
+        }
+        right={
+          <span className="text-muted-foreground">
+            Tip: use Scope to quickly switch between all vs own.
+          </span>
+        }
+      />
+
+      <form>
+        <FilterBar
+          actions={
+            <button
+              type="submit"
+              className={cn(buttonVariants({ variant: "outline" }), "h-9 px-4")}
+            >
+              Apply filters
+            </button>
+          }
         >
-          <option value="">All parties</option>
-          {partiesForFilter.map((p) => (
-            <option key={p.id} value={p.id}>
-              {p.name}
-            </option>
-          ))}
-        </select>
-        <select
-          name="status"
-          defaultValue={status}
-          className="h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
-        >
-          <option value="">All statuses</option>
-          {DEMAND_ORDER_STATUSES.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-        <select
-          name="scope"
-          defaultValue={scope}
-          className="h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
-        >
-          <option value="all">All (within visibility)</option>
-          <option value="own">Own orders only</option>
-          <option value="team">Team (RLS visibility)</option>
-        </select>
-        <input
-          name="user"
-          placeholder="Owner user id"
-          defaultValue={user}
-          className="h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
-        />
-        <div className="flex gap-2">
-          <button
-            type="submit"
-            className={cn(buttonVariants({ variant: "outline" }), "h-9 flex-1 px-4")}
-          >
-            Apply
-          </button>
-        </div>
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-7">
+            <Input name="dateFrom" type="date" defaultValue={dateFrom} />
+            <Input name="dateTo" type="date" defaultValue={dateTo} />
+            <NativeSelect name="party" defaultValue={party}>
+              <option value="">All parties</option>
+              {partiesForFilter.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.name}
+                </option>
+              ))}
+            </NativeSelect>
+            <NativeSelect name="status" defaultValue={status}>
+              <option value="">All statuses</option>
+              {DEMAND_ORDER_STATUSES.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </NativeSelect>
+            <NativeSelect name="scope" defaultValue={scope}>
+              <option value="all">All (within visibility)</option>
+              <option value="own">Own orders only</option>
+              <option value="team">Team (RLS visibility)</option>
+            </NativeSelect>
+            <Input name="user" placeholder="Owner user id" defaultValue={user} />
+          </div>
+        </FilterBar>
       </form>
 
-      <div className="overflow-x-auto rounded-lg border">
-        <table className="w-full min-w-[1020px] text-left text-sm">
-          <thead className="border-b bg-muted/40">
+      <DataTable label="Demand orders table">
+        <DataTableTable className="min-w-[1020px]">
+          <DataTableHead>
             <tr>
-              <th className="px-3 py-2 font-medium">Order date</th>
-              <th className="px-3 py-2 font-medium">Party</th>
-              <th className="px-3 py-2 font-medium">Owner</th>
-              <th className="px-3 py-2 font-medium">Total</th>
-              <th className="px-3 py-2 font-medium">Status</th>
-              <th className="px-3 py-2 font-medium">Stage</th>
-              <th className="px-3 py-2 font-medium">Submitted</th>
-              <th className="px-3 py-2 w-20 font-medium" />
+              <DataTableHeaderCell>Order date</DataTableHeaderCell>
+              <DataTableHeaderCell>Party</DataTableHeaderCell>
+              <DataTableHeaderCell>Owner</DataTableHeaderCell>
+              <DataTableHeaderCell align="right">Total</DataTableHeaderCell>
+              <DataTableHeaderCell>Status</DataTableHeaderCell>
+              <DataTableHeaderCell>Stage</DataTableHeaderCell>
+              <DataTableHeaderCell>Submitted</DataTableHeaderCell>
+              <DataTableHeaderCell className="w-24" />
             </tr>
-          </thead>
-          <tbody>
+          </DataTableHead>
+          <DataTableBody>
             {rows.length === 0 ? (
-              <tr>
-                <td colSpan={8} className="text-muted-foreground px-3 py-8 text-center">
-                  No demand orders found.
-                </td>
-              </tr>
+              <DataTableEmptyRow colSpan={8}>No demand orders found.</DataTableEmptyRow>
             ) : (
               rows.map((row) => (
-                <tr key={row.id} className="border-b last:border-0">
-                  <td className="px-3 py-2 font-mono text-xs">{row.order_date}</td>
-                  <td className="px-3 py-2 font-medium">
-                    {row.party_name ?? row.party_id}
-                    {row.party_code ? (
-                      <span className="text-muted-foreground ml-1 font-mono text-xs">
-                        ({row.party_code})
-                      </span>
-                    ) : null}
-                  </td>
-                  <td className="px-3 py-2 text-muted-foreground">
+                <DataTableRow key={row.id}>
+                  <DataTableCell className="font-mono text-xs text-muted-foreground">
+                    {row.order_date}
+                  </DataTableCell>
+                  <DataTableCell>
+                    <div className="font-medium">
+                      {row.party_name ?? row.party_id}
+                      {row.party_code ? (
+                        <span className="ml-1 font-mono text-xs text-muted-foreground">
+                          ({row.party_code})
+                        </span>
+                      ) : null}
+                    </div>
+                  </DataTableCell>
+                  <DataTableCell className="text-muted-foreground">
                     {row.creator_name ?? row.creator_email ?? row.created_by_user_id}
-                  </td>
-                  <td className="px-3 py-2 font-mono text-xs">{row.total_amount}</td>
-                  <td className="px-3 py-2 font-mono text-xs capitalize">{row.status}</td>
-                  <td className="px-3 py-2 font-mono text-xs">{row.stage}</td>
-                  <td className="px-3 py-2 font-mono text-xs">
+                  </DataTableCell>
+                  <DataTableCell align="right" className="font-mono text-xs">
+                    {row.total_amount}
+                  </DataTableCell>
+                  <DataTableCell>
+                    <StatusBadge tone="neutral" size="sm" className="capitalize">
+                      {row.status}
+                    </StatusBadge>
+                  </DataTableCell>
+                  <DataTableCell>
+                    <StatusBadge tone="neutral" size="sm" className="font-mono">
+                      {row.stage}
+                    </StatusBadge>
+                  </DataTableCell>
+                  <DataTableCell className="font-mono text-xs text-muted-foreground">
                     {row.submitted_at ? row.submitted_at.slice(0, 10) : "—"}
-                  </td>
-                  <td className="px-3 py-2">
-                    <Link
-                      href={`${ROUTES.demandOrders}/${row.id}`}
-                      className="text-primary text-xs font-medium underline-offset-4 hover:underline"
-                    >
-                      View
-                    </Link>
-                  </td>
-                </tr>
+                  </DataTableCell>
+                  <DataTableCell align="right">
+                    <RowActionLink href={`${ROUTES.demandOrders}/${row.id}`} />
+                  </DataTableCell>
+                </DataTableRow>
               ))
             )}
-          </tbody>
-        </table>
-      </div>
-    </div>
+          </DataTableBody>
+        </DataTableTable>
+      </DataTable>
+    </ListPageShell>
   );
 }

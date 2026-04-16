@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
+import { PageHeader } from "@/components/ui/page-header";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
@@ -77,15 +78,23 @@ export default async function NewDemandOrderPage() {
     : { data: null };
 
   return (
-    <div className="space-y-4">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">New demand order</h1>
-        <p className="text-muted-foreground text-sm">
-          {isAdmin
+    <div className="space-y-6">
+      <PageHeader
+        title="New demand order"
+        description={
+          isAdmin
             ? "Create a draft order for any user in your organization."
-            : "Create a draft order for your accounts."}
-        </p>
-      </div>
+            : "Create a draft order for your accounts."
+        }
+        actions={
+          <Link
+            href={ROUTES.demandOrders}
+            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "h-9")}
+          >
+            Back to demand orders
+          </Link>
+        }
+      />
       <CreateDemandOrderForm
         organizationId={orgId}
         isAdmin={isAdmin}

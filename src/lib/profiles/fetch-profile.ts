@@ -80,14 +80,20 @@ export async function fetchProfileByUserId(
     if (isProfilesTableMissing(error.message)) {
       if (!hasLoggedProfilesTableWarning) {
         hasLoggedProfilesTableWarning = true;
-        console.warn(
-          "[profiles] table not available in the connected Supabase project; falling back to auth-only session data."
-        );
+        if (process.env.NODE_ENV !== "production") {
+          console.warn(
+            "[profiles] table not available in the connected Supabase project; falling back to auth-only session data."
+          );
+        }
       }
       return null;
     }
 
-    console.error("[profiles] fetch error", error.message);
+    if (process.env.NODE_ENV !== "production") {
+      console.error("[profiles] fetch error", error.message);
+    } else {
+      console.error("[profiles] fetch error");
+    }
     return null;
   }
 

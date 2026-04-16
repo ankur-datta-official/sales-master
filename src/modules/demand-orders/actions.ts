@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
+import { APPROVAL_LOG_ACTION, DEMAND_ORDER_STAGE, DEMAND_ORDER_STATUS } from "@/constants/statuses";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
@@ -96,7 +97,7 @@ export async function createDemandOrderAction(
       created_by_user_id: ownerId,
       order_date: parsed.data.order_date,
       remarks,
-      status: "draft",
+      status: DEMAND_ORDER_STATUS.draft,
     })
     .select("id")
     .single();
@@ -149,14 +150,14 @@ export async function updateDraftDemandOrderAction(
 
   const { data: target } = await supabase
     .from("demand_orders")
-    .select("id, organization_id, created_by_user_id, status, stage")
+    .select("id, organization_id, created_by_user_id, status, stage, party_id, order_date, remarks")
     .eq("id", parsed.data.demandOrderId)
     .maybeSingle();
 
   if (!target || target.organization_id !== profile.organization_id) {
     return { ok: false, error: "Demand order not found in your organization." };
   }
-  if (target.status !== "draft" || target.stage !== "draft") {
+  if (target.status !== DEMAND_ORDER_STATUS.draft || target.stage !== DEMAND_ORDER_STAGE.draft) {
     return { ok: false, error: "Only draft orders can be edited." };
   }
   if (!isAdmin && target.created_by_user_id !== profile.id) {
@@ -168,14 +169,18 @@ export async function updateDraftDemandOrderAction(
 
   const remarks = (parsed.data.remarks ?? "").trim();
 
-  const { error: headerErr } = await supabase
+  const { data: headerUpdated, error: headerErr } = await supabase
     .from("demand_orders")
     .update({
       party_id: parsed.data.party_id,
       order_date: parsed.data.order_date,
       remarks,
     })
-    .eq("id", parsed.data.demandOrderId);
+    .eq("id", parsed.data.demandOrderId)
+    .eq("status", DEMAND_ORDER_STATUS.draft)
+    .eq("stage", DEMAND_ORDER_STAGE.draft)
+    .select("id")
+    .maybeSingle();
 
   if (headerErr) {
     return {
@@ -187,6 +192,12 @@ export async function updateDraftDemandOrderAction(
       ),
     };
   }
+  if (!headerUpdated) {
+    return {
+      ok: false,
+      error: "This order is no longer a draft or could not be updated. Refresh and try again.",
+    };
+  }
 
   const { error: rpcErr } = await supabase.rpc("replace_demand_order_items", {
     p_order_id: parsed.data.demandOrderId,
@@ -194,6 +205,16 @@ export async function updateDraftDemandOrderAction(
   });
 
   if (rpcErr) {
+    await supabase
+      .from("demand_orders")
+      .update({
+        party_id: target.party_id,
+        order_date: target.order_date,
+        remarks: target.remarks ?? "",
+      })
+      .eq("id", parsed.data.demandOrderId)
+      .eq("status", DEMAND_ORDER_STATUS.draft)
+      .eq("stage", DEMAND_ORDER_STAGE.draft);
     return {
       ok: false,
       error: toSafeActionError(
@@ -235,7 +256,7 @@ export async function submitDemandOrderAction(
   if (!target || target.organization_id !== profile.organization_id) {
     return { ok: false, error: "Demand order not found in your organization." };
   }
-  if (target.status !== "draft" || target.stage !== "draft") {
+  if (target.status !== DEMAND_ORDER_STATUS.draft || target.stage !== DEMAND_ORDER_STAGE.draft) {
     return { ok: false, error: "Only draft orders can be submitted." };
   }
   if (!isAdmin && target.created_by_user_id !== profile.id) {
@@ -261,19 +282,33 @@ export async function submitDemandOrderAction(
     return { ok: false, error: "Add at least one line item before submitting." };
   }
 
-  const { error } = await supabase
+  const { data: submittedRow, error: submitErr } = await supabase
     .from("demand_orders")
     .update({
-      status: "submitted",
       submitted_at: new Date().toISOString(),
-      stage: "manager_review",
+      status: DEMAND_ORDER_STATUS.submitted,
+      stage: DEMAND_ORDER_STAGE.managerReview,
     })
-    .eq("id", parsed.data.demandOrderId);
+    .eq("id", parsed.data.demandOrderId)
+    .eq("status", DEMAND_ORDER_STATUS.draft)
+    .eq("stage", DEMAND_ORDER_STAGE.draft)
+    .select("id")
+    .maybeSingle();
 
-  if (error) {
+  if (submitErr) {
     return {
       ok: false,
-      error: toSafeActionError(error, "Could not submit demand order.", "demandOrders.submitDemandOrderAction"),
+      error: toSafeActionError(
+        submitErr,
+        "Could not submit demand order.",
+        "demandOrders.submitDemandOrderAction"
+      ),
+    };
+  }
+  if (!submittedRow) {
+    return {
+      ok: false,
+      error: "This order is no longer a draft or was changed by another action. Refresh and try again.",
     };
   }
 
@@ -281,7 +316,7 @@ export async function submitDemandOrderAction(
     organization_id: profile.organization_id,
     entity_type: "demand_order",
     entity_id: parsed.data.demandOrderId,
-    action: "submit",
+    action: APPROVAL_LOG_ACTION.submit,
     from_user_id: null,
     to_user_id: null,
     acted_by_user_id: profile.id,
@@ -291,8 +326,14 @@ export async function submitDemandOrderAction(
   if (logErr) {
     await supabase
       .from("demand_orders")
-      .update({ status: "draft", submitted_at: null, stage: "draft" })
-      .eq("id", parsed.data.demandOrderId);
+      .update({
+        status: DEMAND_ORDER_STATUS.draft,
+        submitted_at: null,
+        stage: DEMAND_ORDER_STAGE.draft,
+      })
+      .eq("id", parsed.data.demandOrderId)
+      .eq("status", DEMAND_ORDER_STATUS.submitted)
+      .eq("stage", DEMAND_ORDER_STAGE.managerReview);
     return {
       ok: false,
       error: toSafeActionError(logErr, "Could not write approval log.", "demandOrders.submitDemandOrderAction.insertApprovalLog"),

@@ -2,9 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 
-import type { AppRole } from "@/constants/roles";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
+import { canReviewOwnerByHierarchy } from "@/lib/auth/can-review-owner";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
@@ -25,31 +25,6 @@ import {
 } from "@/modules/work-reports/schemas";
 
 type ActionResult<T = void> = { ok: true; data?: T } | { ok: false; error: string };
-
-function canOrgScopeReview(role: AppRole | null): boolean {
-  return role === "hos" || isOrgAdminRole(role);
-}
-
-async function canReviewActorAccessOwner(
-  ownerUserId: string,
-  role: AppRole | null
-): Promise<boolean> {
-  const supabase = await createClient();
-  const { profile } = await requireUserProfile();
-  if (!profile?.id || !profile.organization_id) return false;
-  if (canOrgScopeReview(role)) return true;
-  if (role !== "manager" && role !== "assistant_manager") return false;
-
-  const { data, error } = await supabase.rpc("can_access_profile", {
-    p_actor_profile_id: profile.id,
-    p_target_profile_id: ownerUserId,
-    p_has_org_wide_access: false,
-    p_max_depth: 25,
-  });
-  if (error) return false;
-  const row = Array.isArray(data) ? data[0] : data;
-  return Boolean(row && typeof row === "object" && "can_access" in row && row.can_access);
-}
 
 export async function createWorkReportAction(
   input: CreateWorkReportInput
@@ -129,7 +104,7 @@ export async function updateDraftWorkReportAction(
     return { ok: false, error: "Only draft reports can be edited." };
   }
 
-  const { error } = await supabase
+  const { data: updatedRow, error } = await supabase
     .from("work_reports")
     .update({
       report_date: parsed.data.report_date,
@@ -138,12 +113,21 @@ export async function updateDraftWorkReportAction(
       challenges: parsed.data.challenges?.trim() || null,
       next_step: parsed.data.next_step?.trim() || null,
     })
-    .eq("id", parsed.data.workReportId);
+    .eq("id", parsed.data.workReportId)
+    .eq("status", "draft")
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
       ok: false,
       error: toSafeActionError(error, "Could not update work report.", "workReports.updateDraftWorkReportAction"),
+    };
+  }
+  if (!updatedRow) {
+    return {
+      ok: false,
+      error: "This report is no longer a draft or could not be updated. Refresh and try again.",
     };
   }
 
@@ -181,7 +165,7 @@ export async function submitWorkReportAction(
     return { ok: false, error: "Only draft reports can be submitted." };
   }
 
-  const { error } = await supabase
+  const { data: submittedRow, error } = await supabase
     .from("work_reports")
     .update({
       status: "submitted",
@@ -190,12 +174,21 @@ export async function submitWorkReportAction(
       reviewed_by: null,
       reviewed_at: null,
     })
-    .eq("id", parsed.data.workReportId);
+    .eq("id", parsed.data.workReportId)
+    .eq("status", "draft")
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
       ok: false,
       error: toSafeActionError(error, "Could not submit work report.", "workReports.submitWorkReportAction"),
+    };
+  }
+  if (!submittedRow) {
+    return {
+      ok: false,
+      error: "Only draft reports can be submitted, or the report was changed elsewhere. Refresh and try again.",
     };
   }
 
@@ -237,12 +230,17 @@ export async function reviewWorkReportAction(
     return { ok: false, error: "You cannot review your own report." };
   }
 
-  const allowed = await canReviewActorAccessOwner(target.owner_user_id, role);
+  const allowed = await canReviewOwnerByHierarchy(
+    supabase,
+    profile.id,
+    target.owner_user_id,
+    role
+  );
   if (!allowed) {
     return { ok: false, error: "You are outside the allowed review scope." };
   }
 
-  const { error } = await supabase
+  const { data: reviewedRow, error } = await supabase
     .from("work_reports")
     .update({
       status: parsed.data.status,
@@ -250,12 +248,21 @@ export async function reviewWorkReportAction(
       reviewed_at: new Date().toISOString(),
       review_note: parsed.data.review_note?.trim() || null,
     })
-    .eq("id", parsed.data.workReportId);
+    .eq("id", parsed.data.workReportId)
+    .eq("status", "submitted")
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     return {
       ok: false,
       error: toSafeActionError(error, "Could not review work report.", "workReports.reviewWorkReportAction"),
+    };
+  }
+  if (!reviewedRow) {
+    return {
+      ok: false,
+      error: "Only submitted reports can be reviewed, or the report changed. Refresh and try again.",
     };
   }
 

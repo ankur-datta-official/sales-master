@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
+import { APPROVAL_LOG_ACTION, DEMAND_ORDER_STAGE, DEMAND_ORDER_STATUS } from "@/constants/statuses";
 import { ROUTES } from "@/config/routes";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
@@ -16,6 +17,7 @@ import {
   type ForwardDemandOrderInput,
   type RejectDemandOrderInput,
 } from "@/modules/demand-orders/approval-schemas";
+import { isAppRole } from "@/constants/roles";
 import { canActorReviewDemandOrder } from "@/modules/demand-orders/review-access";
 
 type ActionResult = { ok: true } | { ok: false; error: string };
@@ -49,10 +51,13 @@ export async function approveDemandOrderAction(input: ApproveDemandOrderInput): 
   if (order.created_by_user_id === profile.id) {
     return { ok: false, error: "You cannot approve your own order." };
   }
-  if (order.stage !== "manager_review") {
+  if (order.stage !== DEMAND_ORDER_STAGE.managerReview) {
     return { ok: false, error: "This order is not in manager review." };
   }
-  if (order.status !== "submitted" && order.status !== "under_review") {
+  if (
+    order.status !== DEMAND_ORDER_STATUS.submitted &&
+    order.status !== DEMAND_ORDER_STATUS.underReview
+  ) {
     return { ok: false, error: "Only submitted or under-review orders can be approved." };
   }
 
@@ -74,7 +79,7 @@ export async function approveDemandOrderAction(input: ApproveDemandOrderInput): 
       organization_id: profile.organization_id,
       entity_type: "demand_order",
       entity_id: order.id,
-      action: "approve",
+      action: APPROVAL_LOG_ACTION.approve,
       from_user_id: null,
       to_user_id: null,
       acted_by_user_id: profile.id,
@@ -92,10 +97,13 @@ export async function approveDemandOrderAction(input: ApproveDemandOrderInput): 
 
   const { data: updated, error: updErr } = await supabase
     .from("demand_orders")
-    .update({ status: "approved", stage: "accounts_review" })
+    .update({
+      status: DEMAND_ORDER_STATUS.approved,
+      stage: DEMAND_ORDER_STAGE.accountsReview,
+    })
     .eq("id", order.id)
-    .eq("stage", "manager_review")
-    .in("status", ["submitted", "under_review"])
+    .eq("stage", DEMAND_ORDER_STAGE.managerReview)
+    .in("status", [DEMAND_ORDER_STATUS.submitted, DEMAND_ORDER_STATUS.underReview])
     .select("id")
     .maybeSingle();
 
@@ -147,10 +155,13 @@ export async function rejectDemandOrderAction(input: RejectDemandOrderInput): Pr
   if (order.created_by_user_id === profile.id) {
     return { ok: false, error: "You cannot reject your own order." };
   }
-  if (order.stage !== "manager_review") {
+  if (order.stage !== DEMAND_ORDER_STAGE.managerReview) {
     return { ok: false, error: "This order is not in manager review." };
   }
-  if (order.status !== "submitted" && order.status !== "under_review") {
+  if (
+    order.status !== DEMAND_ORDER_STATUS.submitted &&
+    order.status !== DEMAND_ORDER_STATUS.underReview
+  ) {
     return { ok: false, error: "Only submitted or under-review orders can be rejected." };
   }
 
@@ -172,7 +183,7 @@ export async function rejectDemandOrderAction(input: RejectDemandOrderInput): Pr
       organization_id: profile.organization_id,
       entity_type: "demand_order",
       entity_id: order.id,
-      action: "reject",
+      action: APPROVAL_LOG_ACTION.reject,
       from_user_id: null,
       to_user_id: null,
       acted_by_user_id: profile.id,
@@ -190,10 +201,13 @@ export async function rejectDemandOrderAction(input: RejectDemandOrderInput): Pr
 
   const { data: updated, error: updErr } = await supabase
     .from("demand_orders")
-    .update({ status: "rejected", stage: "manager_review" })
+    .update({
+      status: DEMAND_ORDER_STATUS.rejected,
+      stage: DEMAND_ORDER_STAGE.managerReview,
+    })
     .eq("id", order.id)
-    .eq("stage", "manager_review")
-    .in("status", ["submitted", "under_review"])
+    .eq("stage", DEMAND_ORDER_STAGE.managerReview)
+    .in("status", [DEMAND_ORDER_STATUS.submitted, DEMAND_ORDER_STATUS.underReview])
     .select("id")
     .maybeSingle();
 
@@ -245,10 +259,10 @@ export async function forwardDemandOrderAction(input: ForwardDemandOrderInput): 
   if (order.created_by_user_id === profile.id) {
     return { ok: false, error: "You cannot forward your own order." };
   }
-  if (order.stage !== "manager_review") {
+  if (order.stage !== DEMAND_ORDER_STAGE.managerReview) {
     return { ok: false, error: "This order is not in manager review." };
   }
-  if (order.status !== "submitted") {
+  if (order.status !== DEMAND_ORDER_STATUS.submitted) {
     return { ok: false, error: "Only submitted orders can be forwarded for deeper review." };
   }
 
@@ -283,11 +297,22 @@ export async function forwardDemandOrderAction(input: ForwardDemandOrderInput): 
     .maybeSingle();
 
   const targetRoleSlug = targetRole?.slug ?? null;
-  if (
-    !targetRoleSlug ||
-    !["manager", "assistant_manager", "hos", "admin"].includes(targetRoleSlug)
-  ) {
+  const targetAppRole = targetRoleSlug && isAppRole(targetRoleSlug) ? targetRoleSlug : null;
+  if (!targetAppRole || !canReviewDemandOrders(targetAppRole)) {
     return { ok: false, error: "Forward target must be a reviewer role in your organization." };
+  }
+
+  const targetCanReview = await canActorReviewDemandOrder(
+    supabase,
+    parsed.data.to_user_id,
+    order.created_by_user_id,
+    targetAppRole
+  );
+  if (!targetCanReview) {
+    return {
+      ok: false,
+      error: "Forward target is not in scope to review this order (hierarchy or role).",
+    };
   }
 
   const note = (parsed.data.note ?? "").trim();
@@ -298,7 +323,7 @@ export async function forwardDemandOrderAction(input: ForwardDemandOrderInput): 
       organization_id: profile.organization_id,
       entity_type: "demand_order",
       entity_id: order.id,
-      action: "forward",
+      action: APPROVAL_LOG_ACTION.forward,
       from_user_id: profile.id,
       to_user_id: parsed.data.to_user_id,
       acted_by_user_id: profile.id,
@@ -316,10 +341,13 @@ export async function forwardDemandOrderAction(input: ForwardDemandOrderInput): 
 
   const { data: updated, error: updErr } = await supabase
     .from("demand_orders")
-    .update({ status: "under_review", stage: "manager_review" })
+    .update({
+      status: DEMAND_ORDER_STATUS.underReview,
+      stage: DEMAND_ORDER_STAGE.managerReview,
+    })
     .eq("id", order.id)
-    .eq("stage", "manager_review")
-    .eq("status", "submitted")
+    .eq("stage", DEMAND_ORDER_STAGE.managerReview)
+    .eq("status", DEMAND_ORDER_STATUS.submitted)
     .select("id")
     .maybeSingle();
 
