@@ -32,6 +32,19 @@ type NavGroup = { label: string; titles: readonly string[] };
 
 const NAV_GROUPS: readonly NavGroup[] = [
   { label: "Overview", titles: ["Dashboard", "Analytics"] },
+  {
+    label: "CRM",
+    titles: [
+      "CRM Companies",
+      "CRM Contacts",
+      "CRM Meetings",
+      "CRM Follow-ups",
+      "CRM Pipeline",
+      "CRM Documents",
+      "CRM Help",
+      "CRM Reports",
+    ],
+  },
   { label: "Work", titles: ["Work Plans", "Work Reports", "Visit Plans", "Visit Logs"] },
   { label: "Targets", titles: ["Sales Targets", "Collection Targets"] },
   { label: "Entries", titles: ["Sales Entries", "Collection Entries"] },

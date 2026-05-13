@@ -20,6 +20,11 @@ import {
   CalendarClock,
   Activity,
   LineChart,
+  Handshake,
+  KanbanSquare,
+  FileText,
+  CircleHelp,
+  BarChart3,
 } from "lucide-react";
 
 import type { AppRole } from "@/constants/roles";
@@ -62,6 +67,46 @@ export const mainNavigation: readonly NavItem[] = [
     title: "Analytics",
     href: ROUTES.analytics,
     icon: LineChart,
+  },
+  {
+    title: "CRM Companies",
+    href: ROUTES.crmCompanies,
+    icon: Building2,
+  },
+  {
+    title: "CRM Contacts",
+    href: ROUTES.crmContacts,
+    icon: Users,
+  },
+  {
+    title: "CRM Meetings",
+    href: ROUTES.crmMeetings,
+    icon: CalendarClock,
+  },
+  {
+    title: "CRM Follow-ups",
+    href: ROUTES.crmFollowups,
+    icon: Handshake,
+  },
+  {
+    title: "CRM Pipeline",
+    href: ROUTES.crmPipeline,
+    icon: KanbanSquare,
+  },
+  {
+    title: "CRM Documents",
+    href: ROUTES.crmDocuments,
+    icon: FileText,
+  },
+  {
+    title: "CRM Help",
+    href: ROUTES.crmHelp,
+    icon: CircleHelp,
+  },
+  {
+    title: "CRM Reports",
+    href: ROUTES.crmReports,
+    icon: BarChart3,
   },
   {
     title: "Users",

@@ -36,6 +36,21 @@ export const ROUTES = {
   attendanceHistory: "/attendance/history",
   fieldActivity: "/field-activity",
   analytics: "/analytics",
+  crm: "/crm",
+  crmCompanies: "/crm/companies",
+  crmCompaniesNew: "/crm/companies/new",
+  crmContacts: "/crm/contacts",
+  crmContactsNew: "/crm/contacts/new",
+  crmMeetings: "/crm/meetings",
+  crmMeetingsNew: "/crm/meetings/new",
+  crmFollowups: "/crm/followups",
+  crmFollowupsNew: "/crm/followups/new",
+  crmPipeline: "/crm/pipeline",
+  crmDocuments: "/crm/documents",
+  crmDocumentsNew: "/crm/documents/new",
+  crmHelp: "/crm/help",
+  crmHelpNew: "/crm/help/new",
+  crmReports: "/crm/reports",
   authCallback: "/auth/callback",
 } as const;
 
@@ -61,6 +76,7 @@ export const PROTECTED_PATH_PREFIXES = [
   ROUTES.attendance,
   ROUTES.fieldActivity,
   ROUTES.analytics,
+  ROUTES.crm,
 ] as const;
 
 export function isProtectedPath(pathname: string): boolean {
