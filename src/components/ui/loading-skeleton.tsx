@@ -16,7 +16,7 @@ export function LoadingSkeleton({
     return (
       <div className={cn("space-y-2", className)} {...props}>
         <Skeleton className="h-8 w-64" />
-        <div className="rounded-xl border bg-card shadow-[var(--shadow-xs)]">
+        <div className="rounded-2xl border bg-card/80 shadow-[var(--shadow-sm)]">
           <div className="space-y-2 p-4">
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-[92%]" />
@@ -30,7 +30,7 @@ export function LoadingSkeleton({
 
   if (variant === "card") {
     return (
-      <div className={cn("rounded-xl border bg-card p-4 shadow-[var(--shadow-xs)]", className)} {...props}>
+      <div className={cn("rounded-2xl border bg-card/80 p-4 shadow-[var(--shadow-sm)]", className)} {...props}>
         <Skeleton className="h-5 w-40" />
         <Skeleton className="mt-2 h-4 w-72" />
         <Skeleton className="mt-4 h-9 w-28" />
@@ -43,12 +43,11 @@ export function LoadingSkeleton({
       <Skeleton className="h-8 w-40" />
       <Skeleton className="h-4 w-80" />
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <Skeleton className="h-28 rounded-xl" />
-        <Skeleton className="h-28 rounded-xl" />
-        <Skeleton className="h-28 rounded-xl" />
-        <Skeleton className="h-28 rounded-xl" />
+        <Skeleton className="h-28 rounded-2xl" />
+        <Skeleton className="h-28 rounded-2xl" />
+        <Skeleton className="h-28 rounded-2xl" />
+        <Skeleton className="h-28 rounded-2xl" />
       </div>
     </div>
   );
 }
-

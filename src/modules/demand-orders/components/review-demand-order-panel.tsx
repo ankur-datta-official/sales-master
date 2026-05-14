@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
+import type { DemandOrderStatus } from "@/constants/statuses";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,7 +20,6 @@ import {
   forwardDemandOrderAction,
   rejectDemandOrderAction,
 } from "@/modules/demand-orders/approval-actions";
-import type { DemandOrderStatus } from "@/constants/statuses";
 
 const selectClass = cn(
   "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none",
@@ -33,9 +33,15 @@ type Props = {
   demandOrderId: string;
   status: DemandOrderStatus;
   forwardTargets: ForwardTarget[];
+  variant?: "card" | "embedded";
 };
 
-export function ReviewDemandOrderPanel({ demandOrderId, status, forwardTargets }: Props) {
+export function ReviewDemandOrderPanel({
+  demandOrderId,
+  status,
+  forwardTargets,
+  variant = "card",
+}: Props) {
   const router = useRouter();
   const [approveNote, setApproveNote] = useState("");
   const [rejectNote, setRejectNote] = useState("");
@@ -47,6 +53,147 @@ export function ReviewDemandOrderPanel({ demandOrderId, status, forwardTargets }
   const canDecide = status === "submitted" || status === "under_review";
   const canForward = status === "submitted" && forwardTargets.length > 0;
 
+  const content = (
+    <div className="space-y-6">
+      {variant === "embedded" ? (
+        <div className="space-y-1">
+          <h3 className="text-base font-semibold tracking-tight">Review</h3>
+          <p className="text-sm text-muted-foreground">
+            Approve or reject submitted demand orders in your hierarchy scope. Forward sends the
+            order to under review for another reviewer.
+          </p>
+        </div>
+      ) : null}
+
+      {error ? (
+        <p className="text-sm text-destructive" role="alert">
+          {error}
+        </p>
+      ) : null}
+
+      {canDecide ? (
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="space-y-2 rounded-md border p-3">
+            <Label htmlFor="approve-note">Approve (optional note)</Label>
+            <Textarea
+              id="approve-note"
+              rows={2}
+              value={approveNote}
+              onChange={(e) => setApproveNote(e.target.value)}
+            />
+            <Button
+              type="button"
+              disabled={isPending}
+              onClick={() =>
+                startTransition(async () => {
+                  setError(null);
+                  const result = await approveDemandOrderAction({
+                    demandOrderId,
+                    note: approveNote.trim() || undefined,
+                  });
+                  if (!result.ok) {
+                    setError(result.error);
+                    return;
+                  }
+                  setApproveNote("");
+                  router.refresh();
+                })
+              }
+            >
+              {isPending ? "Working..." : "Approve"}
+            </Button>
+          </div>
+          <div className="space-y-2 rounded-md border p-3">
+            <Label htmlFor="reject-note">Reject (optional note)</Label>
+            <Textarea
+              id="reject-note"
+              rows={2}
+              value={rejectNote}
+              onChange={(e) => setRejectNote(e.target.value)}
+            />
+            <Button
+              type="button"
+              variant="destructive"
+              disabled={isPending}
+              onClick={() =>
+                startTransition(async () => {
+                  setError(null);
+                  const result = await rejectDemandOrderAction({
+                    demandOrderId,
+                    note: rejectNote.trim() || undefined,
+                  });
+                  if (!result.ok) {
+                    setError(result.error);
+                    return;
+                  }
+                  setRejectNote("");
+                  router.refresh();
+                })
+              }
+            >
+              {isPending ? "Working..." : "Reject"}
+            </Button>
+          </div>
+        </div>
+      ) : null}
+
+      {canForward ? (
+        <div className="space-y-2 rounded-md border p-3">
+          <Label htmlFor="forward-to">Forward to reviewer</Label>
+          <select
+            id="forward-to"
+            className={selectClass}
+            value={forwardTo}
+            onChange={(e) => setForwardTo(e.target.value)}
+          >
+            <option value="" disabled>
+              Select reviewer
+            </option>
+            {forwardTargets.map((target) => (
+              <option key={target.id} value={target.id}>
+                {target.full_name ?? target.email ?? target.id}
+              </option>
+            ))}
+          </select>
+          <Label htmlFor="forward-note">Note (optional)</Label>
+          <Textarea
+            id="forward-note"
+            rows={2}
+            value={forwardNote}
+            onChange={(e) => setForwardNote(e.target.value)}
+          />
+          <Button
+            type="button"
+            variant="outline"
+            disabled={isPending || !forwardTo}
+            onClick={() =>
+              startTransition(async () => {
+                setError(null);
+                const result = await forwardDemandOrderAction({
+                  demandOrderId,
+                  to_user_id: forwardTo,
+                  note: forwardNote.trim() || undefined,
+                });
+                if (!result.ok) {
+                  setError(result.error);
+                  return;
+                }
+                setForwardNote("");
+                router.refresh();
+              })
+            }
+          >
+            {isPending ? "Working..." : "Forward for review"}
+          </Button>
+        </div>
+      ) : null}
+    </div>
+  );
+
+  if (variant === "embedded") {
+    return content;
+  }
+
   return (
     <Card className="max-w-4xl border-teal-500/25">
       <CardHeader>
@@ -56,130 +203,7 @@ export function ReviewDemandOrderPanel({ demandOrderId, status, forwardTargets }
           to under review for another reviewer.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6">
-        {error && (
-          <p className="text-sm text-destructive" role="alert">
-            {error}
-          </p>
-        )}
-
-        {canDecide && (
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-2 rounded-md border p-3">
-              <Label htmlFor="approve-note">Approve (optional note)</Label>
-              <Textarea
-                id="approve-note"
-                rows={2}
-                value={approveNote}
-                onChange={(e) => setApproveNote(e.target.value)}
-              />
-              <Button
-                type="button"
-                disabled={isPending}
-                onClick={() =>
-                  startTransition(async () => {
-                    setError(null);
-                    const result = await approveDemandOrderAction({
-                      demandOrderId,
-                      note: approveNote.trim() || undefined,
-                    });
-                    if (!result.ok) {
-                      setError(result.error);
-                      return;
-                    }
-                    setApproveNote("");
-                    router.refresh();
-                  })
-                }
-              >
-                {isPending ? "Working…" : "Approve"}
-              </Button>
-            </div>
-            <div className="space-y-2 rounded-md border p-3">
-              <Label htmlFor="reject-note">Reject (optional note)</Label>
-              <Textarea
-                id="reject-note"
-                rows={2}
-                value={rejectNote}
-                onChange={(e) => setRejectNote(e.target.value)}
-              />
-              <Button
-                type="button"
-                variant="destructive"
-                disabled={isPending}
-                onClick={() =>
-                  startTransition(async () => {
-                    setError(null);
-                    const result = await rejectDemandOrderAction({
-                      demandOrderId,
-                      note: rejectNote.trim() || undefined,
-                    });
-                    if (!result.ok) {
-                      setError(result.error);
-                      return;
-                    }
-                    setRejectNote("");
-                    router.refresh();
-                  })
-                }
-              >
-                {isPending ? "Working…" : "Reject"}
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {canForward && (
-          <div className="space-y-2 rounded-md border p-3">
-            <Label htmlFor="forward-to">Forward to reviewer</Label>
-            <select
-              id="forward-to"
-              className={selectClass}
-              value={forwardTo}
-              onChange={(e) => setForwardTo(e.target.value)}
-            >
-              <option value="" disabled>
-                Select reviewer
-              </option>
-              {forwardTargets.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.full_name ?? p.email ?? p.id}
-                </option>
-              ))}
-            </select>
-            <Label htmlFor="forward-note">Note (optional)</Label>
-            <Textarea
-              id="forward-note"
-              rows={2}
-              value={forwardNote}
-              onChange={(e) => setForwardNote(e.target.value)}
-            />
-            <Button
-              type="button"
-              variant="outline"
-              disabled={isPending || !forwardTo}
-              onClick={() =>
-                startTransition(async () => {
-                  setError(null);
-                  const result = await forwardDemandOrderAction({
-                    demandOrderId,
-                    to_user_id: forwardTo,
-                    note: forwardNote.trim() || undefined,
-                  });
-                  if (!result.ok) {
-                    setError(result.error);
-                    return;
-                  }
-                  setForwardNote("");
-                  router.refresh();
-                })
-              }
-            >
-              {isPending ? "Working…" : "Forward for review"}
-            </Button>
-          </div>
-        )}
-      </CardContent>
+      <CardContent className="space-y-6">{content}</CardContent>
     </Card>
   );
 }

@@ -58,16 +58,16 @@ export function LoginForm() {
 
   return (
     <div className="space-y-4">
-      <Card className="w-full rounded-[1.75rem] border border-white/85 bg-white/88 py-0 shadow-[0_30px_80px_hsl(220_40%_12%_/_0.14)] backdrop-blur-sm">
+      <Card className="w-full rounded-[1.75rem] border border-white/85 bg-card/90 py-0 shadow-[var(--shadow-lg)] backdrop-blur-sm dark:border-white/10">
         <CardHeader className="gap-2 px-6 pb-0 pt-5 sm:px-7 sm:pt-6">
-          <div className="inline-flex w-fit items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.22em] text-slate-500">
+          <div className="inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
             Secure workspace access
           </div>
           <div className="space-y-2">
-            <CardTitle className="text-[1.7rem] font-semibold tracking-[-0.03em] text-slate-950">
+            <CardTitle className="text-[1.7rem] font-semibold tracking-[-0.03em] text-foreground">
               Welcome back
             </CardTitle>
-            <CardDescription className="max-w-sm text-sm leading-6 text-slate-600">
+            <CardDescription className="max-w-sm text-sm leading-6 text-muted-foreground">
               Sign in to access your sales workspace.
             </CardDescription>
           </div>
@@ -96,7 +96,7 @@ export function LoginForm() {
             <div className="space-y-2.5">
               <Label
                 htmlFor="email"
-                className="text-sm font-medium text-slate-700"
+                className="text-sm font-medium text-foreground/80"
               >
                 Email
               </Label>
@@ -104,7 +104,7 @@ export function LoginForm() {
                 id="email"
                 type="email"
                 autoComplete="email"
-                className="h-12 rounded-2xl border-slate-200 bg-slate-50/70 px-4 text-slate-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] focus-visible:bg-white focus-visible:border-sky-400 focus-visible:ring-sky-100"
+                className="h-12 rounded-2xl border-border/80 bg-background/65 px-4 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.38)] focus-visible:border-primary/45 focus-visible:bg-background/90 focus-visible:ring-primary/20 dark:shadow-none"
                 {...form.register("email")}
               />
               {form.formState.errors.email && (
@@ -117,7 +117,7 @@ export function LoginForm() {
             <div className="space-y-2.5">
               <Label
                 htmlFor="password"
-                className="text-sm font-medium text-slate-700"
+                className="text-sm font-medium text-foreground/80"
               >
                 Password
               </Label>
@@ -125,7 +125,7 @@ export function LoginForm() {
                 id="password"
                 type="password"
                 autoComplete="current-password"
-                className="h-12 rounded-2xl border-slate-200 bg-slate-50/70 px-4 text-slate-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] focus-visible:bg-white focus-visible:border-sky-400 focus-visible:ring-sky-100"
+                className="h-12 rounded-2xl border-border/80 bg-background/65 px-4 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.38)] focus-visible:border-primary/45 focus-visible:bg-background/90 focus-visible:ring-primary/20 dark:shadow-none"
                 {...form.register("password")}
               />
               {form.formState.errors.password && (
@@ -135,11 +135,11 @@ export function LoginForm() {
               )}
             </div>
 
-            <div className="rounded-[1.1rem] border border-slate-200/80 bg-slate-50/70 px-4 py-2.5">
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
+            <div className="rounded-[1.1rem] border border-border/80 bg-muted/45 px-4 py-2.5">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Protected access
               </p>
-              <p className="mt-1.5 text-xs leading-5 text-slate-600">
+              <p className="mt-1.5 text-xs leading-5 text-muted-foreground">
                 Your access follows your assigned role and organization permissions.
               </p>
             </div>
@@ -150,16 +150,16 @@ export function LoginForm() {
               type="submit"
               disabled={form.formState.isSubmitting}
               className={cn(
-                "h-12 w-full rounded-2xl bg-slate-950 px-5 text-sm font-medium text-white shadow-[0_22px_40px_hsl(222_47%_11%_/_0.18)]",
+                "h-12 w-full rounded-2xl bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-md)]",
                 "transition-[transform,box-shadow,background-color] duration-200 ease-out",
-                "hover:scale-[1.01] hover:bg-slate-900 hover:shadow-[0_26px_50px_hsl(222_47%_11%_/_0.22)] active:scale-[0.99]",
+                "hover:scale-[1.01] hover:bg-primary/92 hover:shadow-[var(--shadow-lg)] active:scale-[0.99]",
                 "motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100"
               )}
             >
               {form.formState.isSubmitting ? "Signing in..." : "Sign in"}
             </Button>
 
-            <p className="text-center text-[11px] leading-5 text-slate-500">
+            <p className="text-center text-[11px] leading-5 text-muted-foreground">
               Existing redirect rules still apply after sign-in.
             </p>
           </CardFooter>

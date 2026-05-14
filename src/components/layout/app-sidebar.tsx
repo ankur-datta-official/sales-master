@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ChevronRight } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -34,16 +35,7 @@ const NAV_GROUPS: readonly NavGroup[] = [
   { label: "Overview", titles: ["Dashboard", "Analytics"] },
   {
     label: "CRM",
-    titles: [
-      "CRM Companies",
-      "CRM Contacts",
-      "CRM Meetings",
-      "CRM Follow-ups",
-      "CRM Pipeline",
-      "CRM Documents",
-      "CRM Help",
-      "CRM Reports",
-    ],
+    titles: ["CRM"],
   },
   { label: "Work", titles: ["Work Plans", "Work Reports", "Visit Plans", "Visit Logs"] },
   { label: "Targets", titles: ["Sales Targets", "Collection Targets"] },
@@ -77,17 +69,17 @@ export function AppSidebar({ userRole, userEmail, userDisplayName }: AppSidebarP
 
   return (
     <Sidebar collapsible="icon" variant="inset">
-      <SidebarHeader className="border-b border-sidebar-border/70">
-        <div className="px-2 py-3">
-          <div className="flex items-center gap-2">
-            <div className="relative flex size-9 items-center justify-center rounded-xl bg-sidebar-primary text-sidebar-primary-foreground shadow-[var(--shadow-sm)] ring-1 ring-sidebar-border/70">
+      <SidebarHeader className="border-b border-sidebar-border/75 bg-[linear-gradient(180deg,color-mix(in_oklch,var(--sidebar-accent)_42%,transparent),transparent)]">
+        <div className="px-2 py-3.5">
+          <div className="flex items-center gap-3">
+            <div className="relative flex size-10 items-center justify-center rounded-2xl bg-sidebar-primary text-sidebar-primary-foreground shadow-[var(--shadow-md)] ring-1 ring-sidebar-border/80">
               <span className="text-xs font-semibold tracking-tight">SM</span>
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute -right-1 -top-1 size-2.5 rounded-full bg-background ring-1 ring-sidebar-border/70"
+                className="pointer-events-none absolute -right-1 -top-1 size-2.5 rounded-full bg-emerald-400 ring-2 ring-sidebar"
               />
             </div>
-            <div className="min-w-0">
+            <div className="min-w-0 group-data-[collapsible=icon]:hidden">
               <div className="truncate text-sm font-semibold tracking-tight">
                 Sales Master
               </div>
@@ -98,7 +90,7 @@ export function AppSidebar({ userRole, userEmail, userDisplayName }: AppSidebarP
           </div>
         </div>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="py-2">
         {grouped.map((group) => (
           <SidebarGroup key={group.label}>
             <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
@@ -152,22 +144,23 @@ export function AppSidebar({ userRole, userEmail, userDisplayName }: AppSidebarP
         ) : null}
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-sidebar-border/70">
+      <SidebarFooter className="border-t border-sidebar-border/75 bg-sidebar/80">
         <Link
           href={ROUTES.profile}
-          className="flex items-center gap-2 rounded-xl px-2 py-2 ring-1 ring-transparent transition-colors hover:bg-sidebar-accent/70 hover:ring-sidebar-border/70"
+          className="group flex items-center gap-3 rounded-2xl border border-sidebar-border/75 bg-sidebar-accent/35 px-2.5 py-2.5 shadow-[var(--shadow-xs)] transition-colors hover:bg-sidebar-accent/70"
         >
-          <Avatar className="size-8">
+          <Avatar className="size-9 rounded-2xl">
             <AvatarFallback>
               {initialsFromName(userDisplayName ?? userEmail)}
             </AvatarFallback>
           </Avatar>
-          <div className="min-w-0">
+          <div className="min-w-0 group-data-[collapsible=icon]:hidden">
             <p className="truncate text-sm font-medium leading-none">
               {userDisplayName ?? "Account"}
             </p>
             <p className="truncate text-xs text-muted-foreground">{userEmail ?? "—"}</p>
           </div>
+          <ChevronRight className="ml-auto size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 group-data-[collapsible=icon]:hidden" />
         </Link>
       </SidebarFooter>
       <SidebarRail />

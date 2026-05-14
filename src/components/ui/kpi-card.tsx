@@ -26,8 +26,8 @@ export function KpiCard({
   return (
     <Card
       className={cn(
-        "py-0 ring-foreground/10 shadow-[var(--shadow-sm)]",
-        "relative overflow-hidden bg-card/80",
+        "py-0 ring-border/80 shadow-[var(--shadow-sm)]",
+        "relative overflow-hidden bg-card/86 backdrop-blur-sm",
         className
       )}
       {...props}
@@ -44,14 +44,14 @@ export function KpiCard({
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-muted/40 blur-3xl"
+        className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[linear-gradient(180deg,color-mix(in_oklch,var(--primary)_7%,transparent),transparent)]"
       />
       <CardContent className="px-4 py-3">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               {icon ? (
-                <span className="flex size-7 items-center justify-center rounded-lg bg-muted/60 text-muted-foreground ring-1 ring-foreground/10 [&>svg]:size-4">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/15 [&>svg]:size-4">
                   {icon}
                 </span>
               ) : null}
@@ -76,4 +76,3 @@ export function KpiCard({
     </Card>
   );
 }
-

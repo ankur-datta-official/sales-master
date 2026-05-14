@@ -16,14 +16,14 @@ export function FormShell({
   return (
     <Card
       className={cn(
-        "relative overflow-hidden bg-card/75 shadow-[var(--shadow-md)]",
+        "relative overflow-hidden bg-card/86 shadow-[var(--shadow-md)]",
         className
       )}
       {...props}
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-transparent"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,color-mix(in_oklch,var(--primary)_8%,transparent),transparent_50%)]"
       />
       {(title || description) && (
         <CardHeader className="relative pb-4">
@@ -76,7 +76,7 @@ export function FormSection({
     <section
       data-slot="form-section"
       className={cn(
-        "space-y-4 rounded-2xl border bg-background/40 p-4 shadow-[var(--shadow-sm)]",
+        "space-y-4 rounded-2xl border border-border/80 bg-background/50 p-4 shadow-[var(--shadow-sm)]",
         className
       )}
       {...props}
@@ -152,7 +152,7 @@ export function FormActions({
         "flex flex-wrap items-center justify-between gap-2",
         "border-t bg-background/60 py-3",
         sticky &&
-          "sticky bottom-0 z-10 shadow-[0_-10px_30px_hsl(0_0%_0%/0.08)] backdrop-blur supports-[backdrop-filter]:bg-background/55",
+          "sticky bottom-0 z-10 shadow-[0_-10px_30px_oklch(0_0_0/0.08)] backdrop-blur supports-[backdrop-filter]:bg-background/55",
         className
       )}
       {...props}
@@ -161,4 +161,3 @@ export function FormActions({
     </CardFooter>
   );
 }
-

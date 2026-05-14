@@ -22,13 +22,13 @@ export function PageHeader({
   return (
     <header className={cn("space-y-4", className)} data-slot="page-header">
       {leading ? <div className="flex items-center gap-2">{leading}</div> : null}
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div className="min-w-0">
           <div className="flex items-baseline gap-2">
             <h1 className="min-w-0 truncate text-display">{title}</h1>
           </div>
           {description ? (
-            <p className="max-w-[80ch] text-sm leading-relaxed text-muted-foreground">{description}</p>
+            <p className="mt-1 max-w-[80ch] text-sm leading-relaxed text-muted-foreground">{description}</p>
           ) : null}
         </div>
         {actions ? (
@@ -40,4 +40,3 @@ export function PageHeader({
     </header>
   );
 }
-

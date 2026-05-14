@@ -29,10 +29,10 @@ export function AuthShell({
 
   if (!isLoginPage) {
     return (
-      <div className="relative min-h-svh overflow-hidden bg-[linear-gradient(180deg,hsl(var(--background))_0%,hsl(var(--background))_70%,hsl(var(--muted)/0.4)_100%)]">
+      <div className="relative min-h-svh overflow-hidden bg-[linear-gradient(180deg,var(--background)_0%,var(--background)_70%,color-mix(in_oklch,var(--muted)_40%,transparent)_100%)]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(800px_420px_at_15%_-10%,hsl(var(--primary)/0.08),transparent_60%)]"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,color-mix(in_oklch,var(--primary)_8%,transparent),transparent_60%)]"
         />
         <div className="relative mx-auto flex min-h-svh w-full max-w-xl items-center justify-center px-4 py-10 sm:px-6">
           <div className="w-full animate-in fade-in slide-in-from-bottom-3 duration-500 motion-reduce:animate-none">
@@ -44,14 +44,14 @@ export function AuthShell({
   }
 
   return (
-    <div className="relative min-h-svh overflow-x-hidden bg-[linear-gradient(180deg,hsl(var(--background))_0%,hsl(var(--background))_72%,hsl(var(--muted)/0.32)_100%)] lg:h-svh lg:min-h-0">
+    <div className="relative min-h-svh overflow-x-hidden bg-[linear-gradient(180deg,var(--background)_0%,var(--background)_72%,color-mix(in_oklch,var(--muted)_32%,transparent)_100%)] lg:h-svh lg:min-h-0">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(1100px_600px_at_20%_-10%,hsl(var(--primary)/0.08),transparent_65%)]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,color-mix(in_oklch,var(--primary)_8%,transparent),transparent_65%)]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[linear-gradient(180deg,hsl(var(--background)/0.75),transparent)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[linear-gradient(180deg,color-mix(in_oklch,var(--background)_75%,transparent),transparent)]"
       />
 
       <div className="grid min-h-svh grid-cols-1 lg:h-svh lg:min-h-0 lg:grid-cols-[1.05fr_0.95fr]">
@@ -118,7 +118,7 @@ export function AuthShell({
                     </div>
 
                     <div className="mt-4 grid gap-3 lg:grid-cols-[1.22fr_0.78fr] xl:grid-cols-[1.3fr_0.7fr]">
-                      <div className="rounded-[1.25rem] border border-slate-200/80 bg-[linear-gradient(180deg,hsl(var(--background))_0%,hsl(var(--muted)/0.45)_100%)] p-3.5">
+                      <div className="rounded-[1.25rem] border border-slate-200/80 bg-[linear-gradient(180deg,var(--background)_0%,color-mix(in_oklch,var(--muted)_45%,transparent)_100%)] p-3.5 dark:border-slate-800/80">
                         <div className="flex items-end justify-between gap-4">
                           <div>
                             <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
@@ -287,7 +287,7 @@ export function AuthShell({
         <div className="relative flex items-center justify-center px-4 py-8 sm:px-6 sm:py-10 lg:h-svh lg:px-8 lg:py-6 xl:px-12 xl:py-8">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(720px_440px_at_30%_12%,hsl(var(--primary)/0.08),transparent_62%)]"
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,color-mix(in_oklch,var(--primary)_8%,transparent),transparent_62%)]"
           />
           <div
             aria-hidden="true"

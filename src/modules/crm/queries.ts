@@ -13,6 +13,7 @@ import type {
   CrmListFilters,
   CrmPipelineStage,
   CrmProfileOption,
+  CrmWorkspaceSummary,
 } from "@/modules/crm/types";
 
 type CountResult<T> = {
@@ -256,23 +257,70 @@ export async function getCrmHelpRequests(filters: CrmListFilters = {}): Promise<
   return { rows: (data ?? []) as unknown as CrmHelpRequest[], total: normalizeCount(count) };
 }
 
-export async function getCrmReportSummary() {
-  const [companies, contacts, interactions, followups, helpRequests, stages] = await Promise.all([
-    getCrmCompanies(),
-    getCrmContacts(),
-    getCrmInteractions(),
-    getCrmFollowups(),
-    getCrmHelpRequests(),
-    getCrmPipelineStages(),
-  ]);
+export const getCrmWorkspaceSummary = cache(async (): Promise<CrmWorkspaceSummary> => {
+  const [companies, contacts, interactions, followups, documents, helpRequests, stages] =
+    await Promise.all([
+      getCrmCompanies(),
+      getCrmContacts(),
+      getCrmInteractions(),
+      getCrmFollowups(),
+      getCrmDocuments(),
+      getCrmHelpRequests(),
+      getCrmPipelineStages(),
+    ]);
+
+  const stageSummary = stages.map((stage) => {
+    const stageCompanies = companies.rows.filter(
+      (company) => company.pipeline_stage_id === stage.id
+    );
+    return {
+      id: stage.id,
+      name: stage.name,
+      color: stage.color,
+      probability: stage.probability,
+      companyCount: stageCompanies.length,
+      totalValue: stageCompanies.reduce(
+        (total, company) => total + Number(company.estimated_value ?? 0),
+        0
+      ),
+    };
+  });
 
   return {
-    companies: companies.total,
-    contacts: contacts.total,
-    meetings: interactions.total,
+    totals: {
+      companies: companies.total,
+      contacts: contacts.total,
+      meetings: interactions.total,
+      followups: followups.total,
+      documents: documents.total,
+      helpRequests: helpRequests.total,
+    },
     pendingFollowups: followups.rows.filter((item) => item.status === "pending").length,
-    openHelpRequests: helpRequests.rows.filter((item) => item.status === "open").length,
-    pipelineStages: stages,
-    pipelineValue: companies.rows.reduce((total, company) => total + Number(company.estimated_value ?? 0), 0),
+    urgentFollowups: followups.rows.filter(
+      (item) => item.status === "pending" && ["high", "urgent"].includes(item.priority)
+    ),
+    openHelpRequests: helpRequests.rows.filter((item) =>
+      ["open", "in_progress"].includes(item.status)
+    ),
+    recentMeetings: interactions.rows.slice(0, 5),
+    pipelineValue: companies.rows.reduce(
+      (total, company) => total + Number(company.estimated_value ?? 0),
+      0
+    ),
+    stageSummary,
+  };
+});
+
+export async function getCrmReportSummary() {
+  const summary = await getCrmWorkspaceSummary();
+
+  return {
+    companies: summary.totals.companies,
+    contacts: summary.totals.contacts,
+    meetings: summary.totals.meetings,
+    pendingFollowups: summary.pendingFollowups,
+    openHelpRequests: summary.openHelpRequests.filter((item) => item.status === "open").length,
+    pipelineStages: summary.stageSummary,
+    pipelineValue: summary.pipelineValue,
   };
 }

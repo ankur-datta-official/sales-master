@@ -45,17 +45,17 @@ export function ListPageHeader({
     <div
       data-slot="list-page-hero"
       className={cn(
-        "relative overflow-hidden rounded-2xl border bg-card/75 shadow-[var(--shadow-md)]",
+        "relative overflow-hidden rounded-[26px] border border-border/80 bg-card/82 shadow-[var(--shadow-md)] backdrop-blur-sm",
         className
       )}
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-transparent"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,color-mix(in_oklch,var(--primary)_10%,transparent),transparent_48%)]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-24 -top-24 size-72 rounded-full bg-primary/10 blur-3xl"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent"
       />
       <div className="relative p-4 md:p-5">
         <PageHeader title={title} description={description} actions={actions} />
@@ -82,7 +82,7 @@ export function ListSummaryRow({
     <div
       data-slot="list-summary-row"
       className={cn(
-        "flex flex-col gap-2 rounded-2xl border bg-card/60 px-4 py-3 shadow-[var(--shadow-sm)]",
+        "flex flex-col gap-2 rounded-2xl border border-border/80 bg-card/72 px-4 py-3 shadow-[var(--shadow-sm)] backdrop-blur-sm",
         "sm:flex-row sm:items-center sm:justify-between",
         className
       )}
@@ -92,4 +92,3 @@ export function ListSummaryRow({
     </div>
   );
 }
-

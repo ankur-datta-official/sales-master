@@ -10,7 +10,7 @@ export function DataTable({
   ...props
 }: React.ComponentProps<typeof TableShell>) {
   return (
-    <TableShell className={cn("bg-card/80", className)} {...props}>
+    <TableShell className={cn("bg-card/86", className)} {...props}>
       {children}
     </TableShell>
   );
@@ -37,9 +37,9 @@ export function DataTableHead({
   return (
     <thead
       className={cn(
-        "border-b border-border/70 bg-muted/25 text-xs text-muted-foreground",
+        "border-b border-border/70 bg-muted/35 text-xs uppercase tracking-[0.12em] text-muted-foreground",
         sticky &&
-          "sticky top-0 z-10 shadow-[0_1px_0_hsl(var(--border))] backdrop-blur supports-[backdrop-filter]:bg-muted/20",
+          "sticky top-0 z-10 shadow-[0_1px_0_var(--border)] backdrop-blur supports-[backdrop-filter]:bg-muted/28",
         className
       )}
       {...props}
@@ -79,8 +79,8 @@ export function DataTableRow({
   return (
     <tr
       className={cn(
-        "transition-[background-color] hover:bg-muted/20",
-        "focus-within:bg-muted/25",
+        "transition-[background-color] hover:bg-muted/24",
+        "focus-within:bg-muted/28",
         className
       )}
       {...props}
@@ -130,4 +130,3 @@ export function DataTableEmptyRow({
     </tr>
   );
 }
-

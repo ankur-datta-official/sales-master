@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 import type { CrmFormOptions } from "@/modules/crm/types";
 
 export const nativeSelectClass = cn(
-  "flex h-9 w-full rounded-xl border border-input bg-background/50 px-3 py-1 text-sm shadow-[var(--shadow-xs)] outline-none",
-  "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
+  "flex h-10 w-full rounded-xl border border-input bg-background/60 px-3 py-1 text-sm shadow-[var(--shadow-xs)] outline-none",
+  "focus-visible:border-ring focus-visible:bg-background/85 focus-visible:ring-3 focus-visible:ring-ring/35",
   "disabled:cursor-not-allowed disabled:opacity-50 dark:bg-input/30"
 );
 

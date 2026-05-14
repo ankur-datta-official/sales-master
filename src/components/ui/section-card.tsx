@@ -28,7 +28,7 @@ export function SectionCard({
   return (
     <Card
       className={cn(
-        "ring-foreground/10 bg-card/85",
+        "ring-border/80 bg-card/86 backdrop-blur-sm",
         "shadow-[var(--shadow-md)]",
         className
       )}
@@ -49,4 +49,3 @@ export function SectionCard({
     </Card>
   );
 }
-

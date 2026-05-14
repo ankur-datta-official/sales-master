@@ -20,13 +20,16 @@ export function AppShell({
   userRole,
 }: AppShellProps) {
   return (
-    <SidebarProvider className="bg-gradient-to-br from-sidebar/25 via-background to-muted/15">
+    <SidebarProvider
+      data-app-shell-root
+      className="h-dvh min-h-dvh overflow-hidden bg-[linear-gradient(135deg,color-mix(in_oklch,var(--sidebar)_82%,transparent),var(--background)_48%,color-mix(in_oklch,var(--muted)_55%,transparent))]"
+    >
       <AppSidebar
         userRole={userRole}
         userEmail={userEmail}
         userDisplayName={userDisplayName}
       />
-      <SidebarInset className="flex min-h-svh flex-col overflow-x-hidden bg-gradient-to-b from-background via-background to-muted/12">
+      <SidebarInset className="flex h-dvh min-h-0 flex-col overflow-hidden bg-[linear-gradient(180deg,var(--background)_0%,var(--background)_70%,color-mix(in_oklch,var(--muted)_42%,transparent)_100%)]">
         <AppTopbar userEmail={userEmail} userDisplayName={userDisplayName} />
         <ContentContainer>{children}</ContentContainer>
       </SidebarInset>

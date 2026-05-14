@@ -1,4 +1,5 @@
 import { AppShell } from "@/components/layout/app-shell";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { resolveAppRole } from "@/lib/auth/app-role";
 import { requireUserProfile } from "@/lib/auth/get-current-profile";
 import { getUserDisplayName } from "@/lib/profiles/display-name";
@@ -13,12 +14,14 @@ export default async function AppGroupLayout({
   const userDisplayName = getUserDisplayName(profile, user);
 
   return (
-    <AppShell
-      userEmail={user.email}
-      userDisplayName={userDisplayName}
-      userRole={userRole}
-    >
-      {children}
-    </AppShell>
+    <ThemeProvider>
+      <AppShell
+        userEmail={user.email}
+        userDisplayName={userDisplayName}
+        userRole={userRole}
+      >
+        {children}
+      </AppShell>
+    </ThemeProvider>
   );
 }

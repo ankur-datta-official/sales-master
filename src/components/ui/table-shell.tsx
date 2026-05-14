@@ -18,7 +18,7 @@ export function TableShell({
       data-slot="table-shell"
       aria-label={label}
       className={cn(
-        "overflow-hidden rounded-2xl border bg-card/80 shadow-[var(--shadow-sm)]",
+        "overflow-hidden rounded-2xl border border-border/80 bg-card/86 shadow-[var(--shadow-md)] backdrop-blur-sm",
         className
       )}
       {...props}
@@ -27,4 +27,3 @@ export function TableShell({
     </div>
   );
 }
-

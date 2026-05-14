@@ -17,7 +17,7 @@ export function FilterBar({
     <div
       data-slot="filter-bar"
       className={cn(
-        "relative overflow-hidden rounded-2xl border bg-card/75 backdrop-blur-sm",
+        "relative overflow-hidden rounded-2xl border border-border/80 bg-card/82 backdrop-blur-sm",
         "shadow-[var(--shadow-md)]",
         className
       )}
@@ -38,4 +38,3 @@ export function FilterBar({
     </div>
   );
 }
-

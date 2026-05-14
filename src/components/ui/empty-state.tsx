@@ -21,14 +21,14 @@ export function EmptyState({
     <div
       data-slot="empty-state"
       className={cn(
-        "flex flex-col items-center justify-center rounded-2xl border bg-card/60 px-6 py-10 text-center",
-        "shadow-[var(--shadow-sm)]",
+        "flex flex-col items-center justify-center rounded-2xl border border-border/80 bg-card/72 px-6 py-10 text-center backdrop-blur-sm",
+        "shadow-[var(--shadow-md)]",
         className
       )}
       {...props}
     >
       {icon ? (
-        <div className="mb-3 flex size-11 items-center justify-center rounded-2xl bg-muted/70 text-muted-foreground ring-1 ring-foreground/10 shadow-[var(--shadow-xs)]">
+        <div className="mb-3 flex size-11 items-center justify-center rounded-2xl bg-primary/10 text-primary ring-1 ring-primary/15 shadow-[var(--shadow-xs)]">
           {icon}
         </div>
       ) : null}
@@ -42,4 +42,3 @@ export function EmptyState({
     </div>
   );
 }
-

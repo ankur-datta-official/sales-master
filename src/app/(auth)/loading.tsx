@@ -7,7 +7,7 @@ export default function AuthLoading() {
         <Skeleton className="h-7 w-36 rounded-xl" />
         <Skeleton className="h-4 w-72 rounded-lg" />
       </div>
-      <div className="rounded-2xl border bg-card/75 p-5 shadow-[var(--shadow-md)]">
+      <div className="rounded-2xl border bg-card/82 p-5 shadow-[var(--shadow-md)]">
         <Skeleton className="h-4 w-24 rounded-lg" />
         <Skeleton className="mt-2 h-10 w-full rounded-xl" />
         <Skeleton className="mt-4 h-4 w-24 rounded-lg" />

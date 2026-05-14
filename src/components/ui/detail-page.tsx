@@ -38,16 +38,16 @@ export function DetailHeader({
     <div
       data-slot="detail-hero"
       className={cn(
-        "relative overflow-hidden rounded-2xl border bg-card/75 shadow-[var(--shadow-md)]"
+        "relative overflow-hidden rounded-[26px] border border-border/80 bg-card/82 shadow-[var(--shadow-md)] backdrop-blur-sm"
       )}
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,color-mix(in_oklch,var(--primary)_12%,transparent),transparent_48%)]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-24 -top-24 size-72 rounded-full bg-primary/10 blur-3xl"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent"
       />
       <div className="relative p-4 md:p-6">
         <PageHeader
@@ -90,7 +90,7 @@ export function MetadataCard({
   children: React.ReactNode;
 }) {
   return (
-    <Card className={cn("bg-card/75 shadow-[var(--shadow-md)]", className)}>
+    <Card className={cn("bg-card/82 shadow-[var(--shadow-md)]", className)}>
       <CardHeader className="pb-3">
         <CardTitle className="text-base tracking-tight">{title}</CardTitle>
         {description ? <CardDescription>{description}</CardDescription> : null}
@@ -166,7 +166,7 @@ export function ActionCard({
   children: React.ReactNode;
 }) {
   return (
-    <Card className={cn("bg-card/75 shadow-[var(--shadow-md)]", className)}>
+    <Card className={cn("bg-card/82 shadow-[var(--shadow-md)]", className)}>
       <CardHeader className="pb-3">
         <CardTitle className="text-base tracking-tight">{title}</CardTitle>
         {description ? <CardDescription>{description}</CardDescription> : null}
@@ -203,7 +203,7 @@ export function Section({
         {action ? <div className="shrink-0">{action}</div> : null}
       </div>
       {variant === "surface" ? (
-        <div className="rounded-2xl border bg-background/40 p-3 shadow-[var(--shadow-sm)]">
+        <div className="rounded-2xl border border-border/80 bg-background/50 p-3 shadow-[var(--shadow-sm)]">
           {children}
         </div>
       ) : (
@@ -226,4 +226,3 @@ export function StatusPill({
     </StatusBadge>
   );
 }
-

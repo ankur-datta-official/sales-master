@@ -46,7 +46,7 @@ export function AuthVisualPanel({
   return (
     <div
       ref={panelRef}
-      className="auth-parallax relative hidden overflow-hidden border-r border-white/65 bg-[linear-gradient(160deg,#f7fbff_0%,#edf4fb_46%,#f8fafc_100%)] lg:block lg:h-svh"
+      className="auth-parallax relative hidden overflow-hidden border-r border-white/65 bg-[linear-gradient(160deg,var(--background)_0%,color-mix(in_oklch,var(--muted)_55%,var(--background))_46%,var(--background)_100%)] dark:border-white/10 lg:block lg:h-svh"
       onPointerMove={(event) => {
         const bounds = event.currentTarget.getBoundingClientRect();
         const offsetX = (event.clientX - bounds.left) / bounds.width - 0.5;
@@ -60,25 +60,11 @@ export function AuthVisualPanel({
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(720px_420px_at_18%_12%,rgba(59,130,246,0.12),transparent_62%),radial-gradient(640px_360px_at_82%_8%,rgba(15,23,42,0.07),transparent_55%),linear-gradient(180deg,rgba(255,255,255,0.68),rgba(248,250,252,0.18))]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,color-mix(in_oklch,var(--primary)_12%,transparent),transparent_52%),linear-gradient(180deg,color-mix(in_oklch,var(--card)_68%,transparent),transparent)]"
       />
       <div
         aria-hidden="true"
-        className="auth-parallax-layer auth-parallax-glow pointer-events-none absolute inset-x-[-10%] top-[-8%] h-[26rem] rounded-full bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.18),rgba(59,130,246,0.08)_38%,transparent_68%)] blur-3xl motion-safe:animate-[auth-login-glow_18s_ease-in-out_infinite]"
-      />
-      <div
-        aria-hidden="true"
-        className="auth-parallax-layer auth-parallax-soft pointer-events-none absolute left-[8%] top-[14%] h-56 w-56 rounded-full bg-sky-200/40 blur-3xl motion-safe:animate-[auth-login-float_18s_ease-in-out_infinite]"
-      />
-      <div
-        aria-hidden="true"
-        className="auth-parallax-layer auth-parallax-drift pointer-events-none absolute right-[8%] top-[12%] h-64 w-64 rounded-full bg-slate-200/55 blur-3xl motion-safe:animate-[auth-login-float_22s_ease-in-out_infinite]"
-        style={{ animationDelay: "2s" }}
-      />
-      <div
-        aria-hidden="true"
-        className="auth-parallax-layer auth-parallax-soft pointer-events-none absolute bottom-[18%] right-[16%] h-40 w-40 rounded-full bg-white/45 blur-2xl motion-safe:animate-[auth-login-float_20s_ease-in-out_infinite]"
-        style={{ animationDelay: "4s" }}
+        className="auth-parallax-layer auth-parallax-soft pointer-events-none absolute inset-x-12 top-20 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent motion-safe:animate-[auth-opacity-breathe_10s_ease-in-out_infinite]"
       />
       <div
         aria-hidden="true"

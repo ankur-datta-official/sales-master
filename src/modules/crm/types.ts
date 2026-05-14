@@ -243,3 +243,29 @@ export type CrmFormOptions = {
   teamMembers: CrmProfileOption[];
   pipelineStages: CrmPipelineStage[];
 };
+
+export type CrmWorkspaceStageSummary = {
+  id: string;
+  name: string;
+  color: string;
+  probability: number;
+  companyCount: number;
+  totalValue: number;
+};
+
+export type CrmWorkspaceSummary = {
+  totals: {
+    companies: number;
+    contacts: number;
+    meetings: number;
+    followups: number;
+    documents: number;
+    helpRequests: number;
+  };
+  pendingFollowups: number;
+  urgentFollowups: CrmFollowup[];
+  openHelpRequests: CrmHelpRequest[];
+  recentMeetings: CrmInteraction[];
+  pipelineValue: number;
+  stageSummary: CrmWorkspaceStageSummary[];
+};
