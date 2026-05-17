@@ -4,7 +4,15 @@
 export const ROUTES = {
   login: "/login",
   dashboard: "/dashboard",
+  dashboardExport: "/dashboard/export",
+  dashboardExportDownload: "/api/dashboard-export",
   profile: "/profile",
+  messages: "/messages",
+  notifications: "/notifications",
+  settings: "/settings",
+  documents: "/documents",
+  monthlyBudget: "/monthly-budget",
+  exportData: "/export-data",
   users: "/users",
   usersNew: "/users/new",
   parties: "/parties",
@@ -36,21 +44,6 @@ export const ROUTES = {
   attendanceHistory: "/attendance/history",
   fieldActivity: "/field-activity",
   analytics: "/analytics",
-  crm: "/crm",
-  crmCompanies: "/crm/companies",
-  crmCompaniesNew: "/crm/companies/new",
-  crmContacts: "/crm/contacts",
-  crmContactsNew: "/crm/contacts/new",
-  crmMeetings: "/crm/meetings",
-  crmMeetingsNew: "/crm/meetings/new",
-  crmFollowups: "/crm/followups",
-  crmFollowupsNew: "/crm/followups/new",
-  crmPipeline: "/crm/pipeline",
-  crmDocuments: "/crm/documents",
-  crmDocumentsNew: "/crm/documents/new",
-  crmHelp: "/crm/help",
-  crmHelpNew: "/crm/help/new",
-  crmReports: "/crm/reports",
   authCallback: "/auth/callback",
 } as const;
 
@@ -58,6 +51,12 @@ export const ROUTES = {
 export const PROTECTED_PATH_PREFIXES = [
   ROUTES.dashboard,
   ROUTES.profile,
+  ROUTES.messages,
+  ROUTES.notifications,
+  ROUTES.settings,
+  ROUTES.documents,
+  ROUTES.monthlyBudget,
+  ROUTES.exportData,
   ROUTES.users,
   ROUTES.parties,
   ROUTES.products,
@@ -76,7 +75,6 @@ export const PROTECTED_PATH_PREFIXES = [
   ROUTES.attendance,
   ROUTES.fieldActivity,
   ROUTES.analytics,
-  ROUTES.crm,
 ] as const;
 
 export function isProtectedPath(pathname: string): boolean {

@@ -243,9 +243,9 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar-inner"
         className={cn(
-          "flex size-full flex-col overflow-hidden bg-[linear-gradient(180deg,var(--sidebar)_0%,color-mix(in_oklch,var(--sidebar-accent)_18%,var(--sidebar))_100%)]",
-          "ring-1 ring-sidebar-border/70",
-          "shadow-[var(--shadow-md)]",
+          "flex size-full flex-col overflow-hidden bg-[linear-gradient(180deg,color-mix(in_oklch,var(--sidebar)_92%,white)_0%,var(--sidebar)_44%,color-mix(in_oklch,var(--sidebar-accent)_20%,var(--sidebar))_100%)]",
+          "ring-1 ring-sidebar-border/75",
+          "shadow-[0_18px_48px_color-mix(in_oklch,var(--sidebar-border)_26%,transparent)]",
           "group-data-[variant=floating]:rounded-2xl group-data-[variant=inset]:rounded-[24px] group-data-[variant=floating]:shadow-[var(--shadow-sm)]"
         )}
         >

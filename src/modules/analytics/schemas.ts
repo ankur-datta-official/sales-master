@@ -6,6 +6,9 @@ export const analyticsFiltersSchema = z.object({
   scope: z.enum(["own", "team"]).optional().default("team"),
   user: z.string().optional().default(""),
   party: z.string().optional().default(""),
+  division: z.string().optional().default(""),
+  zone: z.string().optional().default(""),
+  view: z.string().optional().default(""),
 });
 
 export type AnalyticsFilters = z.infer<typeof analyticsFiltersSchema>;

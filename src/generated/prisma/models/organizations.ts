@@ -195,14 +195,6 @@ export type organizationsWhereInput = {
   branches?: Prisma.BranchesListRelationFilter
   collection_entries?: Prisma.Collection_entriesListRelationFilter
   collection_targets?: Prisma.Collection_targetsListRelationFilter
-  crm_companies?: Prisma.Crm_companiesListRelationFilter
-  crm_contacts?: Prisma.Crm_contactsListRelationFilter
-  crm_documents?: Prisma.Crm_documentsListRelationFilter
-  crm_followups?: Prisma.Crm_followupsListRelationFilter
-  crm_help_request_comments?: Prisma.Crm_help_request_commentsListRelationFilter
-  crm_help_requests?: Prisma.Crm_help_requestsListRelationFilter
-  crm_interactions?: Prisma.Crm_interactionsListRelationFilter
-  crm_pipeline_stages?: Prisma.Crm_pipeline_stagesListRelationFilter
   demand_order_dispatches?: Prisma.Demand_order_dispatchesListRelationFilter
   demand_orders?: Prisma.Demand_ordersListRelationFilter
   location_pings?: Prisma.Location_pingsListRelationFilter
@@ -230,14 +222,6 @@ export type organizationsOrderByWithRelationInput = {
   branches?: Prisma.branchesOrderByRelationAggregateInput
   collection_entries?: Prisma.collection_entriesOrderByRelationAggregateInput
   collection_targets?: Prisma.collection_targetsOrderByRelationAggregateInput
-  crm_companies?: Prisma.crm_companiesOrderByRelationAggregateInput
-  crm_contacts?: Prisma.crm_contactsOrderByRelationAggregateInput
-  crm_documents?: Prisma.crm_documentsOrderByRelationAggregateInput
-  crm_followups?: Prisma.crm_followupsOrderByRelationAggregateInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsOrderByRelationAggregateInput
-  crm_help_requests?: Prisma.crm_help_requestsOrderByRelationAggregateInput
-  crm_interactions?: Prisma.crm_interactionsOrderByRelationAggregateInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesOrderByRelationAggregateInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesOrderByRelationAggregateInput
   demand_orders?: Prisma.demand_ordersOrderByRelationAggregateInput
   location_pings?: Prisma.location_pingsOrderByRelationAggregateInput
@@ -268,14 +252,6 @@ export type organizationsWhereUniqueInput = Prisma.AtLeast<{
   branches?: Prisma.BranchesListRelationFilter
   collection_entries?: Prisma.Collection_entriesListRelationFilter
   collection_targets?: Prisma.Collection_targetsListRelationFilter
-  crm_companies?: Prisma.Crm_companiesListRelationFilter
-  crm_contacts?: Prisma.Crm_contactsListRelationFilter
-  crm_documents?: Prisma.Crm_documentsListRelationFilter
-  crm_followups?: Prisma.Crm_followupsListRelationFilter
-  crm_help_request_comments?: Prisma.Crm_help_request_commentsListRelationFilter
-  crm_help_requests?: Prisma.Crm_help_requestsListRelationFilter
-  crm_interactions?: Prisma.Crm_interactionsListRelationFilter
-  crm_pipeline_stages?: Prisma.Crm_pipeline_stagesListRelationFilter
   demand_order_dispatches?: Prisma.Demand_order_dispatchesListRelationFilter
   demand_orders?: Prisma.Demand_ordersListRelationFilter
   location_pings?: Prisma.Location_pingsListRelationFilter
@@ -327,14 +303,6 @@ export type organizationsCreateInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -362,14 +330,6 @@ export type organizationsUncheckedCreateInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -397,14 +357,6 @@ export type organizationsUpdateInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -432,14 +384,6 @@ export type organizationsUncheckedUpdateInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -775,118 +719,6 @@ export type organizationsUpdateOneRequiredWithoutWork_reportsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.organizationsUpdateToOneWithWhereWithoutWork_reportsInput, Prisma.organizationsUpdateWithoutWork_reportsInput>, Prisma.organizationsUncheckedUpdateWithoutWork_reportsInput>
 }
 
-export type organizationsCreateNestedOneWithoutCrm_companiesInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_companiesInput, Prisma.organizationsUncheckedCreateWithoutCrm_companiesInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_companiesInput
-  connect?: Prisma.organizationsWhereUniqueInput
-}
-
-export type organizationsUpdateOneRequiredWithoutCrm_companiesNestedInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_companiesInput, Prisma.organizationsUncheckedCreateWithoutCrm_companiesInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_companiesInput
-  upsert?: Prisma.organizationsUpsertWithoutCrm_companiesInput
-  connect?: Prisma.organizationsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.organizationsUpdateToOneWithWhereWithoutCrm_companiesInput, Prisma.organizationsUpdateWithoutCrm_companiesInput>, Prisma.organizationsUncheckedUpdateWithoutCrm_companiesInput>
-}
-
-export type organizationsCreateNestedOneWithoutCrm_contactsInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_contactsInput, Prisma.organizationsUncheckedCreateWithoutCrm_contactsInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_contactsInput
-  connect?: Prisma.organizationsWhereUniqueInput
-}
-
-export type organizationsUpdateOneRequiredWithoutCrm_contactsNestedInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_contactsInput, Prisma.organizationsUncheckedCreateWithoutCrm_contactsInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_contactsInput
-  upsert?: Prisma.organizationsUpsertWithoutCrm_contactsInput
-  connect?: Prisma.organizationsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.organizationsUpdateToOneWithWhereWithoutCrm_contactsInput, Prisma.organizationsUpdateWithoutCrm_contactsInput>, Prisma.organizationsUncheckedUpdateWithoutCrm_contactsInput>
-}
-
-export type organizationsCreateNestedOneWithoutCrm_documentsInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_documentsInput, Prisma.organizationsUncheckedCreateWithoutCrm_documentsInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_documentsInput
-  connect?: Prisma.organizationsWhereUniqueInput
-}
-
-export type organizationsUpdateOneRequiredWithoutCrm_documentsNestedInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_documentsInput, Prisma.organizationsUncheckedCreateWithoutCrm_documentsInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_documentsInput
-  upsert?: Prisma.organizationsUpsertWithoutCrm_documentsInput
-  connect?: Prisma.organizationsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.organizationsUpdateToOneWithWhereWithoutCrm_documentsInput, Prisma.organizationsUpdateWithoutCrm_documentsInput>, Prisma.organizationsUncheckedUpdateWithoutCrm_documentsInput>
-}
-
-export type organizationsCreateNestedOneWithoutCrm_followupsInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_followupsInput, Prisma.organizationsUncheckedCreateWithoutCrm_followupsInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_followupsInput
-  connect?: Prisma.organizationsWhereUniqueInput
-}
-
-export type organizationsUpdateOneRequiredWithoutCrm_followupsNestedInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_followupsInput, Prisma.organizationsUncheckedCreateWithoutCrm_followupsInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_followupsInput
-  upsert?: Prisma.organizationsUpsertWithoutCrm_followupsInput
-  connect?: Prisma.organizationsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.organizationsUpdateToOneWithWhereWithoutCrm_followupsInput, Prisma.organizationsUpdateWithoutCrm_followupsInput>, Prisma.organizationsUncheckedUpdateWithoutCrm_followupsInput>
-}
-
-export type organizationsCreateNestedOneWithoutCrm_help_request_commentsInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_help_request_commentsInput, Prisma.organizationsUncheckedCreateWithoutCrm_help_request_commentsInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_help_request_commentsInput
-  connect?: Prisma.organizationsWhereUniqueInput
-}
-
-export type organizationsUpdateOneRequiredWithoutCrm_help_request_commentsNestedInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_help_request_commentsInput, Prisma.organizationsUncheckedCreateWithoutCrm_help_request_commentsInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_help_request_commentsInput
-  upsert?: Prisma.organizationsUpsertWithoutCrm_help_request_commentsInput
-  connect?: Prisma.organizationsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.organizationsUpdateToOneWithWhereWithoutCrm_help_request_commentsInput, Prisma.organizationsUpdateWithoutCrm_help_request_commentsInput>, Prisma.organizationsUncheckedUpdateWithoutCrm_help_request_commentsInput>
-}
-
-export type organizationsCreateNestedOneWithoutCrm_help_requestsInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_help_requestsInput, Prisma.organizationsUncheckedCreateWithoutCrm_help_requestsInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_help_requestsInput
-  connect?: Prisma.organizationsWhereUniqueInput
-}
-
-export type organizationsUpdateOneRequiredWithoutCrm_help_requestsNestedInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_help_requestsInput, Prisma.organizationsUncheckedCreateWithoutCrm_help_requestsInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_help_requestsInput
-  upsert?: Prisma.organizationsUpsertWithoutCrm_help_requestsInput
-  connect?: Prisma.organizationsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.organizationsUpdateToOneWithWhereWithoutCrm_help_requestsInput, Prisma.organizationsUpdateWithoutCrm_help_requestsInput>, Prisma.organizationsUncheckedUpdateWithoutCrm_help_requestsInput>
-}
-
-export type organizationsCreateNestedOneWithoutCrm_interactionsInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_interactionsInput, Prisma.organizationsUncheckedCreateWithoutCrm_interactionsInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_interactionsInput
-  connect?: Prisma.organizationsWhereUniqueInput
-}
-
-export type organizationsUpdateOneRequiredWithoutCrm_interactionsNestedInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_interactionsInput, Prisma.organizationsUncheckedCreateWithoutCrm_interactionsInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_interactionsInput
-  upsert?: Prisma.organizationsUpsertWithoutCrm_interactionsInput
-  connect?: Prisma.organizationsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.organizationsUpdateToOneWithWhereWithoutCrm_interactionsInput, Prisma.organizationsUpdateWithoutCrm_interactionsInput>, Prisma.organizationsUncheckedUpdateWithoutCrm_interactionsInput>
-}
-
-export type organizationsCreateNestedOneWithoutCrm_pipeline_stagesInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_pipeline_stagesInput, Prisma.organizationsUncheckedCreateWithoutCrm_pipeline_stagesInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_pipeline_stagesInput
-  connect?: Prisma.organizationsWhereUniqueInput
-}
-
-export type organizationsUpdateOneRequiredWithoutCrm_pipeline_stagesNestedInput = {
-  create?: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_pipeline_stagesInput, Prisma.organizationsUncheckedCreateWithoutCrm_pipeline_stagesInput>
-  connectOrCreate?: Prisma.organizationsCreateOrConnectWithoutCrm_pipeline_stagesInput
-  upsert?: Prisma.organizationsUpsertWithoutCrm_pipeline_stagesInput
-  connect?: Prisma.organizationsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.organizationsUpdateToOneWithWhereWithoutCrm_pipeline_stagesInput, Prisma.organizationsUpdateWithoutCrm_pipeline_stagesInput>, Prisma.organizationsUncheckedUpdateWithoutCrm_pipeline_stagesInput>
-}
-
 export type organizationsCreateWithoutApproval_logsInput = {
   id?: string
   name: string
@@ -898,14 +730,6 @@ export type organizationsCreateWithoutApproval_logsInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -932,14 +756,6 @@ export type organizationsUncheckedCreateWithoutApproval_logsInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -982,14 +798,6 @@ export type organizationsUpdateWithoutApproval_logsInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -1016,14 +824,6 @@ export type organizationsUncheckedUpdateWithoutApproval_logsInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -1050,14 +850,6 @@ export type organizationsCreateWithoutAttendance_sessionsInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -1084,14 +876,6 @@ export type organizationsUncheckedCreateWithoutAttendance_sessionsInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -1134,14 +918,6 @@ export type organizationsUpdateWithoutAttendance_sessionsInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -1168,14 +944,6 @@ export type organizationsUncheckedUpdateWithoutAttendance_sessionsInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -1202,14 +970,6 @@ export type organizationsCreateWithoutBranchesInput = {
   attendance_sessions?: Prisma.attendance_sessionsCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -1236,14 +996,6 @@ export type organizationsUncheckedCreateWithoutBranchesInput = {
   attendance_sessions?: Prisma.attendance_sessionsUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -1286,14 +1038,6 @@ export type organizationsUpdateWithoutBranchesInput = {
   attendance_sessions?: Prisma.attendance_sessionsUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -1320,14 +1064,6 @@ export type organizationsUncheckedUpdateWithoutBranchesInput = {
   attendance_sessions?: Prisma.attendance_sessionsUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -1354,14 +1090,6 @@ export type organizationsCreateWithoutCollection_entriesInput = {
   attendance_sessions?: Prisma.attendance_sessionsCreateNestedManyWithoutOrganizationsInput
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -1388,14 +1116,6 @@ export type organizationsUncheckedCreateWithoutCollection_entriesInput = {
   attendance_sessions?: Prisma.attendance_sessionsUncheckedCreateNestedManyWithoutOrganizationsInput
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -1438,14 +1158,6 @@ export type organizationsUpdateWithoutCollection_entriesInput = {
   attendance_sessions?: Prisma.attendance_sessionsUpdateManyWithoutOrganizationsNestedInput
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -1472,14 +1184,6 @@ export type organizationsUncheckedUpdateWithoutCollection_entriesInput = {
   attendance_sessions?: Prisma.attendance_sessionsUncheckedUpdateManyWithoutOrganizationsNestedInput
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -1506,14 +1210,6 @@ export type organizationsCreateWithoutCollection_targetsInput = {
   attendance_sessions?: Prisma.attendance_sessionsCreateNestedManyWithoutOrganizationsInput
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -1540,14 +1236,6 @@ export type organizationsUncheckedCreateWithoutCollection_targetsInput = {
   attendance_sessions?: Prisma.attendance_sessionsUncheckedCreateNestedManyWithoutOrganizationsInput
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -1590,14 +1278,6 @@ export type organizationsUpdateWithoutCollection_targetsInput = {
   attendance_sessions?: Prisma.attendance_sessionsUpdateManyWithoutOrganizationsNestedInput
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -1624,14 +1304,6 @@ export type organizationsUncheckedUpdateWithoutCollection_targetsInput = {
   attendance_sessions?: Prisma.attendance_sessionsUncheckedUpdateManyWithoutOrganizationsNestedInput
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -1659,14 +1331,6 @@ export type organizationsCreateWithoutDemand_order_dispatchesInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
   parties?: Prisma.partiesCreateNestedManyWithoutOrganizationsInput
@@ -1693,14 +1357,6 @@ export type organizationsUncheckedCreateWithoutDemand_order_dispatchesInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
   parties?: Prisma.partiesUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -1743,14 +1399,6 @@ export type organizationsUpdateWithoutDemand_order_dispatchesInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
   parties?: Prisma.partiesUpdateManyWithoutOrganizationsNestedInput
@@ -1777,14 +1425,6 @@ export type organizationsUncheckedUpdateWithoutDemand_order_dispatchesInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
   parties?: Prisma.partiesUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -1811,14 +1451,6 @@ export type organizationsCreateWithoutDemand_ordersInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
   parties?: Prisma.partiesCreateNestedManyWithoutOrganizationsInput
@@ -1845,14 +1477,6 @@ export type organizationsUncheckedCreateWithoutDemand_ordersInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
   parties?: Prisma.partiesUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -1895,14 +1519,6 @@ export type organizationsUpdateWithoutDemand_ordersInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
   parties?: Prisma.partiesUpdateManyWithoutOrganizationsNestedInput
@@ -1929,14 +1545,6 @@ export type organizationsUncheckedUpdateWithoutDemand_ordersInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
   parties?: Prisma.partiesUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -1963,14 +1571,6 @@ export type organizationsCreateWithoutLocation_pingsInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   parties?: Prisma.partiesCreateNestedManyWithoutOrganizationsInput
@@ -1997,14 +1597,6 @@ export type organizationsUncheckedCreateWithoutLocation_pingsInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   parties?: Prisma.partiesUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -2047,14 +1639,6 @@ export type organizationsUpdateWithoutLocation_pingsInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   parties?: Prisma.partiesUpdateManyWithoutOrganizationsNestedInput
@@ -2081,14 +1665,6 @@ export type organizationsUncheckedUpdateWithoutLocation_pingsInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   parties?: Prisma.partiesUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -2115,14 +1691,6 @@ export type organizationsCreateWithoutPartiesInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -2149,14 +1717,6 @@ export type organizationsUncheckedCreateWithoutPartiesInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -2199,14 +1759,6 @@ export type organizationsUpdateWithoutPartiesInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -2233,14 +1785,6 @@ export type organizationsUncheckedUpdateWithoutPartiesInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -2267,14 +1811,6 @@ export type organizationsCreateWithoutProductsInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -2301,14 +1837,6 @@ export type organizationsUncheckedCreateWithoutProductsInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -2351,14 +1879,6 @@ export type organizationsUpdateWithoutProductsInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -2385,14 +1905,6 @@ export type organizationsUncheckedUpdateWithoutProductsInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -2419,14 +1931,6 @@ export type organizationsCreateWithoutProfilesInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -2453,14 +1957,6 @@ export type organizationsUncheckedCreateWithoutProfilesInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -2503,14 +1999,6 @@ export type organizationsUpdateWithoutProfilesInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -2537,14 +2025,6 @@ export type organizationsUncheckedUpdateWithoutProfilesInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -2571,14 +2051,6 @@ export type organizationsCreateWithoutRolesInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -2605,14 +2077,6 @@ export type organizationsUncheckedCreateWithoutRolesInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -2655,14 +2119,6 @@ export type organizationsUpdateWithoutRolesInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -2689,14 +2145,6 @@ export type organizationsUncheckedUpdateWithoutRolesInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -2723,14 +2171,6 @@ export type organizationsCreateWithoutSales_entriesInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -2757,14 +2197,6 @@ export type organizationsUncheckedCreateWithoutSales_entriesInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -2807,14 +2239,6 @@ export type organizationsUpdateWithoutSales_entriesInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -2841,14 +2265,6 @@ export type organizationsUncheckedUpdateWithoutSales_entriesInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -2875,14 +2291,6 @@ export type organizationsCreateWithoutSales_targetsInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -2909,14 +2317,6 @@ export type organizationsUncheckedCreateWithoutSales_targetsInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -2959,14 +2359,6 @@ export type organizationsUpdateWithoutSales_targetsInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -2993,14 +2385,6 @@ export type organizationsUncheckedUpdateWithoutSales_targetsInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -3027,14 +2411,6 @@ export type organizationsCreateWithoutVisit_logsInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -3061,14 +2437,6 @@ export type organizationsUncheckedCreateWithoutVisit_logsInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -3111,14 +2479,6 @@ export type organizationsUpdateWithoutVisit_logsInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -3145,14 +2505,6 @@ export type organizationsUncheckedUpdateWithoutVisit_logsInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -3179,14 +2531,6 @@ export type organizationsCreateWithoutVisit_plansInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -3213,14 +2557,6 @@ export type organizationsUncheckedCreateWithoutVisit_plansInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -3263,14 +2599,6 @@ export type organizationsUpdateWithoutVisit_plansInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -3297,14 +2625,6 @@ export type organizationsUncheckedUpdateWithoutVisit_plansInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -3331,14 +2651,6 @@ export type organizationsCreateWithoutWork_plansInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -3365,14 +2677,6 @@ export type organizationsUncheckedCreateWithoutWork_plansInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -3415,14 +2719,6 @@ export type organizationsUpdateWithoutWork_plansInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -3449,14 +2745,6 @@ export type organizationsUncheckedUpdateWithoutWork_plansInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -3483,14 +2771,6 @@ export type organizationsCreateWithoutWork_reportsInput = {
   branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
@@ -3517,14 +2797,6 @@ export type organizationsUncheckedCreateWithoutWork_reportsInput = {
   branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
   collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
   demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
   location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -3567,14 +2839,6 @@ export type organizationsUpdateWithoutWork_reportsInput = {
   branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
@@ -3601,14 +2865,6 @@ export type organizationsUncheckedUpdateWithoutWork_reportsInput = {
   branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
   collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
   demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
   location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -3621,1222 +2877,6 @@ export type organizationsUncheckedUpdateWithoutWork_reportsInput = {
   visit_logs?: Prisma.visit_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
   visit_plans?: Prisma.visit_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
   work_plans?: Prisma.work_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsCreateWithoutCrm_companiesInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsUncheckedCreateWithoutCrm_companiesInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsUncheckedCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesUncheckedCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsUncheckedCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsCreateOrConnectWithoutCrm_companiesInput = {
-  where: Prisma.organizationsWhereUniqueInput
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_companiesInput, Prisma.organizationsUncheckedCreateWithoutCrm_companiesInput>
-}
-
-export type organizationsUpsertWithoutCrm_companiesInput = {
-  update: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_companiesInput, Prisma.organizationsUncheckedUpdateWithoutCrm_companiesInput>
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_companiesInput, Prisma.organizationsUncheckedCreateWithoutCrm_companiesInput>
-  where?: Prisma.organizationsWhereInput
-}
-
-export type organizationsUpdateToOneWithWhereWithoutCrm_companiesInput = {
-  where?: Prisma.organizationsWhereInput
-  data: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_companiesInput, Prisma.organizationsUncheckedUpdateWithoutCrm_companiesInput>
-}
-
-export type organizationsUpdateWithoutCrm_companiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsUncheckedUpdateWithoutCrm_companiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUncheckedUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsCreateWithoutCrm_contactsInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsUncheckedCreateWithoutCrm_contactsInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsUncheckedCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesUncheckedCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsUncheckedCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsCreateOrConnectWithoutCrm_contactsInput = {
-  where: Prisma.organizationsWhereUniqueInput
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_contactsInput, Prisma.organizationsUncheckedCreateWithoutCrm_contactsInput>
-}
-
-export type organizationsUpsertWithoutCrm_contactsInput = {
-  update: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_contactsInput, Prisma.organizationsUncheckedUpdateWithoutCrm_contactsInput>
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_contactsInput, Prisma.organizationsUncheckedCreateWithoutCrm_contactsInput>
-  where?: Prisma.organizationsWhereInput
-}
-
-export type organizationsUpdateToOneWithWhereWithoutCrm_contactsInput = {
-  where?: Prisma.organizationsWhereInput
-  data: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_contactsInput, Prisma.organizationsUncheckedUpdateWithoutCrm_contactsInput>
-}
-
-export type organizationsUpdateWithoutCrm_contactsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsUncheckedUpdateWithoutCrm_contactsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUncheckedUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsCreateWithoutCrm_documentsInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsUncheckedCreateWithoutCrm_documentsInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsUncheckedCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesUncheckedCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsUncheckedCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsCreateOrConnectWithoutCrm_documentsInput = {
-  where: Prisma.organizationsWhereUniqueInput
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_documentsInput, Prisma.organizationsUncheckedCreateWithoutCrm_documentsInput>
-}
-
-export type organizationsUpsertWithoutCrm_documentsInput = {
-  update: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_documentsInput, Prisma.organizationsUncheckedUpdateWithoutCrm_documentsInput>
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_documentsInput, Prisma.organizationsUncheckedCreateWithoutCrm_documentsInput>
-  where?: Prisma.organizationsWhereInput
-}
-
-export type organizationsUpdateToOneWithWhereWithoutCrm_documentsInput = {
-  where?: Prisma.organizationsWhereInput
-  data: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_documentsInput, Prisma.organizationsUncheckedUpdateWithoutCrm_documentsInput>
-}
-
-export type organizationsUpdateWithoutCrm_documentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsUncheckedUpdateWithoutCrm_documentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUncheckedUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsCreateWithoutCrm_followupsInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsUncheckedCreateWithoutCrm_followupsInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsUncheckedCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesUncheckedCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsUncheckedCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsCreateOrConnectWithoutCrm_followupsInput = {
-  where: Prisma.organizationsWhereUniqueInput
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_followupsInput, Prisma.organizationsUncheckedCreateWithoutCrm_followupsInput>
-}
-
-export type organizationsUpsertWithoutCrm_followupsInput = {
-  update: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_followupsInput, Prisma.organizationsUncheckedUpdateWithoutCrm_followupsInput>
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_followupsInput, Prisma.organizationsUncheckedCreateWithoutCrm_followupsInput>
-  where?: Prisma.organizationsWhereInput
-}
-
-export type organizationsUpdateToOneWithWhereWithoutCrm_followupsInput = {
-  where?: Prisma.organizationsWhereInput
-  data: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_followupsInput, Prisma.organizationsUncheckedUpdateWithoutCrm_followupsInput>
-}
-
-export type organizationsUpdateWithoutCrm_followupsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsUncheckedUpdateWithoutCrm_followupsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUncheckedUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsCreateWithoutCrm_help_request_commentsInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsUncheckedCreateWithoutCrm_help_request_commentsInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsUncheckedCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesUncheckedCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsUncheckedCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsCreateOrConnectWithoutCrm_help_request_commentsInput = {
-  where: Prisma.organizationsWhereUniqueInput
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_help_request_commentsInput, Prisma.organizationsUncheckedCreateWithoutCrm_help_request_commentsInput>
-}
-
-export type organizationsUpsertWithoutCrm_help_request_commentsInput = {
-  update: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_help_request_commentsInput, Prisma.organizationsUncheckedUpdateWithoutCrm_help_request_commentsInput>
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_help_request_commentsInput, Prisma.organizationsUncheckedCreateWithoutCrm_help_request_commentsInput>
-  where?: Prisma.organizationsWhereInput
-}
-
-export type organizationsUpdateToOneWithWhereWithoutCrm_help_request_commentsInput = {
-  where?: Prisma.organizationsWhereInput
-  data: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_help_request_commentsInput, Prisma.organizationsUncheckedUpdateWithoutCrm_help_request_commentsInput>
-}
-
-export type organizationsUpdateWithoutCrm_help_request_commentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsUncheckedUpdateWithoutCrm_help_request_commentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUncheckedUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsCreateWithoutCrm_help_requestsInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsUncheckedCreateWithoutCrm_help_requestsInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsUncheckedCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesUncheckedCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsUncheckedCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsCreateOrConnectWithoutCrm_help_requestsInput = {
-  where: Prisma.organizationsWhereUniqueInput
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_help_requestsInput, Prisma.organizationsUncheckedCreateWithoutCrm_help_requestsInput>
-}
-
-export type organizationsUpsertWithoutCrm_help_requestsInput = {
-  update: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_help_requestsInput, Prisma.organizationsUncheckedUpdateWithoutCrm_help_requestsInput>
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_help_requestsInput, Prisma.organizationsUncheckedCreateWithoutCrm_help_requestsInput>
-  where?: Prisma.organizationsWhereInput
-}
-
-export type organizationsUpdateToOneWithWhereWithoutCrm_help_requestsInput = {
-  where?: Prisma.organizationsWhereInput
-  data: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_help_requestsInput, Prisma.organizationsUncheckedUpdateWithoutCrm_help_requestsInput>
-}
-
-export type organizationsUpdateWithoutCrm_help_requestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsUncheckedUpdateWithoutCrm_help_requestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUncheckedUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsCreateWithoutCrm_interactionsInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsUncheckedCreateWithoutCrm_interactionsInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsUncheckedCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesUncheckedCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsUncheckedCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsCreateOrConnectWithoutCrm_interactionsInput = {
-  where: Prisma.organizationsWhereUniqueInput
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_interactionsInput, Prisma.organizationsUncheckedCreateWithoutCrm_interactionsInput>
-}
-
-export type organizationsUpsertWithoutCrm_interactionsInput = {
-  update: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_interactionsInput, Prisma.organizationsUncheckedUpdateWithoutCrm_interactionsInput>
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_interactionsInput, Prisma.organizationsUncheckedCreateWithoutCrm_interactionsInput>
-  where?: Prisma.organizationsWhereInput
-}
-
-export type organizationsUpdateToOneWithWhereWithoutCrm_interactionsInput = {
-  where?: Prisma.organizationsWhereInput
-  data: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_interactionsInput, Prisma.organizationsUncheckedUpdateWithoutCrm_interactionsInput>
-}
-
-export type organizationsUpdateWithoutCrm_interactionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsUncheckedUpdateWithoutCrm_interactionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_pipeline_stages?: Prisma.crm_pipeline_stagesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUncheckedUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsCreateWithoutCrm_pipeline_stagesInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsUncheckedCreateWithoutCrm_pipeline_stagesInput = {
-  id?: string
-  name: string
-  slug: string
-  status?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approval_logs?: Prisma.approval_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  branches?: Prisma.branchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_entries?: Prisma.collection_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  collection_targets?: Prisma.collection_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_companies?: Prisma.crm_companiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_contacts?: Prisma.crm_contactsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_documents?: Prisma.crm_documentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_followups?: Prisma.crm_followupsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedCreateNestedManyWithoutOrganizationsInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedCreateNestedManyWithoutOrganizationsInput
-  demand_orders?: Prisma.demand_ordersUncheckedCreateNestedManyWithoutOrganizationsInput
-  location_pings?: Prisma.location_pingsUncheckedCreateNestedManyWithoutOrganizationsInput
-  parties?: Prisma.partiesUncheckedCreateNestedManyWithoutOrganizationsInput
-  products?: Prisma.productsUncheckedCreateNestedManyWithoutOrganizationsInput
-  profiles?: Prisma.profilesUncheckedCreateNestedManyWithoutOrganizationsInput
-  roles?: Prisma.rolesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_entries?: Prisma.sales_entriesUncheckedCreateNestedManyWithoutOrganizationsInput
-  sales_targets?: Prisma.sales_targetsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_logs?: Prisma.visit_logsUncheckedCreateNestedManyWithoutOrganizationsInput
-  visit_plans?: Prisma.visit_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_plans?: Prisma.work_plansUncheckedCreateNestedManyWithoutOrganizationsInput
-  work_reports?: Prisma.work_reportsUncheckedCreateNestedManyWithoutOrganizationsInput
-}
-
-export type organizationsCreateOrConnectWithoutCrm_pipeline_stagesInput = {
-  where: Prisma.organizationsWhereUniqueInput
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_pipeline_stagesInput, Prisma.organizationsUncheckedCreateWithoutCrm_pipeline_stagesInput>
-}
-
-export type organizationsUpsertWithoutCrm_pipeline_stagesInput = {
-  update: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_pipeline_stagesInput, Prisma.organizationsUncheckedUpdateWithoutCrm_pipeline_stagesInput>
-  create: Prisma.XOR<Prisma.organizationsCreateWithoutCrm_pipeline_stagesInput, Prisma.organizationsUncheckedCreateWithoutCrm_pipeline_stagesInput>
-  where?: Prisma.organizationsWhereInput
-}
-
-export type organizationsUpdateToOneWithWhereWithoutCrm_pipeline_stagesInput = {
-  where?: Prisma.organizationsWhereInput
-  data: Prisma.XOR<Prisma.organizationsUpdateWithoutCrm_pipeline_stagesInput, Prisma.organizationsUncheckedUpdateWithoutCrm_pipeline_stagesInput>
-}
-
-export type organizationsUpdateWithoutCrm_pipeline_stagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUpdateManyWithoutOrganizationsNestedInput
-}
-
-export type organizationsUncheckedUpdateWithoutCrm_pipeline_stagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approval_logs?: Prisma.approval_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  attendance_sessions?: Prisma.attendance_sessionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  branches?: Prisma.branchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_entries?: Prisma.collection_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  collection_targets?: Prisma.collection_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_companies?: Prisma.crm_companiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_contacts?: Prisma.crm_contactsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_documents?: Prisma.crm_documentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_followups?: Prisma.crm_followupsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_request_comments?: Prisma.crm_help_request_commentsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_help_requests?: Prisma.crm_help_requestsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  crm_interactions?: Prisma.crm_interactionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_order_dispatches?: Prisma.demand_order_dispatchesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  demand_orders?: Prisma.demand_ordersUncheckedUpdateManyWithoutOrganizationsNestedInput
-  location_pings?: Prisma.location_pingsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  parties?: Prisma.partiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  products?: Prisma.productsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  profiles?: Prisma.profilesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  roles?: Prisma.rolesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_entries?: Prisma.sales_entriesUncheckedUpdateManyWithoutOrganizationsNestedInput
-  sales_targets?: Prisma.sales_targetsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_logs?: Prisma.visit_logsUncheckedUpdateManyWithoutOrganizationsNestedInput
-  visit_plans?: Prisma.visit_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_plans?: Prisma.work_plansUncheckedUpdateManyWithoutOrganizationsNestedInput
-  work_reports?: Prisma.work_reportsUncheckedUpdateManyWithoutOrganizationsNestedInput
 }
 
 
@@ -4850,14 +2890,6 @@ export type OrganizationsCountOutputType = {
   branches: number
   collection_entries: number
   collection_targets: number
-  crm_companies: number
-  crm_contacts: number
-  crm_documents: number
-  crm_followups: number
-  crm_help_request_comments: number
-  crm_help_requests: number
-  crm_interactions: number
-  crm_pipeline_stages: number
   demand_order_dispatches: number
   demand_orders: number
   location_pings: number
@@ -4879,14 +2911,6 @@ export type OrganizationsCountOutputTypeSelect<ExtArgs extends runtime.Types.Ext
   branches?: boolean | OrganizationsCountOutputTypeCountBranchesArgs
   collection_entries?: boolean | OrganizationsCountOutputTypeCountCollection_entriesArgs
   collection_targets?: boolean | OrganizationsCountOutputTypeCountCollection_targetsArgs
-  crm_companies?: boolean | OrganizationsCountOutputTypeCountCrm_companiesArgs
-  crm_contacts?: boolean | OrganizationsCountOutputTypeCountCrm_contactsArgs
-  crm_documents?: boolean | OrganizationsCountOutputTypeCountCrm_documentsArgs
-  crm_followups?: boolean | OrganizationsCountOutputTypeCountCrm_followupsArgs
-  crm_help_request_comments?: boolean | OrganizationsCountOutputTypeCountCrm_help_request_commentsArgs
-  crm_help_requests?: boolean | OrganizationsCountOutputTypeCountCrm_help_requestsArgs
-  crm_interactions?: boolean | OrganizationsCountOutputTypeCountCrm_interactionsArgs
-  crm_pipeline_stages?: boolean | OrganizationsCountOutputTypeCountCrm_pipeline_stagesArgs
   demand_order_dispatches?: boolean | OrganizationsCountOutputTypeCountDemand_order_dispatchesArgs
   demand_orders?: boolean | OrganizationsCountOutputTypeCountDemand_ordersArgs
   location_pings?: boolean | OrganizationsCountOutputTypeCountLocation_pingsArgs
@@ -4945,62 +2969,6 @@ export type OrganizationsCountOutputTypeCountCollection_entriesArgs<ExtArgs exte
  */
 export type OrganizationsCountOutputTypeCountCollection_targetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.collection_targetsWhereInput
-}
-
-/**
- * OrganizationsCountOutputType without action
- */
-export type OrganizationsCountOutputTypeCountCrm_companiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.crm_companiesWhereInput
-}
-
-/**
- * OrganizationsCountOutputType without action
- */
-export type OrganizationsCountOutputTypeCountCrm_contactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.crm_contactsWhereInput
-}
-
-/**
- * OrganizationsCountOutputType without action
- */
-export type OrganizationsCountOutputTypeCountCrm_documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.crm_documentsWhereInput
-}
-
-/**
- * OrganizationsCountOutputType without action
- */
-export type OrganizationsCountOutputTypeCountCrm_followupsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.crm_followupsWhereInput
-}
-
-/**
- * OrganizationsCountOutputType without action
- */
-export type OrganizationsCountOutputTypeCountCrm_help_request_commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.crm_help_request_commentsWhereInput
-}
-
-/**
- * OrganizationsCountOutputType without action
- */
-export type OrganizationsCountOutputTypeCountCrm_help_requestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.crm_help_requestsWhereInput
-}
-
-/**
- * OrganizationsCountOutputType without action
- */
-export type OrganizationsCountOutputTypeCountCrm_interactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.crm_interactionsWhereInput
-}
-
-/**
- * OrganizationsCountOutputType without action
- */
-export type OrganizationsCountOutputTypeCountCrm_pipeline_stagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.crm_pipeline_stagesWhereInput
 }
 
 /**
@@ -5107,14 +3075,6 @@ export type organizationsSelect<ExtArgs extends runtime.Types.Extensions.Interna
   branches?: boolean | Prisma.organizations$branchesArgs<ExtArgs>
   collection_entries?: boolean | Prisma.organizations$collection_entriesArgs<ExtArgs>
   collection_targets?: boolean | Prisma.organizations$collection_targetsArgs<ExtArgs>
-  crm_companies?: boolean | Prisma.organizations$crm_companiesArgs<ExtArgs>
-  crm_contacts?: boolean | Prisma.organizations$crm_contactsArgs<ExtArgs>
-  crm_documents?: boolean | Prisma.organizations$crm_documentsArgs<ExtArgs>
-  crm_followups?: boolean | Prisma.organizations$crm_followupsArgs<ExtArgs>
-  crm_help_request_comments?: boolean | Prisma.organizations$crm_help_request_commentsArgs<ExtArgs>
-  crm_help_requests?: boolean | Prisma.organizations$crm_help_requestsArgs<ExtArgs>
-  crm_interactions?: boolean | Prisma.organizations$crm_interactionsArgs<ExtArgs>
-  crm_pipeline_stages?: boolean | Prisma.organizations$crm_pipeline_stagesArgs<ExtArgs>
   demand_order_dispatches?: boolean | Prisma.organizations$demand_order_dispatchesArgs<ExtArgs>
   demand_orders?: boolean | Prisma.organizations$demand_ordersArgs<ExtArgs>
   location_pings?: boolean | Prisma.organizations$location_pingsArgs<ExtArgs>
@@ -5165,14 +3125,6 @@ export type organizationsInclude<ExtArgs extends runtime.Types.Extensions.Intern
   branches?: boolean | Prisma.organizations$branchesArgs<ExtArgs>
   collection_entries?: boolean | Prisma.organizations$collection_entriesArgs<ExtArgs>
   collection_targets?: boolean | Prisma.organizations$collection_targetsArgs<ExtArgs>
-  crm_companies?: boolean | Prisma.organizations$crm_companiesArgs<ExtArgs>
-  crm_contacts?: boolean | Prisma.organizations$crm_contactsArgs<ExtArgs>
-  crm_documents?: boolean | Prisma.organizations$crm_documentsArgs<ExtArgs>
-  crm_followups?: boolean | Prisma.organizations$crm_followupsArgs<ExtArgs>
-  crm_help_request_comments?: boolean | Prisma.organizations$crm_help_request_commentsArgs<ExtArgs>
-  crm_help_requests?: boolean | Prisma.organizations$crm_help_requestsArgs<ExtArgs>
-  crm_interactions?: boolean | Prisma.organizations$crm_interactionsArgs<ExtArgs>
-  crm_pipeline_stages?: boolean | Prisma.organizations$crm_pipeline_stagesArgs<ExtArgs>
   demand_order_dispatches?: boolean | Prisma.organizations$demand_order_dispatchesArgs<ExtArgs>
   demand_orders?: boolean | Prisma.organizations$demand_ordersArgs<ExtArgs>
   location_pings?: boolean | Prisma.organizations$location_pingsArgs<ExtArgs>
@@ -5199,14 +3151,6 @@ export type $organizationsPayload<ExtArgs extends runtime.Types.Extensions.Inter
     branches: Prisma.$branchesPayload<ExtArgs>[]
     collection_entries: Prisma.$collection_entriesPayload<ExtArgs>[]
     collection_targets: Prisma.$collection_targetsPayload<ExtArgs>[]
-    crm_companies: Prisma.$crm_companiesPayload<ExtArgs>[]
-    crm_contacts: Prisma.$crm_contactsPayload<ExtArgs>[]
-    crm_documents: Prisma.$crm_documentsPayload<ExtArgs>[]
-    crm_followups: Prisma.$crm_followupsPayload<ExtArgs>[]
-    crm_help_request_comments: Prisma.$crm_help_request_commentsPayload<ExtArgs>[]
-    crm_help_requests: Prisma.$crm_help_requestsPayload<ExtArgs>[]
-    crm_interactions: Prisma.$crm_interactionsPayload<ExtArgs>[]
-    crm_pipeline_stages: Prisma.$crm_pipeline_stagesPayload<ExtArgs>[]
     demand_order_dispatches: Prisma.$demand_order_dispatchesPayload<ExtArgs>[]
     demand_orders: Prisma.$demand_ordersPayload<ExtArgs>[]
     location_pings: Prisma.$location_pingsPayload<ExtArgs>[]
@@ -5627,14 +3571,6 @@ export interface Prisma__organizationsClient<T, Null = never, ExtArgs extends ru
   branches<T extends Prisma.organizations$branchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$branchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$branchesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   collection_entries<T extends Prisma.organizations$collection_entriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$collection_entriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$collection_entriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   collection_targets<T extends Prisma.organizations$collection_targetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$collection_targetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$collection_targetsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  crm_companies<T extends Prisma.organizations$crm_companiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$crm_companiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$crm_companiesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  crm_contacts<T extends Prisma.organizations$crm_contactsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$crm_contactsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$crm_contactsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  crm_documents<T extends Prisma.organizations$crm_documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$crm_documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$crm_documentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  crm_followups<T extends Prisma.organizations$crm_followupsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$crm_followupsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$crm_followupsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  crm_help_request_comments<T extends Prisma.organizations$crm_help_request_commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$crm_help_request_commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$crm_help_request_commentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  crm_help_requests<T extends Prisma.organizations$crm_help_requestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$crm_help_requestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$crm_help_requestsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  crm_interactions<T extends Prisma.organizations$crm_interactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$crm_interactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$crm_interactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  crm_pipeline_stages<T extends Prisma.organizations$crm_pipeline_stagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$crm_pipeline_stagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$crm_pipeline_stagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   demand_order_dispatches<T extends Prisma.organizations$demand_order_dispatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$demand_order_dispatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$demand_order_dispatchesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   demand_orders<T extends Prisma.organizations$demand_ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$demand_ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$demand_ordersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   location_pings<T extends Prisma.organizations$location_pingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.organizations$location_pingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$location_pingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6193,198 +4129,6 @@ export type organizations$collection_targetsArgs<ExtArgs extends runtime.Types.E
   take?: number
   skip?: number
   distinct?: Prisma.Collection_targetsScalarFieldEnum | Prisma.Collection_targetsScalarFieldEnum[]
-}
-
-/**
- * organizations.crm_companies
- */
-export type organizations$crm_companiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the crm_companies
-   */
-  select?: Prisma.crm_companiesSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the crm_companies
-   */
-  omit?: Prisma.crm_companiesOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.crm_companiesInclude<ExtArgs> | null
-  where?: Prisma.crm_companiesWhereInput
-  orderBy?: Prisma.crm_companiesOrderByWithRelationInput | Prisma.crm_companiesOrderByWithRelationInput[]
-  cursor?: Prisma.crm_companiesWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.Crm_companiesScalarFieldEnum | Prisma.Crm_companiesScalarFieldEnum[]
-}
-
-/**
- * organizations.crm_contacts
- */
-export type organizations$crm_contactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the crm_contacts
-   */
-  select?: Prisma.crm_contactsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the crm_contacts
-   */
-  omit?: Prisma.crm_contactsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.crm_contactsInclude<ExtArgs> | null
-  where?: Prisma.crm_contactsWhereInput
-  orderBy?: Prisma.crm_contactsOrderByWithRelationInput | Prisma.crm_contactsOrderByWithRelationInput[]
-  cursor?: Prisma.crm_contactsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.Crm_contactsScalarFieldEnum | Prisma.Crm_contactsScalarFieldEnum[]
-}
-
-/**
- * organizations.crm_documents
- */
-export type organizations$crm_documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the crm_documents
-   */
-  select?: Prisma.crm_documentsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the crm_documents
-   */
-  omit?: Prisma.crm_documentsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.crm_documentsInclude<ExtArgs> | null
-  where?: Prisma.crm_documentsWhereInput
-  orderBy?: Prisma.crm_documentsOrderByWithRelationInput | Prisma.crm_documentsOrderByWithRelationInput[]
-  cursor?: Prisma.crm_documentsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.Crm_documentsScalarFieldEnum | Prisma.Crm_documentsScalarFieldEnum[]
-}
-
-/**
- * organizations.crm_followups
- */
-export type organizations$crm_followupsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the crm_followups
-   */
-  select?: Prisma.crm_followupsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the crm_followups
-   */
-  omit?: Prisma.crm_followupsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.crm_followupsInclude<ExtArgs> | null
-  where?: Prisma.crm_followupsWhereInput
-  orderBy?: Prisma.crm_followupsOrderByWithRelationInput | Prisma.crm_followupsOrderByWithRelationInput[]
-  cursor?: Prisma.crm_followupsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.Crm_followupsScalarFieldEnum | Prisma.Crm_followupsScalarFieldEnum[]
-}
-
-/**
- * organizations.crm_help_request_comments
- */
-export type organizations$crm_help_request_commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the crm_help_request_comments
-   */
-  select?: Prisma.crm_help_request_commentsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the crm_help_request_comments
-   */
-  omit?: Prisma.crm_help_request_commentsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.crm_help_request_commentsInclude<ExtArgs> | null
-  where?: Prisma.crm_help_request_commentsWhereInput
-  orderBy?: Prisma.crm_help_request_commentsOrderByWithRelationInput | Prisma.crm_help_request_commentsOrderByWithRelationInput[]
-  cursor?: Prisma.crm_help_request_commentsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.Crm_help_request_commentsScalarFieldEnum | Prisma.Crm_help_request_commentsScalarFieldEnum[]
-}
-
-/**
- * organizations.crm_help_requests
- */
-export type organizations$crm_help_requestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the crm_help_requests
-   */
-  select?: Prisma.crm_help_requestsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the crm_help_requests
-   */
-  omit?: Prisma.crm_help_requestsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.crm_help_requestsInclude<ExtArgs> | null
-  where?: Prisma.crm_help_requestsWhereInput
-  orderBy?: Prisma.crm_help_requestsOrderByWithRelationInput | Prisma.crm_help_requestsOrderByWithRelationInput[]
-  cursor?: Prisma.crm_help_requestsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.Crm_help_requestsScalarFieldEnum | Prisma.Crm_help_requestsScalarFieldEnum[]
-}
-
-/**
- * organizations.crm_interactions
- */
-export type organizations$crm_interactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the crm_interactions
-   */
-  select?: Prisma.crm_interactionsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the crm_interactions
-   */
-  omit?: Prisma.crm_interactionsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.crm_interactionsInclude<ExtArgs> | null
-  where?: Prisma.crm_interactionsWhereInput
-  orderBy?: Prisma.crm_interactionsOrderByWithRelationInput | Prisma.crm_interactionsOrderByWithRelationInput[]
-  cursor?: Prisma.crm_interactionsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.Crm_interactionsScalarFieldEnum | Prisma.Crm_interactionsScalarFieldEnum[]
-}
-
-/**
- * organizations.crm_pipeline_stages
- */
-export type organizations$crm_pipeline_stagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the crm_pipeline_stages
-   */
-  select?: Prisma.crm_pipeline_stagesSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the crm_pipeline_stages
-   */
-  omit?: Prisma.crm_pipeline_stagesOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.crm_pipeline_stagesInclude<ExtArgs> | null
-  where?: Prisma.crm_pipeline_stagesWhereInput
-  orderBy?: Prisma.crm_pipeline_stagesOrderByWithRelationInput | Prisma.crm_pipeline_stagesOrderByWithRelationInput[]
-  cursor?: Prisma.crm_pipeline_stagesWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.Crm_pipeline_stagesScalarFieldEnum | Prisma.Crm_pipeline_stagesScalarFieldEnum[]
 }
 
 /**

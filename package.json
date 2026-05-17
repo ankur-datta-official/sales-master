@@ -8,12 +8,13 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "test": "tsx tests/run-workspace-guard-tests.ts",
     "prisma:pull": "prisma db pull",
     "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio",
     "prisma:validate": "prisma validate",
     "prisma:format": "prisma format",
-    "ci": "npm run lint && npm run typecheck && npm run build",
+    "ci": "npm run lint && npm run typecheck && npm run test && npm run build",
     "launch:verify": "npm run ci && npm audit --audit-level=high"
   },
   "dependencies": {

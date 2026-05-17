@@ -16,11 +16,13 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { filterNavByRoles, mainNavigation } from "@/config/navigation";
+import { getWorkspaceDefinition } from "@/config/navigation";
 import { ROUTES } from "@/config/routes";
 import type { AppRole } from "@/constants/roles";
+import { getRolePresentation } from "@/lib/auth/role-presentation";
 
 type AppSidebarProps = {
   /** Resolved from JWT metadata or profiles table when RBAC is wired */
@@ -28,22 +30,6 @@ type AppSidebarProps = {
   userEmail?: string | null;
   userDisplayName?: string | null;
 };
-
-type NavGroup = { label: string; titles: readonly string[] };
-
-const NAV_GROUPS: readonly NavGroup[] = [
-  { label: "Overview", titles: ["Dashboard", "Analytics"] },
-  {
-    label: "CRM",
-    titles: ["CRM"],
-  },
-  { label: "Work", titles: ["Work Plans", "Work Reports", "Visit Plans", "Visit Logs"] },
-  { label: "Targets", titles: ["Sales Targets", "Collection Targets"] },
-  { label: "Entries", titles: ["Sales Entries", "Collection Entries"] },
-  { label: "Workflow", titles: ["Demand Orders", "Approvals", "Accounts review", "Factory queue"] },
-  { label: "Directory", titles: ["Users", "Parties", "Products"] },
-  { label: "Personal", titles: ["Profile", "Attendance", "Field activity"] },
-] as const;
 
 function initialsFromName(name: string | null | undefined) {
   if (!name) return "SM";
@@ -57,15 +43,8 @@ function initialsFromName(name: string | null | undefined) {
 
 export function AppSidebar({ userRole, userEmail, userDisplayName }: AppSidebarProps) {
   const pathname = usePathname();
-  const items = filterNavByRoles(mainNavigation, userRole);
-
-  const grouped = NAV_GROUPS.map((group) => ({
-    label: group.label,
-    items: items.filter((i) => group.titles.includes(i.title)),
-  })).filter((g) => g.items.length > 0);
-
-  const groupedTitles = new Set(grouped.flatMap((g) => g.items.map((i) => i.title)));
-  const ungrouped = items.filter((i) => !groupedTitles.has(i.title));
+  const rolePresentation = getRolePresentation(userRole);
+  const workspace = getWorkspaceDefinition(userRole);
 
   return (
     <Sidebar collapsible="icon" variant="inset">
@@ -84,20 +63,21 @@ export function AppSidebar({ userRole, userEmail, userDisplayName }: AppSidebarP
                 Sales Master
               </div>
               <div className="truncate text-xs text-muted-foreground">
-                Executive workspace
+                {rolePresentation.workspaceLabel}
               </div>
             </div>
+            <SidebarTrigger className="ml-auto rounded-xl border border-sidebar-border/80 bg-sidebar/70 text-sidebar-foreground shadow-none hover:border-sidebar-ring/45 hover:bg-sidebar-accent/55 hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:mx-auto group-data-[collapsible=icon]:ml-0" />
           </div>
         </div>
       </SidebarHeader>
       <SidebarContent className="py-2">
-        {grouped.map((group) => (
+        {workspace.sections.map((group) => (
           <SidebarGroup key={group.label}>
             <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {group.items.map((item) => (
-                  <SidebarMenuItem key={item.href}>
+                  <SidebarMenuItem key={`${group.label}:${item.title}:${item.href}`}>
                     <SidebarMenuButton
                       isActive={
                         pathname === item.href || pathname.startsWith(`${item.href}/`)
@@ -116,32 +96,6 @@ export function AppSidebar({ userRole, userEmail, userDisplayName }: AppSidebarP
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
-
-        {ungrouped.length > 0 ? (
-          <SidebarGroup>
-            <SidebarGroupLabel>Other</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {ungrouped.map((item) => (
-                  <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton
-                      isActive={
-                        pathname === item.href || pathname.startsWith(`${item.href}/`)
-                      }
-                      tooltip={item.title}
-                      size="lg"
-                      className="mx-1 my-0.5"
-                      render={<Link href={item.href} />}
-                    >
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ) : null}
       </SidebarContent>
 
       <SidebarFooter className="border-t border-sidebar-border/75 bg-sidebar/80">
@@ -158,7 +112,10 @@ export function AppSidebar({ userRole, userEmail, userDisplayName }: AppSidebarP
             <p className="truncate text-sm font-medium leading-none">
               {userDisplayName ?? "Account"}
             </p>
-            <p className="truncate text-xs text-muted-foreground">{userEmail ?? "—"}</p>
+            <p className="truncate text-xs text-muted-foreground">{userEmail ?? "-"}</p>
+            <p className="truncate text-[0.7rem] font-medium text-primary">
+              {rolePresentation.shortTitle}
+            </p>
           </div>
           <ChevronRight className="ml-auto size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 group-data-[collapsible=icon]:hidden" />
         </Link>

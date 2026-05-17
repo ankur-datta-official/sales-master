@@ -30,7 +30,11 @@ export function AppShell({
         userDisplayName={userDisplayName}
       />
       <SidebarInset className="flex h-dvh min-h-0 flex-col overflow-hidden bg-[linear-gradient(180deg,var(--background)_0%,var(--background)_70%,color-mix(in_oklch,var(--muted)_42%,transparent)_100%)]">
-        <AppTopbar userEmail={userEmail} userDisplayName={userDisplayName} />
+        <AppTopbar
+          userEmail={userEmail}
+          userDisplayName={userDisplayName}
+          userRole={userRole}
+        />
         <ContentContainer>{children}</ContentContainer>
       </SidebarInset>
     </SidebarProvider>

@@ -140,3 +140,37 @@ export function canViewFieldActivitySummary(role: AppRole | null | undefined): b
 export function canViewAnalytics(role: AppRole | null | undefined): boolean {
   return role != null && (APP_ROLES as readonly string[]).includes(role);
 }
+
+export function canViewWorkspaceNotifications(role: AppRole | null | undefined): boolean {
+  return role != null && (APP_ROLES as readonly string[]).includes(role);
+}
+
+export function canViewWorkspaceMessages(role: AppRole | null | undefined): boolean {
+  return role != null && (APP_ROLES as readonly string[]).includes(role);
+}
+
+export function canSendWorkspaceMessages(role: AppRole | null | undefined): boolean {
+  return role != null && (APP_ROLES as readonly string[]).includes(role);
+}
+
+export function canViewWorkspaceDocuments(role: AppRole | null | undefined): boolean {
+  return role != null && (APP_ROLES as readonly string[]).includes(role);
+}
+
+export function canViewWorkspaceSettings(role: AppRole | null | undefined): boolean {
+  return role != null && (APP_ROLES as readonly string[]).includes(role);
+}
+
+export function canViewWorkspaceMonthlyBudget(role: AppRole | null | undefined): boolean {
+  return (
+    role === "admin" ||
+    role === "hos" ||
+    role === "manager" ||
+    role === "marketer" ||
+    role === "accounts"
+  );
+}
+
+export function canViewWorkspaceExportData(role: AppRole | null | undefined): boolean {
+  return isOrgAdminRole(role);
+}
