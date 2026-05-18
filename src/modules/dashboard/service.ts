@@ -832,6 +832,51 @@ function tableRowsFromDueCustomers(args: {
   };
 }
 
+function tableRowsFromCollectionVerifications(args: {
+  collections: EntryRow[];
+  partiesById: Map<string, PartyRow>;
+  profilesById: Map<string, ProfileRow>;
+  limit?: number;
+}): DashboardTableSection {
+  const rows = [...args.collections]
+    .sort((left, right) => right.entry_date.localeCompare(left.entry_date))
+    .slice(0, args.limit ?? 5)
+    .map((entry) => ({
+    key: entry.id,
+    href: `${ROUTES.collectionEntries}/${entry.id}`,
+    cells: [
+      { key: "receipt", value: entry.id.slice(0, 13), mono: true },
+      { key: "customer", value: entry.party_id ? args.partiesById.get(entry.party_id)?.name ?? "Customer" : "Customer" },
+      { key: "collector", value: profileLabel(args.profilesById.get(entry.user_id)) },
+      { key: "amount", value: fmtMoney(toNumber(entry.amount)), mono: true },
+      { key: "date", value: fmtDate(entry.entry_date), mono: true },
+      {
+        key: "status",
+        value: labelFromKey(entry.verification_status ?? "unverified"),
+        tone: toneFromStatus(entry.verification_status ?? "unverified"),
+      },
+    ],
+  }));
+
+  return {
+    key: "payment-verification",
+    title: "Payment Verification",
+    description: "Recent collection entries waiting for verification flow.",
+    columns: [
+      { key: "receipt", label: "Receipt No." },
+      { key: "customer", label: "Customer" },
+      { key: "collector", label: "Collector" },
+      { key: "amount", label: "Amount", align: "right" },
+      { key: "date", label: "Payment Date" },
+      { key: "status", label: "Status" },
+    ],
+    rows,
+    emptyLabel: "No recent collection entries found.",
+    actionLabel: "View all payments",
+    actionHref: ROUTES.collectionEntries,
+  };
+}
+
 function tableRowsFromCustomerRevenue(args: {
   orders: DemandOrderRow[];
   partiesById: Map<string, PartyRow>;
@@ -1303,6 +1348,11 @@ export async function getDashboardData(params: {
         title: "Order Approval Queue",
       }),
       tableRowsFromDueCustomers({ orders: source.demandOrders, partiesById }),
+      tableRowsFromCollectionVerifications({
+        collections: source.collectionEntries,
+        partiesById,
+        profilesById,
+      }),
       {
         ...tableRowsFromOrders({ orders: source.demandOrders.filter((order) => order.stage === "factory_queue"), partiesById, profilesById, title: "Delivery Ready Orders" }),
         key: "delivery-ready-orders",

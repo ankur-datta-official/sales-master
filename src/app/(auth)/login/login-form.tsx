@@ -1,12 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { resolvePostLoginPathAction } from "@/app/(auth)/login/actions";
+import { ExternalCrmHandoffCta } from "@/components/auth/external-crm-handoff-cta";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,6 +20,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ROUTES } from "@/config/routes";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
@@ -60,7 +63,7 @@ export function LoginForm() {
     <div className="space-y-4">
       <Card className="w-full rounded-[1.75rem] border border-white/85 bg-card/90 py-0 shadow-[var(--shadow-lg)] backdrop-blur-sm dark:border-white/10">
         <CardHeader className="gap-2 px-6 pb-0 pt-5 sm:px-7 sm:pt-6">
-          <div className="inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
+          <div className="inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.75 text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">
             Secure workspace access
           </div>
           <div className="space-y-2">
@@ -75,6 +78,15 @@ export function LoginForm() {
 
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardContent className="space-y-4 px-6 pb-0 pt-4 sm:px-7">
+            {searchParams.get("reset") === "success" && (
+              <p
+                className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700"
+                role="status"
+              >
+                Password updated successfully. Sign in with your new password.
+              </p>
+            )}
+
             {searchParams.get("error") === "auth" && (
               <p
                 className="rounded-2xl border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive"
@@ -133,6 +145,14 @@ export function LoginForm() {
                   {form.formState.errors.password.message}
                 </p>
               )}
+              <div className="flex justify-end">
+                <Link
+                  href={ROUTES.forgotPassword}
+                  className="text-xs font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  Forgot password?
+                </Link>
+              </div>
             </div>
 
             <div className="rounded-[1.1rem] border border-border/80 bg-muted/45 px-4 py-2.5">
@@ -159,9 +179,20 @@ export function LoginForm() {
               {form.formState.isSubmitting ? "Signing in..." : "Sign in"}
             </Button>
 
+            <ExternalCrmHandoffCta className="w-full" />
+
             <p className="text-center text-[11px] leading-5 text-muted-foreground">
               Existing redirect rules still apply after sign-in.
             </p>
+            <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+              <span>Need workspace access?</span>
+              <Link
+                href={ROUTES.signUp}
+                className="font-medium text-primary underline-offset-4 hover:underline"
+              >
+                Sign up
+              </Link>
+            </div>
           </CardFooter>
         </form>
       </Card>

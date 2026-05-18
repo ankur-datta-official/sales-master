@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
 
 import { ROUTES } from "@/config/routes";
-import { resolveAppRole } from "@/lib/auth/app-role";
-import { getPostLoginRedirectPath } from "@/lib/auth/post-login-redirect";
 import { isSafeRelativePath } from "@/lib/auth/safe-redirect";
-import { fetchProfileByUserId } from "@/lib/profiles/fetch-profile";
 import { createClient } from "@/lib/supabase/server";
+import { getCurrentAuthAccessContext, getPostAuthRedirectPath } from "@/modules/auth/access-state";
 
 /**
  * OAuth / magic-link callback — exchanges `code` for a session cookie.
@@ -20,14 +18,11 @@ export async function GET(request: Request) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      const profile = user
-        ? await fetchProfileByUserId(supabase, user.id)
-        : null;
-      const role = user ? resolveAppRole(user, profile) : null;
-      const path = getPostLoginRedirectPath(role, { next: safeNext });
+      if (safeNext === ROUTES.resetPassword) {
+        return NextResponse.redirect(new URL(ROUTES.resetPassword, url.origin));
+      }
+      const access = await getCurrentAuthAccessContext();
+      const path = getPostAuthRedirectPath(access, safeNext);
       return NextResponse.redirect(new URL(path, url.origin));
     }
   }

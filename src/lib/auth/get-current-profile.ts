@@ -2,6 +2,7 @@ import { cache } from "react";
 import { redirect } from "next/navigation";
 
 import { ROUTES } from "@/config/routes";
+import { getCurrentAuthAccessContext } from "@/modules/auth/access-state";
 import { createClient } from "@/lib/supabase/server";
 import { fetchProfileByUserId } from "@/lib/profiles/fetch-profile";
 import type { User } from "@supabase/supabase-js";
@@ -32,9 +33,17 @@ export const getCurrentUserProfile = cache(
 );
 
 export async function requireUserProfile(): Promise<AuthenticatedSession> {
-  const session = await getCurrentUserProfile();
-  if (!session) {
+  const access = await getCurrentAuthAccessContext();
+  if (access.state === "unauthenticated" || !access.user) {
     redirect(ROUTES.login);
   }
-  return session;
+
+  if (access.state !== "active") {
+    redirect(ROUTES.pendingAccess);
+  }
+
+  return {
+    user: access.user,
+    profile: access.profile,
+  };
 }

@@ -22,14 +22,15 @@ export function AppShell({
   return (
     <SidebarProvider
       data-app-shell-root
-      className="h-dvh min-h-dvh overflow-hidden bg-[linear-gradient(135deg,color-mix(in_oklch,var(--sidebar)_82%,transparent),var(--background)_48%,color-mix(in_oklch,var(--muted)_55%,transparent))]"
+      defaultOpen
+      className="h-dvh min-h-dvh overflow-hidden bg-[linear-gradient(180deg,color-mix(in_oklch,white_88%,var(--sidebar))_0%,color-mix(in_oklch,white_94%,var(--background))_18%,color-mix(in_oklch,var(--muted)_18%,white)_100%)]"
     >
       <AppSidebar
         userRole={userRole}
         userEmail={userEmail}
         userDisplayName={userDisplayName}
       />
-      <SidebarInset className="flex h-dvh min-h-0 flex-col overflow-hidden bg-[linear-gradient(180deg,var(--background)_0%,var(--background)_70%,color-mix(in_oklch,var(--muted)_42%,transparent)_100%)]">
+      <SidebarInset className="flex h-dvh min-h-0 flex-col overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,0.75)_0%,color-mix(in_oklch,white_96%,var(--background))_12%,var(--background)_32%,color-mix(in_oklch,var(--muted)_26%,transparent)_100%)]">
         <AppTopbar
           userEmail={userEmail}
           userDisplayName={userDisplayName}

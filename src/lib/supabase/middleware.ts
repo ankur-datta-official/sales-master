@@ -2,8 +2,6 @@ import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
 import { isProtectedPath, ROUTES } from "@/config/routes";
-import { isSafeRelativePath } from "@/lib/auth/safe-redirect";
-
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
@@ -54,13 +52,6 @@ export async function updateSession(request: NextRequest) {
     redirectUrl.pathname = ROUTES.login;
     redirectUrl.searchParams.set("next", pathname);
     return NextResponse.redirect(redirectUrl);
-  }
-
-  if (user && pathname === ROUTES.login) {
-    const next = request.nextUrl.searchParams.get("next");
-    const safeNext =
-      next && isSafeRelativePath(next) ? next : ROUTES.dashboard;
-    return NextResponse.redirect(new URL(safeNext, request.url));
   }
 
   return supabaseResponse;

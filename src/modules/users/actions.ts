@@ -9,6 +9,7 @@ import { toSafeActionError } from "@/lib/errors/safe-action-error";
 import { createClient } from "@/lib/supabase/server";
 import { createServiceRoleClient } from "@/lib/supabase/service";
 import { canMutateOrgUsers } from "@/lib/users/actor-permissions";
+import { buildRecoveryRedirectUrl } from "@/modules/auth/utils";
 
 import {
   createOrgUserSchema,
@@ -70,20 +71,30 @@ export async function createOrgUserAction(
   }
 
   const email = parsed.data.email.trim().toLowerCase();
+  const useTemporaryPassword =
+    parsed.data.provisioning_mode === "temporary_password";
+  const redirectTo = await buildRecoveryRedirectUrl();
 
-  const { data: created, error: createErr } = await service.auth.admin.createUser({
-    email,
-    password: parsed.data.password,
-    email_confirm: true,
-    user_metadata: { full_name: parsed.data.full_name },
-  });
+  const { data: created, error: createErr } = useTemporaryPassword
+    ? await service.auth.admin.createUser({
+        email,
+        password: parsed.data.password ?? undefined,
+        email_confirm: true,
+        user_metadata: { full_name: parsed.data.full_name },
+      })
+    : await service.auth.admin.inviteUserByEmail(email, {
+        data: { full_name: parsed.data.full_name },
+        redirectTo,
+      });
 
   if (createErr || !created.user) {
     return {
       ok: false,
       error: toSafeActionError(
         createErr,
-        "Could not create authentication user.",
+        useTemporaryPassword
+          ? "Could not create authentication user."
+          : "Could not send the employee setup link.",
         "users.createOrgUserAction.createAuthUser"
       ),
     };

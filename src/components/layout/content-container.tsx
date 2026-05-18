@@ -9,9 +9,8 @@ export function ContentContainer({ children, className }: ContentContainerProps)
   return (
     <div
       className={cn(
-        "flex min-h-0 flex-1 flex-col gap-6 overflow-y-auto overflow-x-hidden p-4 md:p-6 lg:p-8",
-        "max-w-[1560px] w-full mx-auto",
-        "pb-10 md:pb-12",
+        "flex min-h-0 flex-1 flex-col gap-6 overflow-y-auto overflow-x-hidden px-4 pb-8 pt-4 md:px-5 md:pb-10 md:pt-5 lg:px-6 lg:pt-6",
+        "max-w-[1580px] w-full mx-auto",
         className
       )}
     >

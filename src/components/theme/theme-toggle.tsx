@@ -63,7 +63,7 @@ export function ThemeToggle() {
           <Button
             variant="outline"
             size="icon-lg"
-            className="rounded-2xl border-border/80 bg-card/85 text-muted-foreground shadow-[var(--shadow-sm)] backdrop-blur hover:border-primary/30 hover:bg-card hover:text-foreground dark:bg-card/80 dark:hover:border-primary/40"
+            className="size-10 rounded-[1rem] border-border/75 bg-background/92 text-muted-foreground shadow-[0_4px_12px_color-mix(in_oklch,var(--border)_7%,transparent)] backdrop-blur hover:border-primary/18 hover:bg-white hover:text-foreground dark:bg-card/80 dark:hover:border-primary/40"
             aria-label="Change theme"
           />
         }

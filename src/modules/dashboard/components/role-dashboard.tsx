@@ -30,6 +30,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { StatusBadge, type StatusTone } from "@/components/ui/status-badge";
+import { ROUTES } from "@/config/routes";
 import { cn } from "@/lib/utils";
 import { CeoFilterControls } from "@/modules/dashboard/components/ceo-filter-controls";
 import { getDashboardLayoutSpec } from "@/modules/dashboard/layout-spec";
@@ -2876,64 +2877,892 @@ function MarketerDashboard({ dashboard }: { dashboard: RoleDashboardData }) {
   );
 }
 
+function AccountsHero({ dashboard }: { dashboard: RoleDashboardData }) {
+  return (
+    <section className="rounded-2xl border border-border/70 bg-card/95 px-4 py-4 shadow-[var(--shadow-xs)]">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0">
+          <h1 className="text-[1.9rem] font-semibold tracking-tight">Accounts Dashboard</h1>
+          <p className="mt-1 text-sm text-muted-foreground">{dashboard.subtitle}</p>
+        </div>
+        <div className="inline-flex h-11 items-center gap-3 rounded-2xl border border-border/70 bg-background/65 px-4 shadow-[var(--shadow-xs)]">
+          <CalendarDays className="size-4 text-muted-foreground" />
+          <span className="text-sm font-medium">{dashboard.filters.dateLabel}</span>
+          <ChevronDown className="size-4 text-muted-foreground" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AccountsKpiTile({ item }: { item: DashboardKpi }) {
+  const accentTone =
+    item.tone === "success"
+      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
+      : item.tone === "warning"
+        ? "bg-amber-500/10 text-amber-700 dark:text-amber-300"
+        : item.tone === "danger"
+          ? "bg-rose-500/10 text-rose-600 dark:text-rose-300"
+          : "bg-blue-500/10 text-blue-600 dark:text-blue-300";
+
+  const content = (
+    <Card className="h-full border-border/70 bg-card/95 py-0 shadow-[var(--shadow-xs)]">
+      <CardContent className="flex h-full min-h-32 flex-col gap-3 p-4">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-[0.9rem] font-semibold text-foreground/90">{item.label}</p>
+            <p className="mt-2 text-[1.8rem] font-semibold tracking-tight tabular-nums">{item.value}</p>
+            {item.hint ? <p className="mt-1 text-sm text-muted-foreground">{item.hint}</p> : null}
+          </div>
+          <span className={cn("grid size-12 place-items-center rounded-2xl", accentTone)}>
+            <DashboardIcon icon={item.icon} tone={item.tone ?? "neutral"} className="size-12 rounded-2xl bg-transparent ring-0" />
+          </span>
+        </div>
+        {item.detail ? <p className="mt-auto text-xs font-medium text-muted-foreground">{item.detail}</p> : null}
+      </CardContent>
+    </Card>
+  );
+
+  if (!item.href) return content;
+  return <Link href={item.href} className="block h-full">{content}</Link>;
+}
+
+function AccountsQueueCard({ section }: { section?: DashboardTableSection }) {
+  if (!section) return null;
+
+  return (
+    <Card className="h-full">
+      <CardHeader className="grid-cols-[1fr_auto] gap-3">
+        <div>
+          <CardTitle>{section.title}</CardTitle>
+          <CardDescription>Review order balances and approve for delivery release.</CardDescription>
+        </div>
+        <div className="flex items-center gap-2">
+          <Link href={section.actionHref ?? ROUTES.accountsReview} className={cn(buttonVariants({ variant: "outline", size: "sm" }), "h-8 rounded-xl")}>
+            View Queue
+          </Link>
+        </div>
+      </CardHeader>
+      <CardContent className="pt-0">
+        <div className="overflow-x-auto rounded-2xl border border-border/75">
+          <table className="w-full min-w-[760px] text-left text-sm">
+            <thead className="border-b bg-muted/45">
+              <tr>
+                {section.columns.map((column) => (
+                  <th
+                    key={column.key}
+                    className={cn(
+                      "px-3 py-2 text-xs font-semibold text-muted-foreground",
+                      column.align === "right" && "text-right"
+                    )}
+                  >
+                    {column.label}
+                  </th>
+                ))}
+                <th className="px-3 py-2 text-xs font-semibold text-muted-foreground text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {section.rows.length === 0 ? (
+                <tr>
+                  <td colSpan={section.columns.length + 1} className="px-3 py-8 text-center text-sm text-muted-foreground">
+                    {section.emptyLabel}
+                  </td>
+                </tr>
+              ) : (
+                section.rows.slice(0, 5).map((row) => (
+                  <tr key={row.key} className="border-b last:border-0 hover:bg-muted/30">
+                    {section.columns.map((column) => {
+                      const cell = row.cells.find((item) => item.key === column.key);
+                      return (
+                        <td
+                          key={column.key}
+                          className={cn(
+                            "px-3 py-3 align-middle",
+                            column.align === "right" && "text-right",
+                            cell?.mono && "font-mono text-xs"
+                          )}
+                        >
+                          {cell?.tone ? (
+                            <StatusBadge tone={cell.tone} size="sm">
+                              {cell.value}
+                            </StatusBadge>
+                          ) : (
+                            <span className="line-clamp-1">{cell?.value ?? "-"}</span>
+                          )}
+                        </td>
+                      );
+                    })}
+                    <td className="px-3 py-3 text-right">
+                      <Link href={row.href ?? (section.actionHref ?? ROUTES.accountsReview)} className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "h-8 rounded-lg")}>
+                        Review
+                      </Link>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function AccountsApprovalSummaryCard({ dashboard }: { dashboard: RoleDashboardData }) {
+  const pendingApprovals = Number.parseInt(dashboard.kpis.find((item) => item.key === "pending-approvals")?.value ?? "0", 10) || 0;
+  const verification = Number.parseInt(dashboard.kpis.find((item) => item.key === "approved-today")?.value ?? "0", 10) || 0;
+  const onHold = Number.parseInt(dashboard.kpis.find((item) => item.key === "on-hold")?.value ?? "0", 10) || 0;
+  const deliveryReady = Number.parseInt(dashboard.kpis.find((item) => item.key === "delivery-ready")?.value ?? "0", 10) || 0;
+  const stats = [
+    { key: "approved", label: "Approved", value: String(deliveryReady), tone: "success" as StatusTone },
+    { key: "on-hold", label: "On Hold", value: String(onHold), tone: "warning" as StatusTone },
+    { key: "need-review", label: "Need Review", value: String(pendingApprovals), tone: "info" as StatusTone },
+    { key: "pending", label: "Pending", value: String(verification), tone: "neutral" as StatusTone },
+  ];
+  const total = stats.reduce((sum, stat) => sum + Number.parseInt(stat.value, 10), 0);
+  const colors = ["#22c55e", "#f59e0b", "#3b82f6", "#cbd5e1"];
+  const stops = stats.reduce<string[]>((acc, stat, index) => {
+    const previousEnd = acc.length === 0 ? 0 : Number.parseFloat(acc[acc.length - 1].split(" ").at(-1)?.replace("%", "") ?? "0");
+    const share = total > 0 ? (Number.parseInt(stat.value, 10) / total) * 100 : 0;
+    const end = previousEnd + share;
+    acc.push(`${colors[index]} ${previousEnd}% ${end}%`);
+    return acc;
+  }, []);
+
+  return (
+    <Card className="h-full">
+      <CardHeader className="grid-cols-[1fr_auto]">
+        <div>
+          <CardTitle>Approval Summary (Today)</CardTitle>
+          <CardDescription>Compact view of the current accounts review mix.</CardDescription>
+        </div>
+        <Link href={ROUTES.notifications} className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "h-8")}>
+          View full report
+        </Link>
+      </CardHeader>
+      <CardContent className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <div className="flex justify-center">
+          <div
+            className="grid size-40 place-items-center rounded-full shadow-[inset_0_10px_26px_rgba(255,255,255,0.28)]"
+            style={{
+              background: stops.length > 0 ? `conic-gradient(${stops.join(", ")})` : "rgba(148, 163, 184, 0.2)",
+            }}
+          >
+            <div className="grid size-24 place-items-center rounded-full bg-background shadow-[var(--shadow-sm)]">
+              <div className="text-center">
+                <p className="text-3xl font-semibold tabular-nums">{total}</p>
+                <p className="mt-1 text-xs font-medium text-muted-foreground">Total Orders</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="space-y-3">
+          {stats.map((stat, index) => (
+            <div key={stat.key} className="flex items-center justify-between gap-3 rounded-2xl border bg-background/55 px-4 py-3 shadow-[var(--shadow-xs)]">
+              <div className="flex items-center gap-3">
+                <span className="size-2.5 rounded-full" style={{ backgroundColor: colors[index] }} />
+                <span className="text-sm font-medium">{stat.label}</span>
+              </div>
+              <span className="text-sm font-semibold tabular-nums">{stat.value}</span>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function AccountsSectionTableCard({
+  section,
+  title,
+  description,
+}: {
+  section?: DashboardTableSection;
+  title: string;
+  description: string;
+}) {
+  const hasRows = Boolean(section && section.rows.length > 0);
+
+  return (
+    <Card className="h-full min-h-[314px] overflow-hidden">
+      <CardHeader className="grid-cols-[1fr_auto]">
+        <div>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
+        </div>
+        {section?.actionHref ? (
+          <Link href={section.actionHref} className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "h-8")}>
+            {section.actionLabel ?? "View All"}
+          </Link>
+        ) : null}
+      </CardHeader>
+      <CardContent className="flex h-[calc(100%-5.5rem)] flex-col pt-0">
+        {hasRows ? (
+          <div className="overflow-x-auto rounded-2xl border border-border/75">
+            <table className="w-full min-w-[560px] text-left text-sm">
+              <thead className="border-b bg-muted/45">
+                <tr>
+                  {(section?.columns ?? []).map((column) => (
+                    <th
+                      key={column.key}
+                      className={cn(
+                        "px-3 py-2 text-xs font-semibold text-muted-foreground",
+                        column.align === "right" && "text-right"
+                      )}
+                    >
+                      {column.label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {section!.rows.slice(0, 5).map((row) => (
+                  <tr key={row.key} className="border-b last:border-0 hover:bg-muted/30">
+                    {section!.columns.map((column) => {
+                      const cell = row.cells.find((item) => item.key === column.key);
+                      return (
+                        <td
+                          key={column.key}
+                          className={cn(
+                            "px-3 py-3 align-middle",
+                            column.align === "right" && "text-right",
+                            cell?.mono && "font-mono text-xs"
+                          )}
+                        >
+                          {cell?.tone ? (
+                            <StatusBadge tone={cell.tone} size="sm">
+                              {cell.value}
+                            </StatusBadge>
+                          ) : (
+                            <span className="line-clamp-1">{cell?.value ?? "-"}</span>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="flex flex-1 items-center">
+            <div className="w-full rounded-[1.35rem] border border-dashed border-border/80 bg-muted/[0.22] px-5 py-8 text-center">
+              <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-2xl border bg-background/80 text-muted-foreground shadow-[var(--shadow-xs)]">
+                <FileText className="size-5" />
+              </div>
+              <p className="text-sm font-semibold text-foreground">{title} is clear right now</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {section?.emptyLabel ?? "No records found for the current accounts scope."}
+              </p>
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+function AccountsAlertsCard({ alerts }: { alerts: DashboardAlert[] }) {
+  const displayAlerts = alerts.slice(0, 3);
+  return (
+    <Card className="h-full min-h-[320px]">
+      <CardHeader>
+        <CardTitle>Alerts & Remarks</CardTitle>
+        <CardDescription>Operational warnings that need immediate attention.</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        {displayAlerts.length === 0 ? (
+          <p className="rounded-xl border border-dashed p-4 text-sm text-muted-foreground">
+            No alerts for the current scope.
+          </p>
+        ) : (
+          displayAlerts.map((alert) => (
+            <div key={alert.key} className="flex items-start gap-3 rounded-xl border bg-background/55 px-3 py-3">
+              <DashboardIcon icon="alert" tone={alert.tone ?? "warning"} className="size-8 rounded-lg" />
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium">{alert.title}</p>
+                {alert.detail ? <p className="mt-1 text-xs text-muted-foreground">{alert.detail}</p> : null}
+              </div>
+              {alert.time ? <span className="shrink-0 text-xs text-muted-foreground">{alert.time}</span> : null}
+            </div>
+          ))
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+function AccountsNotesCard() {
+  const notes = [
+    "Verify large orders above threshold before releasing them to delivery.",
+    "Ensure payment records are matched with the latest customer due position.",
+    "Check approval list daily and coordinate with field marketers where needed.",
+    "All approvals should stay aligned with credit policy compliance.",
+  ];
+
+  return (
+    <Card className="h-full min-h-[320px]">
+      <CardHeader>
+        <CardTitle>Accounts Notes</CardTitle>
+        <CardDescription>Professional reminders for the daily approval workflow.</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        {notes.map((note) => (
+          <div key={note} className="flex min-h-[64px] gap-3 rounded-2xl border bg-background/55 px-4 py-3">
+            <span className="mt-1.5 size-2 rounded-full bg-primary shrink-0" />
+            <p className="text-sm text-foreground/90">{note}</p>
+          </div>
+        ))}
+      </CardContent>
+    </Card>
+  );
+}
+
+function AccountsQuickActionsCard({ actions }: { actions: DashboardAction[] }) {
+  const labelMap: Record<string, string> = {
+    "accounts-review": "Approve Order",
+    "customer-balance": "Check Customer Balance",
+    "verify-payment": "Verify Payment",
+    "delivery-ready": "Delivery Ready",
+    "credit-alerts": "View Credit Alerts",
+    report: "Generate Report",
+  };
+
+  return (
+    <Card className="h-full min-h-[320px]">
+      <CardHeader>
+        <CardTitle>Quick Actions</CardTitle>
+        <CardDescription>Fast links for the most common accounts operations.</CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-3 sm:grid-cols-2">
+        {actions.slice(0, 6).map((action) => (
+          <Link
+            key={action.key}
+            href={action.href}
+            className="flex min-h-[72px] items-center gap-3 rounded-2xl border border-border/70 bg-background/55 px-4 py-3 shadow-[var(--shadow-xs)] transition-colors hover:bg-muted/35"
+          >
+            <DashboardIcon icon={action.icon} tone={action.tone ?? "neutral"} className="size-9 rounded-xl" />
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold">{labelMap[action.key] ?? action.label}</p>
+              <p className="truncate text-xs text-muted-foreground">{action.hint}</p>
+            </div>
+          </Link>
+        ))}
+      </CardContent>
+    </Card>
+  );
+}
+
 function AccountsDashboard({ dashboard }: { dashboard: RoleDashboardData }) {
-  const [approvalQueue, dueCustomers, deliveryReady] = dashboard.sections;
+  const [approvalQueue, dueCustomers, paymentVerification, deliveryReady] = dashboard.sections;
+  const creditAlertKpi: DashboardKpi = {
+    key: "credit-limit-alerts",
+    label: "Credit Limit Alerts",
+    value: String(dashboard.alerts.filter((alert) => alert.tone === "danger" || alert.tone === "warning").length),
+    hint: "Customers",
+    detail: "View alerts",
+    tone: "warning",
+    icon: "alert",
+    href: ROUTES.notifications,
+  };
+  const accountsKpis = [
+    dashboard.kpis[0],
+    dashboard.kpis[1],
+    dashboard.kpis[2],
+    dashboard.kpis[3],
+    creditAlertKpi,
+    dashboard.kpis[4],
+  ].filter(Boolean) as DashboardKpi[];
 
   return (
     <div className="space-y-4">
-      <Hero dashboard={dashboard} />
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
-        {dashboard.kpis.map((kpi) => (
-          <KpiTile key={kpi.key} item={kpi} />
+      <AccountsHero dashboard={dashboard} />
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
+        {accountsKpis.map((kpi) => (
+          <AccountsKpiTile key={kpi.key} item={kpi} />
         ))}
       </div>
       <div className="grid gap-4 xl:grid-cols-[1.3fr_0.7fr]">
-        {approvalQueue ? <DataTableSection section={approvalQueue} /> : <ProgressPanel metrics={dashboard.progress} />}
-        <div className="grid gap-4">
-          <StatusDonut
-            stats={dashboard.miniStats}
-            title="Approval Summary"
-            description="Reference-style approval mix built from the current queue counts."
-          />
-          <AlertList alerts={dashboard.alerts} compact />
-        </div>
+        <AccountsQueueCard section={approvalQueue} />
+        <AccountsApprovalSummaryCard dashboard={dashboard} />
       </div>
       <div className="grid gap-4 xl:grid-cols-3">
-        {dueCustomers ? <DataTableSection section={dueCustomers} /> : <TrendPanel dashboard={dashboard} />}
-        {deliveryReady ? <DataTableSection section={deliveryReady} /> : <ProgressPanel metrics={dashboard.progress} />}
-        <div className="grid gap-4">
-          <ActionStrip actions={dashboard.actions} />
-          <ProgressPanel metrics={dashboard.progress} title="Collection Coverage" description="Current verification and release pace against live targets." />
-        </div>
+        <AccountsSectionTableCard
+          section={dueCustomers}
+          title="Customer Balance Check"
+          description="Outstanding customer positions and open value exposure."
+        />
+        <AccountsSectionTableCard
+          section={paymentVerification}
+          title="Payment Verification"
+          description="Recent receipts and current collection verification status."
+        />
+        <AccountsSectionTableCard
+          section={deliveryReady}
+          title="Delivery Ready Orders"
+          description="Orders ready to be forwarded to dispatch or delivery teams."
+        />
+      </div>
+      <div className="grid gap-4 xl:grid-cols-3 xl:items-stretch">
+        <AccountsAlertsCard alerts={dashboard.alerts} />
+        <AccountsNotesCard />
+        <AccountsQuickActionsCard actions={dashboard.actions} />
       </div>
     </div>
   );
 }
 
+function DeliveryHero({ dashboard }: { dashboard: RoleDashboardData }) {
+  return (
+    <section className="rounded-2xl border border-border/70 bg-card/95 px-4 py-4 shadow-[var(--shadow-xs)]">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0">
+          <h1 className="text-[1.9rem] font-semibold tracking-tight">Delivery Dashboard</h1>
+          <p className="mt-1 text-sm text-muted-foreground">{dashboard.subtitle}</p>
+        </div>
+        <div className="inline-flex h-11 items-center gap-3 rounded-2xl border border-border/70 bg-background/65 px-4 shadow-[var(--shadow-xs)]">
+          <CalendarDays className="size-4 text-muted-foreground" />
+          <span className="text-sm font-medium">{dashboard.filters.dateLabel}</span>
+          <ChevronDown className="size-4 text-muted-foreground" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DeliveryKpiTile({ item }: { item: DashboardKpi }) {
+  const accentTone =
+    item.tone === "success"
+      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
+      : item.tone === "warning"
+        ? "bg-amber-500/10 text-amber-700 dark:text-amber-300"
+        : item.tone === "danger"
+          ? "bg-rose-500/10 text-rose-600 dark:text-rose-300"
+          : "bg-blue-500/10 text-blue-600 dark:text-blue-300";
+
+  const content = (
+    <Card className="h-full border-border/70 bg-card/95 py-0 shadow-[var(--shadow-xs)]">
+      <CardContent className="flex h-full min-h-32 flex-col gap-3 p-4">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-[0.9rem] font-semibold text-foreground/90">{item.label}</p>
+            <p className="mt-2 text-[1.8rem] font-semibold tracking-tight tabular-nums">{item.value}</p>
+            {item.hint ? <p className="mt-1 text-sm text-muted-foreground">{item.hint}</p> : null}
+          </div>
+          <span className={cn("grid size-12 place-items-center rounded-2xl", accentTone)}>
+            <DashboardIcon icon={item.icon} tone={item.tone ?? "neutral"} className="size-12 rounded-2xl bg-transparent ring-0" />
+          </span>
+        </div>
+        {item.detail ? <p className="mt-auto text-xs font-medium text-muted-foreground">{item.detail}</p> : null}
+      </CardContent>
+    </Card>
+  );
+
+  if (!item.href) return content;
+  return <Link href={item.href} className="block h-full">{content}</Link>;
+}
+
+function DeliveryTableCard({
+  section,
+  title,
+  description,
+  actionLabel,
+}: {
+  section?: DashboardTableSection;
+  title: string;
+  description: string;
+  actionLabel?: string;
+}) {
+  const hasRows = Boolean(section && section.rows.length > 0);
+
+  return (
+    <Card className="h-full min-h-[332px] overflow-hidden">
+      <CardHeader className="grid-cols-[1fr_auto]">
+        <div>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
+        </div>
+        {section?.actionHref ? (
+          <Link href={section.actionHref} className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "h-8")}>
+            {actionLabel ?? section.actionLabel ?? "View all"}
+          </Link>
+        ) : null}
+      </CardHeader>
+      <CardContent className="flex h-[calc(100%-5.5rem)] flex-col pt-0">
+        {hasRows ? (
+          <div className="overflow-x-auto rounded-2xl border border-border/75">
+            <table className="w-full min-w-[620px] text-left text-sm">
+              <thead className="border-b bg-muted/45">
+                <tr>
+                  {section!.columns.map((column) => (
+                    <th
+                      key={column.key}
+                      className={cn(
+                        "px-3 py-2 text-xs font-semibold text-muted-foreground",
+                        column.align === "right" && "text-right"
+                      )}
+                    >
+                      {column.label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {section!.rows.slice(0, 5).map((row) => (
+                  <tr key={row.key} className="border-b last:border-0 hover:bg-muted/30">
+                    {section!.columns.map((column) => {
+                      const cell = row.cells.find((item) => item.key === column.key);
+                      return (
+                        <td
+                          key={column.key}
+                          className={cn(
+                            "px-3 py-3 align-middle",
+                            column.align === "right" && "text-right",
+                            cell?.mono && "font-mono text-xs"
+                          )}
+                        >
+                          {cell?.tone ? (
+                            <StatusBadge tone={cell.tone} size="sm">
+                              {cell.value}
+                            </StatusBadge>
+                          ) : (
+                            <span className="line-clamp-1">{cell?.value ?? "-"}</span>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="flex flex-1 items-center">
+            <div className="w-full rounded-[1.35rem] border border-dashed border-border/80 bg-muted/[0.22] px-5 py-8 text-center">
+              <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-2xl border bg-background/80 text-muted-foreground shadow-[var(--shadow-xs)]">
+                <Truck className="size-5" />
+              </div>
+              <p className="text-sm font-semibold text-foreground">{title} is clear right now</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {section?.emptyLabel ?? "No delivery operations found for the current scope."}
+              </p>
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+function DeliveryMovementListCard({
+  section,
+  title,
+  description,
+  actionLabel,
+}: {
+  section?: DashboardTableSection;
+  title: string;
+  description: string;
+  actionLabel?: string;
+}) {
+  const rows = section?.rows.slice(0, 5) ?? [];
+
+  return (
+    <Card className="h-full min-h-[332px] overflow-hidden">
+      <CardHeader className="grid-cols-[1fr_auto]">
+        <div>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
+        </div>
+        {section?.actionHref ? (
+          <Link href={section.actionHref} className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "h-8")}>
+            {actionLabel ?? section.actionLabel ?? "View all"}
+          </Link>
+        ) : null}
+      </CardHeader>
+      <CardContent className="space-y-3 pt-0">
+        {rows.length === 0 ? (
+          <div className="rounded-[1.35rem] border border-dashed border-border/80 bg-muted/[0.22] px-5 py-8 text-center">
+            <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-2xl border bg-background/80 text-muted-foreground shadow-[var(--shadow-xs)]">
+              <Truck className="size-5" />
+            </div>
+            <p className="text-sm font-semibold text-foreground">{title} is clear right now</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {section?.emptyLabel ?? "No delivery operations found for the current scope."}
+            </p>
+          </div>
+        ) : (
+          rows.map((row) => {
+            const order = getCellValue(row, "order");
+            const customer = getCellValue(row, "customer");
+            const challan = getCellValue(row, "challan");
+            const date = getCellValue(row, "date");
+            const statusValue = row.cells.find((cell) => cell.key === "status")?.value ?? "In Progress";
+            const statusTone = getCellTone(row, "status");
+            const area = getCellValue(row, "area");
+
+            const content = (
+              <div className="rounded-2xl border border-border/75 bg-background/55 px-4 py-3 shadow-[var(--shadow-xs)]">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold">{order}</p>
+                    <p className="mt-1 truncate text-sm text-foreground/90">{customer}</p>
+                    <p className="mt-1 truncate text-xs text-muted-foreground">
+                      Challan {challan} • {date}
+                    </p>
+                    {area !== "-" ? (
+                      <p className="mt-1 truncate text-xs text-muted-foreground">{area}</p>
+                    ) : null}
+                  </div>
+                  <StatusBadge tone={statusTone} size="sm">
+                    {statusValue}
+                  </StatusBadge>
+                </div>
+              </div>
+            );
+
+            return row.href ? (
+              <Link key={row.key} href={row.href} className="block">
+                {content}
+              </Link>
+            ) : (
+              <div key={row.key}>{content}</div>
+            );
+          })
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+function DeliveryStatusSummaryCard({ dashboard }: { dashboard: RoleDashboardData }) {
+  const items = [
+    dashboard.kpis.find((item) => item.key === "delivery-ready"),
+    dashboard.kpis.find((item) => item.key === "in-transit"),
+    dashboard.kpis.find((item) => item.key === "delivered-today"),
+    dashboard.kpis.find((item) => item.key === "stock-issue"),
+  ].filter(Boolean) as DashboardKpi[];
+  const colors = ["#22c55e", "#3b82f6", "#14b8a6", "#f43f5e"];
+  const total = items.reduce((sum, item) => sum + parseDisplayNumber(item.value), 0);
+  const stops = items.reduce<string[]>((acc, item, index) => {
+    const previousEnd = acc.length === 0 ? 0 : Number.parseFloat(acc[acc.length - 1].split(" ").at(-1)?.replace("%", "") ?? "0");
+    const share = total > 0 ? (parseDisplayNumber(item.value) / total) * 100 : 0;
+    const end = previousEnd + share;
+    acc.push(`${colors[index]} ${previousEnd}% ${end}%`);
+    return acc;
+  }, []);
+
+  return (
+    <Card className="h-full min-h-[332px]">
+      <CardHeader className="grid-cols-[1fr_auto]">
+        <div>
+          <CardTitle>Delivery Status Overview</CardTitle>
+          <CardDescription>Live fulfillment state summary across visible delivery records.</CardDescription>
+        </div>
+        <Link href={ROUTES.factoryQueue} className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "h-8")}>
+          View full report
+        </Link>
+      </CardHeader>
+      <CardContent className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div className="flex justify-center">
+          <div
+            className="grid size-40 place-items-center rounded-full shadow-[inset_0_10px_26px_rgba(255,255,255,0.28)]"
+            style={{
+              background: stops.length > 0 ? `conic-gradient(${stops.join(", ")})` : "rgba(148, 163, 184, 0.2)",
+            }}
+          >
+            <div className="grid size-24 place-items-center rounded-full bg-background shadow-[var(--shadow-sm)]">
+              <div className="text-center">
+                <p className="text-3xl font-semibold tabular-nums">{total}</p>
+                <p className="mt-1 text-xs font-medium text-muted-foreground">Total Orders</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="space-y-3">
+          {items.map((item, index) => (
+            <div key={item.key} className="flex items-center justify-between gap-3 rounded-2xl border bg-background/55 px-4 py-3 shadow-[var(--shadow-xs)]">
+              <div className="flex items-center gap-3">
+                <span className="size-2.5 rounded-full" style={{ backgroundColor: colors[index] }} />
+                <span className="text-sm font-medium">{item.label}</span>
+              </div>
+              <span className="text-sm font-semibold tabular-nums">{item.value}</span>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function DeliveryScheduleCard({ section }: { section?: DashboardTableSection }) {
+  const rows = section?.rows.slice(0, 4) ?? [];
+
+  return (
+    <Card className="h-full min-h-[320px]">
+      <CardHeader className="grid-cols-[1fr_auto]">
+        <div>
+          <CardTitle>Today's Delivery Schedule</CardTitle>
+          <CardDescription>Upcoming dispatch activities and current movement status.</CardDescription>
+        </div>
+        <Link href={section?.actionHref ?? ROUTES.factoryQueue} className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "h-8")}>
+          View full schedule
+        </Link>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {rows.length === 0 ? (
+          <p className="rounded-xl border border-dashed p-4 text-sm text-muted-foreground">
+            {section?.emptyLabel ?? "No delivery schedule items found."}
+          </p>
+        ) : (
+          rows.map((row, index) => {
+            const customer = row.cells.find((cell) => cell.key === "customer")?.value ?? "Customer";
+            const date = row.cells.find((cell) => cell.key === "date")?.value ?? "-";
+            const status = row.cells.find((cell) => cell.key === "status");
+            const challan = row.cells.find((cell) => cell.key === "challan")?.value ?? row.cells.find((cell) => cell.key === "order")?.value ?? "-";
+            return (
+              <div key={row.key} className="flex gap-3">
+                <div className="flex flex-col items-center">
+                  <span className={cn(
+                    "size-3 rounded-full",
+                    index % 3 === 0 && "bg-emerald-500",
+                    index % 3 === 1 && "bg-blue-500",
+                    index % 3 === 2 && "bg-amber-500"
+                  )} />
+                  {index !== rows.length - 1 ? <span className="mt-1 h-full w-px bg-border" /> : null}
+                </div>
+                <div className="flex min-h-[58px] flex-1 items-center justify-between gap-3 rounded-2xl border bg-background/55 px-4 py-3">
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold">{date}</p>
+                    <p className="truncate text-sm text-foreground/90">{customer}</p>
+                    <p className="truncate text-xs text-muted-foreground">{challan}</p>
+                  </div>
+                  <StatusBadge tone={status?.tone ?? "info"} size="sm">
+                    {status?.value ?? "Scheduled"}
+                  </StatusBadge>
+                </div>
+              </div>
+            );
+          })
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+function DeliveryAlertsCard({ alerts }: { alerts: DashboardAlert[] }) {
+  const items = alerts.slice(0, 2);
+  return (
+    <Card className="h-full min-h-[280px]">
+      <CardHeader>
+        <CardTitle>Alerts & Notes</CardTitle>
+        <CardDescription>Operational issues and on-route follow-up reminders.</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        {items.length === 0 ? (
+          <p className="rounded-xl border border-dashed p-4 text-sm text-muted-foreground">
+            No active delivery alerts right now.
+          </p>
+        ) : (
+          items.map((alert) => (
+            <div key={alert.key} className="flex items-start gap-3 rounded-xl border bg-background/55 px-3 py-3">
+              <DashboardIcon icon={alert.tone === "danger" ? "alert" : "bell"} tone={alert.tone ?? "warning"} className="size-8 rounded-lg" />
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium">{alert.title}</p>
+                {alert.detail ? <p className="mt-1 text-xs text-muted-foreground">{alert.detail}</p> : null}
+              </div>
+              {alert.time ? <span className="shrink-0 text-xs text-muted-foreground">{alert.time}</span> : null}
+            </div>
+          ))
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+function DeliveryQuickActionsCard({ actions }: { actions: DashboardAction[] }) {
+  const labelMap: Record<string, string> = {
+    "generate-challan": "Generate Challan",
+    "confirm-dispatch": "Confirm Dispatch",
+    "delivery-status": "Update Delivery Status",
+    "stock-check": "Stock Check",
+    manifest: "Download Manifest",
+  };
+  const extendedActions = [
+    ...actions,
+    { key: "record-returned", label: "Record Returned Item", hint: "Open return queue", href: ROUTES.factoryQueue, icon: "alert" as DashboardIconKey, tone: "danger" as StatusTone },
+    { key: "assign-vehicle", label: "Assign Rider / Vehicle", hint: "Coordinate delivery route", href: ROUTES.factoryQueue, icon: "team" as DashboardIconKey, tone: "info" as StatusTone },
+    { key: "partial-delivery", label: "Record Partial Delivery", hint: "Update status and notes", href: ROUTES.factoryQueue, icon: "delivery" as DashboardIconKey, tone: "warning" as StatusTone },
+  ].slice(0, 8);
+
+  return (
+    <Card className="h-full min-h-[280px]">
+      <CardHeader>
+        <CardTitle>Quick Actions</CardTitle>
+        <CardDescription>Fast controls for dispatch and delivery operations.</CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        {extendedActions.map((action) => (
+          <Link
+            key={action.key}
+            href={action.href}
+            className="flex min-h-[68px] items-center gap-3 rounded-2xl border border-border/70 bg-background/55 px-4 py-3 shadow-[var(--shadow-xs)] transition-colors hover:bg-muted/35"
+          >
+            <DashboardIcon icon={action.icon} tone={action.tone ?? "neutral"} className="size-9 rounded-xl" />
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold">{labelMap[action.key] ?? action.label}</p>
+              <p className="truncate text-xs text-muted-foreground">{action.hint}</p>
+            </div>
+          </Link>
+        ))}
+      </CardContent>
+    </Card>
+  );
+}
+
 function DeliveryDashboard({ dashboard }: { dashboard: RoleDashboardData }) {
   const [queue, stockReady, returnedFailed] = dashboard.sections;
+  const partialDeliveriesKpi: DashboardKpi = {
+    key: "partial-deliveries",
+    label: "Partial Deliveries",
+    value: String(returnedFailed?.rows.length ?? 0),
+    hint: "Returned / failed rows",
+    detail: "Requires follow-up",
+    tone: "warning",
+    icon: "delivery",
+    href: ROUTES.factoryQueue,
+  };
+  const deliveryKpis = [
+    dashboard.kpis[0],
+    dashboard.kpis[1],
+    dashboard.kpis[2],
+    dashboard.kpis[3],
+    partialDeliveriesKpi,
+    dashboard.kpis[4],
+  ].filter(Boolean) as DashboardKpi[];
 
   return (
     <div className="space-y-4">
-      <Hero dashboard={dashboard} />
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
-        {dashboard.kpis.map((kpi) => (
-          <KpiTile key={kpi.key} item={kpi} />
+      <DeliveryHero dashboard={dashboard} />
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
+        {deliveryKpis.map((kpi) => (
+          <DeliveryKpiTile key={kpi.key} item={kpi} />
         ))}
       </div>
-      <div className="grid gap-4 xl:grid-cols-[1.1fr_1fr_0.85fr]">
-        {queue ? <DataTableSection section={queue} /> : <TrendPanel dashboard={dashboard} />}
-        {stockReady ? <DataTableSection section={stockReady} /> : <ProgressPanel metrics={dashboard.progress} />}
-        <StatusDonut
-          stats={dashboard.miniStats}
-          title="Delivery Status Overview"
-          description="A compact dispatch-state summary inspired by the reference delivery view."
-        />
+      <div className="grid gap-4 xl:grid-cols-[1.2fr_1fr_0.88fr]">
+        <DeliveryMovementListCard section={queue} title="Delivery Queue" description="Orders ready to move through dispatch and route execution." />
+        <DeliveryTableCard section={stockReady} title="Stock Check / Ready for Dispatch" description="Stock, packing, and dispatch readiness across factory queue." />
+        <DeliveryStatusSummaryCard dashboard={dashboard} />
       </div>
-      <div className="grid gap-4 xl:grid-cols-[1fr_0.95fr_0.95fr]">
-        {returnedFailed ? <DataTableSection section={returnedFailed} /> : <AlertList alerts={dashboard.alerts} />}
-        <ActionStrip actions={dashboard.actions} />
-        <AlertList alerts={dashboard.alerts} compact />
+      <div className="grid gap-4 xl:grid-cols-[1fr_0.95fr_1fr]">
+        <DeliveryMovementListCard section={queue} title="Recent Delivery Challans" description="Latest challan-linked movement records and route assignments." actionLabel="View all" />
+        <DeliveryScheduleCard section={queue} />
+        <DeliveryTableCard section={returnedFailed} title="Returned / Failed Delivery" description="Items requiring retry, return handling, or route correction." actionLabel="View all" />
+      </div>
+      <div className="grid gap-4 xl:grid-cols-[0.9fr_1.1fr]">
+        <DeliveryAlertsCard alerts={dashboard.alerts} />
+        <DeliveryQuickActionsCard actions={dashboard.actions} />
       </div>
     </div>
   );

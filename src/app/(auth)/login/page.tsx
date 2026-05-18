@@ -1,9 +1,16 @@
 import { Suspense } from "react";
+import { redirect } from "next/navigation";
 
 import { LoginForm } from "@/app/(auth)/login/login-form";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getCurrentAuthAccessContext, getPostAuthRedirectPath } from "@/modules/auth/access-state";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const access = await getCurrentAuthAccessContext();
+  if (access.state !== "unauthenticated") {
+    redirect(getPostAuthRedirectPath(access));
+  }
+
   return (
     <Suspense
       fallback={

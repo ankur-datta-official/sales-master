@@ -3,6 +3,10 @@
  */
 export const ROUTES = {
   login: "/login",
+  signUp: "/sign-up",
+  forgotPassword: "/forgot-password",
+  resetPassword: "/reset-password",
+  pendingAccess: "/pending-access",
   dashboard: "/dashboard",
   dashboardExport: "/dashboard/export",
   dashboardExportDownload: "/api/dashboard-export",
